@@ -1,0 +1,103 @@
+<div>
+    <!-- Tool Bar Section -->
+    <mat-toolbar class="material-toolbar p-4 justify-content-between fixed-top">
+        <div class="d-flex justfy-content-between align-items-center">
+            <button mat-icon-button class="d-flex mr-2 actions" (click)="sidenav.toggle()">
+                <span class="navbar-toggler-icon">
+                    <mat-icon>menu</mat-icon>
+                </span>
+            </button>
+            <h1 class="brand d-flex align-items-center">
+                <mat-icon class="mr-2">school</mat-icon> alumni
+            </h1>
+        </div>
+        <div class="input-group" style="width: 30%">
+            <input class="form-control" type="text" placeholder="Pesquisar">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <mat-icon>search</mat-icon>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justfy-content-between align-items-center actions">
+            <button mat-icon-button matTooltip="Adicionar aula" matTooltipPosition="above" [matMenuTriggerFor]="typeLessons">
+                <mat-icon class="text-color-primary" [style.fontSize.rem]="1.5">
+                    post_add
+                </mat-icon>
+            </button>
+            <mat-menu #typeLessons="matMenu">
+                <button mat-menu-item>
+                    <mat-icon class="text-color-primary">video_library</mat-icon>
+                    Video aula
+                </button>
+                <button mat-menu-item>
+                    <mat-icon class="text-color-primary">library_books</mat-icon>
+                    Artigo
+                </button>
+            </mat-menu>
+            <button class="mr-4" mat-icon-button>
+                <mat-icon  matBadge="9+" matBadgePosition="after" matBadgeColor="primary">notifications
+                </mat-icon>
+            </button>
+            <div id="image-profile"></div>
+        </div>
+    </mat-toolbar>
+    <!-- End toolbar -->
+
+
+    <!-- Nav Bar Sections -->
+    <mat-sidenav-container class="nav-container h-100 p-0">
+
+        <mat-sidenav class="nav-sidenav" #sidenav fixedInViewport="true" fixedTopGap="50" mode="side" opened>
+            <ul class="flex-column p-0 w-100 justfy-content-start mt-1">
+                <li class="nav-item">
+                    <a class="d-flex pl-4" routerLink="/home" routerLinkActive="nav-active"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        <mat-icon [style.fontSize.rem]="1.6"> home</mat-icon> <span class="ml-4">Inicío</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="pl-4 d-flex" routerLink="/teacherPlace" routerLinkActive="nav-active"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        <mat-icon [style.fontSize.rem]="1.4">school</mat-icon><span class="ml-4">Turmas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="pl-4 d-flex" routerLink="/lesson/lessons" routerLinkActive="nav-active"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        <mat-icon [style.fontSize.rem]="1.4">featured_play_list</mat-icon><span
+                            class="ml-4">Aulas</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="pl-4 d-flex" routerLink="/teacherPlaces" routerLinkActive="nav-active"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        <mat-icon [style.fontSize.rem]="1.5">live_help</mat-icon><span class="ml-4">Questões</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a routerLink="/materials" class="pl-4 d-flex" routerLinkActive="nav-active"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        <mat-icon [style.fontSize.rem]="1.4">library_books</mat-icon><span class="ml-4">Materiais</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a routerLink="/messages" routerLinkActive="nav-active" class="pl-4 d-flex"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        <mat-icon [style.fontSize.rem]="1.4">email</mat-icon><span class="ml-4">Mensagens</span>
+                    </a>
+                </li>
+            </ul>
+        </mat-sidenav>
+
+        <!-- End Nav Bar -->
+
+        <mat-sidenav-content class="bg-lighter">
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

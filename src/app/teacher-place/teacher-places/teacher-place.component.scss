@@ -1,0 +1,34 @@
+@use '../../shared/styles/standard-layout-0';
+
+.teacher-place-main{    
+    @extend %main;
+}
+
+.teacher-place-section {
+    @extend %section;   
+}
+
+.teacher-place-container{
+    @extend %container-items;   
+}
+
+.teacher-place-item{
+    @extend %item;
+    display: flex;
+    flex-flow: column; 
+    overflow: hidden;   
+    height: 23rem; 
+}
+
+.teacher-place-item img{
+    height: 5rem;    
+    object-fit: cover;
+}
+
+.teacher-place-item:hover{
+    cursor: pointer;
+}
+
+.badge-container{
+    flex-wrap: wrap;
+}

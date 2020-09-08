@@ -1,0 +1,41 @@
+@import '../../shared/styles/standard-layout';
+
+.main{
+    @extend %main;
+}
+
+.section{
+    @extend %section;
+}
+
+.container-row{
+    @extend %container-row;
+    justify-content: space-between;
+}
+
+.item{
+    @include item-config(49%);    
+}
+.about-video-lesson p{
+    text-align: justify;;
+}
+
+.about-video-lesson{
+    display: flex;
+    flex-direction: column;    
+}
+
+.about-teacher{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Media Query */
+@media(max-width:991.98px){ 
+    .item{
+        @include item-config(100%);
+    }
+}
