@@ -1,0 +1,29 @@
+@import '../../shared/styles/standard-layout';
+a{
+    color: inherit !important;
+}
+
+a:hover{
+    //color: var(--communication-foreground) !important;
+    color: var(--palette-black-alpha-100) !important;
+}
+
+.main{
+    @extend %main;
+    padding-bottom: 1.5rem;
+}
+
+.section{
+    @extend %section;
+}
+
+.container-row{
+    @extend %container-row;
+    justify-content: space-between;
+}
+
+.item{
+    height: 12rem;
+    background-color: white;
+    width: 49%;    
+}
