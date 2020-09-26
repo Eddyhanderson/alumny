@@ -20,7 +20,11 @@
     height: 23rem; 
 }
 
-.teacher-place-item img{
+.teacher-place-item:hover .discretButton{
+    opacity: 1;
+}
+
+#teacherPlaceBg img{
     height: 5rem;    
     object-fit: cover;
 }
@@ -31,4 +35,12 @@
 
 .badge-container{
     flex-wrap: wrap;
+}
+
+.description-teacher-place{
+    padding: 1rem;
+}
+
+.description-teacher-place p{
+    font-size: .8rem;
 }

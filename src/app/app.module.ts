@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './navigation/navigation.component';
 
 import {MaterialModule} from './material/material.module';
-import { QuillModule } from 'ngx-quill'
+
 
 
 @NgModule({
@@ -16,12 +16,11 @@ import { QuillModule } from 'ngx-quill'
     NavigationComponent,    
   ],
   imports: [
-    BrowserModule,
+    BrowserModule, 
     MaterialModule,    
     AppRoutingModule,
     BrowserAnimationsModule,
-    QuillModule.forRoot()
-  ],
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

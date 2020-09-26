@@ -1,5 +1,14 @@
 @import '../../shared/styles/standard-layout';
 
+a{
+    color: inherit !important;
+}
+
+a:hover{
+    color: var(--palette-black-alpha-100) !important;
+}
+
+
 .main{
     @extend %main;
 }
@@ -30,6 +39,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.item{
+    height: 12rem;
+    background-color: white;
+    width: 49%;    
 }
 
 

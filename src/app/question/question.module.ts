@@ -3,16 +3,18 @@ import { CommonModule } from '@angular/common';
 
 import { QuestionRoutingModule } from './question-routing.module';
 import { QuestionViewComponent } from './question-view/question-view.component';
+import { QuestionAboutComponent } from './question-about/question-about.component';
+import { MaterialModule } from '../material/material.module';
+import { QuestionAnswersComponent } from './question-answers/question-answers.component';
 
-import { QuillModule } from 'ngx-quill'
 
 
 @NgModule({
-  declarations: [QuestionViewComponent],
+  declarations: [QuestionViewComponent, QuestionAboutComponent, QuestionAnswersComponent],
   imports: [
     CommonModule,
+    MaterialModule,
     QuestionRoutingModule,
-    QuillModule
   ]
 })
 export class QuestionModule { }

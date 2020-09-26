@@ -1,193 +1,222 @@
-<div class="container-fluid home-section clearfix">
+<div class="main">
+    <div class="section bg-white pt-4">
+        <!-- Teacher place suggest -->
+        <div class="item teacher-place-suggest border">
+            <!-- Teacher place metadata-->
+            <div>
+                <div class="background-image">
+                    <img src="../../assets/images/lesson2.jpg">
+                </div>
+                <div class="px-3 my-2 d-flex flex-column">
+                    <h4>
+                        <a href="#" class="bold-500 discretLink">
+                            Turma de Algoritmo e Programação
+                        </a>
+                    </h4>
+                    <h5 class="relevant-text-principal">
+                        Programação
+                    </h5>
+                </div>
+            </div>
+            <!-- End -->
+            <!-- Teacher information -->
+            <div class="d-flex flex-row align-items-center px-3 mb-2">
+                <div class="img-profile-xm mr-3">
+                    <img src="../../assets/images/pexels-christina-morillo-1181519.jpg">
+                </div>
+                <div>
+                    <a href="#" class="discretLink">
+                        Professor Paulo Miguel
+                    </a>
+                </div>
+            </div>
+            <!-- End -->
 
-    <!-- Question Post -->
-    <div class="row question-post border bg-white p-0">
-        <!-- Info about question -->
-        <div class="col-12 p-0 question-post-info p-4">
-            <div class="d-flex flex-column justify-content-center">
-                <div class="d-flex flex-column">
-                    <!-- Info studant question -->
-                    <div class="d-flex flex-row">
-                        <div class="img-profile-xm mr-4">
-                            <img src="../../assets/images/pexels-jawm-ling-2748123.jpg">
+            <!-- Suggest brand -->
+            <div class="info-tps irrelevant-text-xm d-flex align-items-center">
+                <mat-icon [style.fontSize.rem]="1.4">reply</mat-icon> Turma sugerida
+            </div>
+            <!-- End -->
+
+            <mat-divider></mat-divider>
+
+            <!-- Description -->
+            <div class="description relevant-text-normal text-justify p-3 mb-2">
+                On the other hand, we denounce with righteous
+                indignation and dislike men who are so beguiled
+                and demoralized by the charms of pleasure of the moment,
+                so blinded by desire, that they cannot foresee the pain
+                and trouble that are bound to ensue; and equal blame belongs
+                to those who fail in their duty through weakness of will, which
+                is the same as saying through shrinking from toil and pain.
+            </div>
+            <!-- End -->
+
+            <!-- Button to get in-->
+            <div class="d-flex justify-content-center">
+                <button mat-button color="primary" class="mb-2">
+                    MATRICULAR-SE
+                </button>
+            </div>
+            <!-- End -->
+        </div>
+        <!-- Item end -->
+
+        <!-- Video lesson item -->
+        <div class="item video-lesson">
+            <!-- Video metadata -->
+            <div class="d-flex flex-column mb-2">
+                <div>
+                    <h4 class="">
+                        <a href="#" class="discretLink">
+                            Aula nº 3 - Declaração de variáveis e tipos de dados
+                        </a>
+                    </h4>
+                </div>
+                <div class="d-flex flex-row align-items-center">
+                    <div class="img-profile-xm mr-3">
+                        <img src="../../assets/images/lesson3.jpg">
+                    </div>
+                    <div class="flex-column d-flex ">
+                        <h5>
+                            <a href="#" class="primaryLink">
+                                Turma de Algoritmo e Programação
+                            </a>
+                        </h5>
+                        <div>
+                            <span class="irrelevant-text-xm">
+                                Há 2 dias
+                            </span>
                         </div>
-                        <span class="d-flex flex-column">
-                            <h4 class="bold-500 m-0">Mara Jorges</h4>
-                            <p class="m-0">teve uma questão <span class="irrelevant-text-xm">há 1s</span> </p>
+                    </div>
+                </div>
+            </div>
+            <!-- End metadata -->
+            <!-- Preload video image -->
+            <a href="#">
+                <div class="background-image ">
+                    <img src="../../assets/images/pexels-christina-morillo-1181398.jpg">
+                    <div class="duration-lesson">
+                        <span class="irrelevant-text-xm bold">
+                            10:10
                         </span>
                     </div>
-                    <!-- End section -->
-                    <!-- Info about the teacher place and class-->
-                    <div class="d-flex flex-column">
-                        <a routerLink="#" class="relevant-text-principal">
-                            Aula nº 4 - Declaração de variáveis e tipos de dados
+                </div>
+            </a>
+            <!-- End -->
+        </div>
+        <!-- End item -->
+
+        <!-- Article lesson item -->
+        <div class="article-lesson item">
+            <div class="d-flex flex-column align-self-start mb-2">
+                <!-- Article Lesson Title -->
+                <div>
+                    <h4>
+                        <a href="#" class="discretLink">
+                            Aula nº 5 - Vectores e Matrizes
                         </a>
-                        <div class="d-flex flex-row justify-content-start">
-                            <div class="my-1">
-                                <a href="#" class="badge badge-info mr-4">EINMF1</a>
-                                <a href="#" class="badge badge-danger mr-4">António P.</a>
-                                <a href="#" class="badge badge-warning mr-4">Programação</a>
-                                <a href="#" class="badge badge-dark ">Principios e fundamentos de programação</a>
-                            </div>
+                    </h4>
+                </div>
+                <!-- End -->
+                <div class="d-flex">
+                    <!-- Teacher place profile -->
+                    <div class="img-profile-xm mr-3">
+                        <img src="../../../assets/images/lesson2.jpg">
+                    </div>
+                    <!-- End -->
+                    <!-- Teacher place name -->
+                    <div class="d-flex flex-column">
+                        <h5>
+                            <a href="#" class="primaryLink">Turma de Algoritmo e Programação </a>
+                        </h5>
+                        <div>
+                            <span class="irrelevant-text-xm">
+                                Há 3 dias
+                            </span>
                         </div>
                     </div>
-                    <!-- End section -->
-                </div>
-                <!-- Question information -->
-                <div class="d-flex flex-column mt-1">
-                    <div class="relevant-text-error  d-flex align-items-center ">
-                        <mat-icon [style.fontSize.rem]="1.3"> warning</mat-icon> Não resolvido
-                    </div>
-                </div>
-                <!-- End section -->
-            </div>
-        </div>
-        <!-- End section -->
-        <mat-divider class="w-100"></mat-divider>
-        <!-- Question content-->
-        <div class="col-12 p-4">
-            <div class="d-flex flex-column">
-                <div class="relevant-text-title">
-                    Sed ut perspiciatis unde omnis iste natus error
-                </div>
-                <div>
-                    <p class="relevant-text-normal">
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                        laudantium,
-                        totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                        dicta sunt explicabo.
-                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                        consequuntur magni dolores eos qui
-                        ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit
-                        amet, consectetur, adipisci
-                        velit, sed quia non numquam eius ?
-                    </p>
-                </div>
-                <div class="mt-4 w-100 p-1">
-                    <button mat-flat-button class="bg-lighter w-100" router-link="#">
-                        Ver mais
-                    </button>
+                    <!-- End -->
                 </div>
             </div>
-        </div>
-        <!-- End section -->
-    </div>
-
-
-
-    <!-- Lesson Post -->
-    <div class="row lesson-post border bg-white d-flex flow-row p-0">
-        <!-- Video image background -->
-        <div class="col-12 p-0">
             <div class="background-image">
-                <div class="duration-lesson">
-                    <span class="irrelevant-text-xm bold">10:10</span>
-                </div>
-                <div class="lesson-background">
-                    <img src="../../assets/images/pexels-luis-gomes-546819.jpg">
-                </div>
+                <img src="../../../assets/images/pexels-christina-morillo-1181519.jpg">
             </div>
-        </div>
-
-        <!-- Relevant information about lesson -->
-        <div class="col-12 d-flex flex-column justify-content-start p-4">
-            <div class="flex-column">
-                <div class="relevant-text-principal">
-                    <h4 [style.margin]="0"> Aula nº 1 - Apresentaçáo do programa curricular </h4>
-                </div>
-                <div class="irrelevant-text-xm">
-                    <p [style.margin]="0"> publicado há 2h </p>
-                </div>
-                <div class="d-flex flex-row justify-content-start">
-                    <div class="my-1">
-                        <a href="#" class="badge badge-info mr-4">EINMF1</a>
-                        <a href="#" class="badge badge-danger mr-4">António P.</a>
-                        <a href="#" class="badge badge-warning mr-4">Programação</a>
-                        <a href="#" class="badge badge-dark ">Principios e fundamentos de programação</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Discription about lesson -->
-            <div>
-                <p class="relevant-content-normal">
-                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
-                    sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+            <div class="d-flex flex-column p-3 border">
+                <h3 class="bold-500">
+                    At vero eos et accusamus et iusto odio dignissimos
+                </h3>
+                <p class="text-justify">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus
+                    qui blanditiis praesentium voluptatum deleniti atque corrupti
+                    quos dolores et quas molestias excepturi sint occaecati cupiditate
+                    non provident, similique sunt in culpa qui officia deserunt mollitia
+                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+                    praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias
+                    excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui
+                    officia deserunt mollitia animi, id est laborum et dolorum fuga.
                 </p>
+                <button mat-button>
+                    Continuar a ler
+                </button>
             </div>
         </div>
-    </div>
+        <!-- End item -->
 
-
-
-    <!-- Article Post -->
-    <div class="article-post border bg-white d-flex flex-column p-0">
-        <div class="p-relative p-0 article-post-bg">
-            <img src="../../assets/images/pexels-hitarth-jadhav-220357.jpg">
-        </div>
-        <!-- Relevant information about article lesson -->
-        <div class="d-flex flex-column justify-content-start p-4">
-            <div class="flex-column">
-                <div class="relevant-text-principal">
-                    <h4 [style.margin]="0"> Aula nº 15 - Processos e Threads </h4>
-                </div>
-                <div class="irrelevant-text-xm">
-                    <p [style.margin]="0"> publicado há 2h </p>
-                </div>
-                <div class="d-flex flex-row justify-content-start">
-                    <div class="my-1">
-                        <a href="#" class="badge badge-info mr-4">KM12020</a>
-                        <a href="#" class="badge badge-danger mr-4">Kissinza M.</a>
-                        <a href="#" class="badge badge-warning mr-4">Sistema Operativo</a>
-                        <a href="#" class="badge badge-dark ">Principios e fundamentos de programação</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Discription about lesson -->
-            <div>
-                <p class="relevant-content-normal">
-                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
-                    sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-                </p>
-            </div>
-        </div>
-    </div>
-
-
-
-
-    <!-- Teacher Messages Post -->
-    <div class="message-post row border bg-white mb-4">
-        <!-- Some informations -->
-        <div class="d-flex">
-            <div class="img-profile-sm">
-                <img src="../../assets/images/pexels-christina-morillo-1181519.jpg">
-            </div>
-            <div class="flex-grow-1 flex-column d-flex justify-content-evenly ml-4">
-                <div class="relevant-content-normal bold">
-                    <span> Prof. Marta Peres </span>
-                </div>
-                <div class="d-flex">
-                    <mat-icon [style.fontSize.rem]="1.2" class="text-warning"> mail </mat-icon>
-                    <span class="irrelevant-text-xm"> Enviou uma mensagem há 3h </span>
-                </div>
+        <!-- Question item -->
+        <div class="item question">
+            <!-- Question data -->
+            <div class="d-flex flex-column mb-2">
+                <!-- Subject question -->
                 <div>
-                    <a class="relevant-text-principal" href="#"> Quimica Experimental </a>
+                    <h4 class="">
+                        <a href="#" class="discretLink">
+                            Como funciona o endereçamento das variáveis na memória?
+                        </a>
+                    </h4>
                 </div>
-            </div>
-        </div>
+                <!-- End -->
 
-        <!-- Content of the message -->
-        <div class="mt-4">
-            <p class="relevant-content-normal">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
-                sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-            </p>
+                <!-- Question subject -->
+                <div class="d-flex flex-row align-items-center">
+                    <div class="img-profile-xm mr-3">
+                        <img src="../../assets/images/pexels-jawm-ling-2748123.jpg">
+                    </div>
+                    <div class="flex-column d-flex ">
+                        <h5>
+                            <a href="#" class="primaryLink">
+                                Questão feita por Neida Matias
+                            </a>
+                        </h5>
+                        <div>
+                            <span class="irrelevant-text-xm">
+                                Há 1 dia   
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- End -->
+            </div>
+            <!-- End -->
+            <!-- Question description -->
+            <div class="border p-3 d-flex flex-column">
+                <p class="relevant-text-normal text-justify">
+                    On the other hand, we denounce with righteous
+                    indignation and dislike men who are so beguiled
+                    and demoralized by the charms of pleasure of the
+                    moment, so blinded by desire, that they cannot foresee
+                    the pain and trouble that are bound to ensue; and equal
+                    blame belongs to those who fail in their duty through
+                    weakness of will, which is the same as saying through
+                </p>
+                <button mat-button>
+                    Ver mais
+                </button>
+            </div>
+            <!-- End -->
         </div>
+        <!-- End item -->
     </div>
+
+
 </div>

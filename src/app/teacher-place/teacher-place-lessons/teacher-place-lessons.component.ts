@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { TopicChoiceDialogComponent } from 'src/app/dialogs/topic-choice-dialog/topic-choice-dialog.component';
 
 @Component({
   selector: 'app-teacher-place-lessons',
@@ -8,12 +10,16 @@ import { Router } from '@angular/router';
 })
 export class TeacherPlaceLessonsComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router: Router, public matDialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
-  navigateToVideo(){
+  openTopicChoiceDialog(){
+    this.matDialog.open(TopicChoiceDialogComponent);
+  }
+
+  navigateToVideo() {
     alert('I can get in !');
     this.router.navigate(['lesson/watch']);
 

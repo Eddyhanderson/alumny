@@ -1,61 +1,63 @@
-%post-box-shared {
-    width: 60%;
-    padding: 1.5rem;
-    margin-top: 3rem;
+@import '../shared/styles/standard-layout';
+
+
+.main{
+    @extend %main;    
 }
 
-.home-section {
-    height: 100%;
+.section{
+    @extend %section;
+    align-items: center;         
+}
+
+.container-row{
+    @extend %container-row;   
+}
+.teacher-place-suggest .background-image{
     width: 100%;
-    background-color: rgba(var(--palette-neutral-2, 248, 248, 248), 1);
+    height: 4rem;
+}
+.container-column{
+    @extend %container-column;    
+}
+
+.item{
+    background-color: white;
+    position: relative;
+    width: 50%;
+    margin-bottom: 1.5rem;
+}
+
+.info-tps{
+    position: absolute;
+    position: absolute;
+    font-style: italic;
+    top: 5rem;
+    left: 70%;
+    color: #ccc;
+    font-weight: 400;    
+}
+
+.description{
+    font-size:.8rem;
+}
+
+.video-lesson .background-image{
+    position: relative;
+    height: 10rem;
+}
+
+.background-shadow{
+    background-color: var(--palette-black-alpha-60);
+    position: absolute;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-}
-
-.question-post {
-    @extend %post-box-shared;
-    display: flex;
     justify-content: center;
-    align-items: flex-start;    
-}
-
-
-.lesson-post {
-    @extend %post-box-shared;
-}
-
-.lesson-background{
     width: 100%;
-    height: 7rem;
-}
-
-.lesson-background img{
-    object-fit: cover;
-}
-
-
-
-.article-post {
-    @extend %post-box-shared;
-}
-
-.article-post-bg{
-    height: 7rem;
-}
-
-.article-post img {
     height: 100%;
-    object-fit: cover;
 }
 
-.message-post{
-    @extend %post-box-shared;
-    border-radius: 0 1rem 1rem 1rem;
+.article-lesson .background-image{
+    height: 5rem;
 }
 
-.message-post::before{
-    content: '';
-
-}

@@ -1,197 +1,279 @@
 <div class="teacher-place-main bg-lighter">
 
-    <!-- To choose the academic year -->
-    <div class="d-flex justify-content-end" [style.width.%]="96">
-        <div class="d-flex align-items-center">
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="alterar ano lectivo">
-                <mat-icon> expand_more </mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item>
-                    <span>2020</span>
+    <!-- Create Teacher Place -->
+    <div class="teacher-place-section">
+        <!-- To activate only when is the teacher of the teacher place -->
+        <button class="border-radius-0 button-bg-accent1 mr-4"  mat-flat-button>
+            <mat-icon [style.fontSize.rem]="1.2">
+                create_new_folder
+            </mat-icon>
+             CRIAR TURMA
+        </button>
+    </div>
+
+    <!-- To choose the school and academic year -->
+    <div class="d-flex justify-content-end mb-3 " [style.width.%]="96">
+        <div class="d-flex justify-content-between w-100">
+            <div class="d-flex flex-row align-items-center">
+                <a class="discretLink" href="#"> Instituto Superior Politécnico de Tecnologia e Ciências </a>
+                <div class="circle-diviser"></div>
+                <span> 2020</span>
+            </div>
+            <span>
+                <button mat-icon-button matToolTip="Mais opções" [matMenuTriggerFor]="optMenu">
+                    <mat-icon>
+                        more_vert
+                    </mat-icon>
                 </button>
-                <button mat-menu-item>
-                    <span>2019</span>
-                </button>
-                <button mat-menu-item>
-                    <span>2018</span>
-                </button>
-            </mat-menu>
-            <span>Ano lectivo 2020</span>
+                <mat-menu #optMenu="matMenu">
+                    <button mat-menu-item>
+                        Escolher Escola
+                    </button>
+                </mat-menu>
+            </span>
         </div>
     </div>
     <!-- End -->
-    <!-- The teacher place information -->
+
+    <!-- The teacher places lists -->
     <div class="teacher-place-section">
         <div class="teacher-place-container">
             <div class="teacher-place-item  item bg-white border p-0 ">
-                <div>
+                <!-- Teacher Place Data -->
+                <div id="teacherPlaceBg">
                     <img src="../../assets/images/lesson2.jpg">
                 </div>
-                <div class="d-flex flex-column  p-1">
-                    <div class="relevant-content-normal justify-content-center d-flex">
-                        <h4 class="m-0 bold"> Turma de Programação IV </h4>
+                <div class="d-flex flex-column p-3">
+                    <div class="relevant-content-normal justify-content-start d-flex">
+                        <span class="m-0 bold-500"> Turma de Programação IV </span>
                     </div>
-                    <div class="d-flex flex-row justify-content-center p-2 badge-container">
-                        <a href="#" class="badge badge-info mr-4">EINMF1</a>
-                        <a href="#" class="badge badge-danger mr-4">António P.</a>
-                        <a href="#" class="badge badge-warning">Programação</a>
+                    <div class="d-flex flex-row justify-content-start">
+                        <div class="img-profile-xxm mr-3">
+                            <img src="../../../assets/images/pexels-thirdman-5060987.jpg">
+                        </div>   
+                        <a class="irrelevant-text-xm bold-500 discretLink" href="#"> 
+                            Prof. Daniel Manuel Silva
+                        </a>
                     </div>
                 </div>
+                <!-- End -->
                 <mat-divider></mat-divider>
                 <!-- Description about the teacher place -->
-                <div class="p-2">
-                    <p class="relevant-text-normal text-center">
+                <div class="description-teacher-place">
+                    <p class="relevant-text-normal text-justify">
                         Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
                         laudantium,
                         totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
                         dicta sunt explicabo.
                     </p>
+                </div>
+                <!-- More options -->
+                <div class="d-flex justify-content-end">
+                    <button class="discretButton" mat-icon-button>
+                        <mat-icon>
+                            more_vert
+                        </mat-icon>
+                    </button>
                 </div>
                 <!-- End -->
             </div>
 
             <div class="teacher-place-item  item bg-white border p-0 ">
-                <div>
+                <div id="teacherPlaceBg">
                     <img src="../../assets/images/lesson2.jpg">
                 </div>
-                <div class="d-flex flex-column  p-1">
-                    <div class="relevant-content-normal justify-content-center d-flex">
-                        <h4 class="m-0 bold"> Turma de Programação IV </h4>
+                <div class="d-flex flex-column p-3">
+                    <div class="relevant-content-normal justify-content-start d-flex">
+                        <span class="m-0 bold-500"> Turma de Programação IV </span>
                     </div>
-                    <div class="d-flex flex-row justify-content-center p-2 badge-container">
-                        <a href="#" class="badge badge-info mr-4">EINMF1</a>
-                        <a href="#" class="badge badge-danger mr-4">António P.</a>
-                        <a href="#" class="badge badge-warning">Programação</a>
+                    <div class="d-flex flex-row justify-content-start">
+                        <div class="img-profile-xxm mr-3">
+                            <img src="../../../assets/images/pexels-thirdman-5060987.jpg">
+                        </div>   
+                        <a class="irrelevant-text-xm bold-500 discretLink" href="#"> 
+                            Prof. Daniel Manuel Silva
+                        </a>
                     </div>
                 </div>
                 <mat-divider></mat-divider>
                 <!-- Description about the teacher place -->
                 <!-- Add height to overflow right the date -->
-                <div class="p-2">
-                    <p class="relevant-text-normal text-center">
+                <div class="description-teacher-place">
+                    <p class="relevant-text-normal text-justify">
                         Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
                         laudantium,
                         totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
                         dicta sunt explicabo.
                     </p>
+                </div>
+                <!-- More options -->
+                <div class="d-flex justify-content-end">
+                    <button class="discretButton" mat-icon-button>
+                        <mat-icon>
+                            more_vert
+                        </mat-icon>
+                    </button>
                 </div>
                 <!-- End -->
             </div>
 
             <div class="teacher-place-item  item bg-white border p-0 ">
-                <div>
+                <div id="teacherPlaceBg">
                     <img src="../../assets/images/lesson2.jpg">
                 </div>
-                <div class="d-flex flex-column  p-1">
-                    <div class="relevant-content-normal justify-content-center d-flex">
-                        <h4 class="m-0 bold"> Turma de Programação IV </h4>
+                <div class="d-flex flex-column p-3">
+                    <div class="relevant-content-normal justify-content-start d-flex">
+                        <span class="m-0 bold-500"> Turma de Programação IV </span>
                     </div>
-                    <div class="d-flex flex-row justify-content-center p-2 badge-container">
-                        <a href="#" class="badge badge-info mr-4">EINMF1</a>
-                        <a href="#" class="badge badge-danger mr-4">António P.</a>
-                        <a href="#" class="badge badge-warning">Programação</a>
+                    <div class="d-flex flex-row justify-content-start">
+                        <div class="img-profile-xxm mr-3">
+                            <img src="../../../assets/images/pexels-thirdman-5060987.jpg">
+                        </div>   
+                        <a class="irrelevant-text-xm bold-500 discretLink" href="#"> 
+                            Prof. Daniel Manuel Silva
+                        </a>
                     </div>
                 </div>
                 <mat-divider></mat-divider>
                 <!-- Description about the teacher place -->
                 <!-- Add height to overflow right the date -->
-                <div class="p-2">
-                    <p class="relevant-text-normal text-center">
+                <div class="description-teacher-place">
+                    <p class="relevant-text-normal text-justify">
                         Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
                         laudantium,
                         totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
                         dicta sunt explicabo.
                     </p>
+                </div>
+                <!-- More options -->
+                <div class="d-flex justify-content-end">
+                    <button class="discretButton" mat-icon-button>
+                        <mat-icon>
+                            more_vert
+                        </mat-icon>
+                    </button>
                 </div>
                 <!-- End -->
             </div>
 
             <div class="teacher-place-item  item bg-white border p-0 ">
-                <div>
+                <div id="teacherPlaceBg">
                     <img src="../../assets/images/lesson2.jpg">
                 </div>
-                <div class="d-flex flex-column  p-1">
-                    <div class="relevant-content-normal justify-content-center d-flex">
-                        <h4 class="m-0 bold"> Turma de Programação IV </h4>
+                <div class="d-flex flex-column p-3">
+                    <div class="relevant-content-normal justify-content-start d-flex">
+                        <span class="m-0 bold-500"> Turma de Programação IV </span>
                     </div>
-                    <div class="d-flex flex-row justify-content-center p-2 badge-container">
-                        <a href="#" class="badge badge-info mr-4">EINMF1</a>
-                        <a href="#" class="badge badge-danger mr-4">António P.</a>
-                        <a href="#" class="badge badge-warning">Programação</a>
+                    <div class="d-flex flex-row justify-content-start">
+                        <div class="img-profile-xxm mr-3">
+                            <img src="../../../assets/images/pexels-thirdman-5060987.jpg">
+                        </div>   
+                        <a class="irrelevant-text-xm bold-500 discretLink" href="#"> 
+                            Prof. Daniel Manuel Silva
+                        </a>
                     </div>
                 </div>
                 <mat-divider></mat-divider>
                 <!-- Description about the teacher place -->
                 <!-- Add height to overflow right the date -->
-                <div class="p-2">
-                    <p class="relevant-text-normal text-center">
+                <div class="description-teacher-place">
+                    <p class="relevant-text-normal text-justify">
                         Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
                         laudantium,
                         totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
                         dicta sunt explicabo.
                     </p>
                 </div>
+                <!-- More options -->
+                <div class="d-flex justify-content-end">
+                    <button class="discretButton" mat-icon-button>
+                        <mat-icon>
+                            more_vert
+                        </mat-icon>
+                    </button>
+                </div>
                 <!-- End -->
-            
+
             </div>
 
             <div class="teacher-place-item  item bg-white border p-0 ">
-                <div>
+                <div id="teacherPlaceBg">
                     <img src="../../assets/images/lesson2.jpg">
                 </div>
-                <div class="d-flex flex-column  p-1">
-                    <div class="relevant-content-normal justify-content-center d-flex">
-                        <h4 class="m-0 bold"> Turma de Programação IV </h4>
+                <div class="d-flex flex-column p-3">
+                    <div class="relevant-content-normal justify-content-start d-flex">
+                        <span class="m-0 bold-500"> Turma de Programação IV </span>
                     </div>
-                    <div class="d-flex flex-row justify-content-center p-2 badge-container">
-                        <a href="#" class="badge badge-info mr-4">EINMF1</a>
-                        <a href="#" class="badge badge-danger mr-4">António P.</a>
-                        <a href="#" class="badge badge-warning">Programação</a>
+                    <div class="d-flex flex-row justify-content-start">
+                        <div class="img-profile-xxm mr-3">
+                            <img src="../../../assets/images/pexels-thirdman-5060987.jpg">
+                        </div>   
+                        <a class="irrelevant-text-xm bold-500 discretLink" href="#"> 
+                            Prof. Daniel Manuel Silva
+                        </a>
                     </div>
                 </div>
                 <mat-divider></mat-divider>
                 <!-- Description about the teacher place -->
                 <!-- Add height to overflow right the date -->
-                <div class="p-2">
-                    <p class="relevant-text-normal text-center">
+                <div class="description-teacher-place">
+                    <p class="relevant-text-normal text-justify">
                         Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
                         laudantium,
                         totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
                         dicta sunt explicabo.
                     </p>
                 </div>
+                <!-- More options -->
+                <div class="d-flex justify-content-end">
+                    <button class="discretButton" mat-icon-button>
+                        <mat-icon>
+                            more_vert
+                        </mat-icon>
+                    </button>
+                </div>
                 <!-- End -->
-            
+
             </div>
-        
+
             <div class="teacher-place-item  item bg-white border p-0 ">
-                <div>
+                <div id="teacherPlaceBg">
                     <img src="../../assets/images/lesson2.jpg">
                 </div>
-                <div class="d-flex flex-column  p-1">
-                    <div class="relevant-content-normal justify-content-center d-flex badge-container">
-                        <h4 class="m-0 bold"> Turma de Programação IV </h4>
+                <div class="d-flex flex-column p-3">
+                    <div class="relevant-content-normal justify-content-start d-flex">
+                        <span class="m-0 bold-500"> Turma de Programação IV </span>
                     </div>
-                    <div class="d-flex flex-row justify-content-center p-2">
-                        <a href="#" class="badge badge-info mr-4">EINMF1</a>
-                        <a href="#" class="badge badge-danger mr-4">António P.</a>
-                        <a href="#" class="badge badge-warning">Programação</a>
+                    <div class="d-flex flex-row justify-content-start">
+                        <div class="img-profile-xxm mr-3">
+                            <img src="../../../assets/images/pexels-thirdman-5060987.jpg">
+                        </div>   
+                        <a class="irrelevant-text-xm bold-500 discretLink" href="#"> 
+                            Prof. Daniel Manuel Silva
+                        </a>
                     </div>
                 </div>
                 <mat-divider></mat-divider>
                 <!-- Description about the teacher place -->
                 <!-- Add height to overflow right the date -->
-                <div class="p-2">
-                    <p class="relevant-text-normal text-center">
+                <div class="description-teacher-place">
+                    <p class="relevant-text-normal text-justify">
                         Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
                         laudantium,
                         totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
                         dicta sunt explicabo.
                     </p>
                 </div>
+                <!-- More options -->
+                <div class="d-flex justify-content-end">
+                    <button class="discretButton" mat-icon-button>
+                        <mat-icon>
+                            more_vert
+                        </mat-icon>
+                    </button>
+                </div>
                 <!-- End -->
-            
+
             </div>
 
         </div>

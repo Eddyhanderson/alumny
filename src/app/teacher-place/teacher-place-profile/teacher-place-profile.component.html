@@ -16,9 +16,17 @@
                 <a href="#" class="badge badge-secondary">Prof. Alberto Mateus </a>
             </div>
         </div>
-        <div >
-            <button class="b-0" mat-flat-button color="primary">
-                Matricular-se
+        <div class="d-flex justify-content-end" [style]="{width:'70%', height:'2.5rem'}">
+            <!-- To activate only when is the teacher of the teacher place -->
+            <button class="border-radius-0 button-bg-accent1 mr-4"  mat-flat-button>
+                <mat-icon [style.fontSize.rem]="1.2">
+                    post_add
+                </mat-icon>
+                 ADICIONAR AULA
+            </button>
+            <!-- End -->
+            <button class="border-radius-0" mat-flat-button color="primary">
+                MATRICULAR-SE
             </button>
         </div>
     </div>
@@ -27,22 +35,31 @@
     <div class="navigation-actions">
         <ul>
             <li>
-                <a class="nav-action text-desabled" routerLink="/teacherPlace/profile" routerLinkActive="nav-action-selected">
+                <a class="nav-action text-desabled" routerLink="/teacherPlace/profile/about" routerLinkActive="nav-action-selected">
+                    <span> ACERCA</span>
+                </a>
+            </li>
+
+            <li>
+                <a class="nav-action text-desabled" routerLink="/teacherPlace/profile/lessons" routerLinkActive="nav-action-selected">
                     <span> AULAS</span>
                 </a>
             </li>
+
             <li>
-                <a class="nav-action text-desabled" routerLink="/teacherPlace/profile/materials"
+                <a class="nav-action text-desabled" routerLink="/teacherPlace/profile/studants"
                     routerLinkActive="nav-action-selected">
-                    <span> MATERIAIS</span>
+                    <span> MATRICULADOS (20)</span>
                 </a>
             </li>
+
             <li>
                 <a class="nav-action text-desabled" routerLink="/teacherPlace/profile/mensages"
                     routerLinkActive="nav-action-selected">
                     <span> MENSAGENS</span>
                 </a>
             </li>
+
             <li>
                 <a>
                     <mat-form-field floatLabel="never">
@@ -61,4 +78,5 @@
     <div class="w-100 bg-lighter">
         <router-outlet></router-outlet>
     </div>
+    <!-- End -->
 </div>

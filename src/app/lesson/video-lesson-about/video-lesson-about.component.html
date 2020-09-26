@@ -2,7 +2,7 @@
     <div class="section">
         <div class="container-row">
             <div class="about-video-lesson item bg-white p-3">
-                <span class="bold-500"> Sobre a aula</span>
+                <span class="bold-500 mb-3"> Sobre a aula</span>
                 <p class="">
                     At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
                     voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
@@ -11,17 +11,28 @@
                 </p>
             </div>
 
-            <div class="about-teacher item bg-white p-3">
-                <div class="img-profile-sm d-flex justify-content-center">
-                    <img src="../../../assets/images/pexels-thirdman-5060987.jpg">
+            <div class="d-flex flex-column item p-4">
+                <!-- Teacher Identifications -->
+                <div class="d-flex justify-content-start align-items-center mb-4">
+                    <div class="img-profile-xm mr-4">
+                        <img src="../../../assets/images/pexels-thirdman-5060987.jpg">
+                    </div>
+                    <a href="#">
+                        <span>Prof. Daniel Manuel Silva</span>
+                    </a>
                 </div>
-                <button mat-button class="bold-400 p-0 relevant-text-principal m-0" routerLink="#" matTooltipPosition="above" matTooltip="Visitar perfil">
-                    Prof. Daniel Silva
-                </button>
+                <!-- End -->
 
-                <span class="text-desabled" [style.fontSize.rem]=".8"> Engenharia Informática </span>
-                <span class="text-desabled" [style.fontSize.rem]=".8">  Instituto Superior Politécnico de Tecnologia e Ciências </span>
+                <!-- Teaher Date -->
+                <span class="irrelevant-text-xm text-desabled">
+                    Engenheiro Informático
+                </span>
+                <a href="#" class="mb-2">
+                    Licenciado na Universidade Católica de Angola
+                </a>
+                <!-- End -->
             </div>
+            <!-- End  -->
         </div>
     </div>
 </div>

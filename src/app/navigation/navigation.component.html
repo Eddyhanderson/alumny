@@ -20,7 +20,8 @@
             </div>
         </div>
         <div class="d-flex justfy-content-between align-items-center actions">
-            <button mat-icon-button matTooltip="Adicionar aula" matTooltipPosition="above" [matMenuTriggerFor]="typeLessons">
+            <button mat-icon-button matTooltip="Adicionar aula" matTooltipPosition="above"
+                [matMenuTriggerFor]="typeLessons">
                 <mat-icon class="text-color-primary" [style.fontSize.rem]="1.5">
                     post_add
                 </mat-icon>
@@ -36,10 +37,12 @@
                 </button>
             </mat-menu>
             <button class="mr-4" mat-icon-button>
-                <mat-icon  matBadge="9+" matBadgePosition="after" matBadgeColor="primary">notifications
+                <mat-icon matBadge="9+" matBadgePosition="after" matBadgeColor="primary">notifications
                 </mat-icon>
             </button>
-            <div id="image-profile"></div>
+            <div class="img-profile-xm">
+                <img src="../../assets/images/pexels-christina-morillo-1181519.jpg">
+            </div>
         </div>
     </mat-toolbar>
     <!-- End toolbar -->
@@ -92,6 +95,60 @@
                     </a>
                 </li>
             </ul>
+            <mat-divider></mat-divider>
+            <div class="pl-4 mt-2">
+                <span class="bold-500  text-desabled-1">ESCOLAS</span>
+            </div>
+
+            <a class="d-flex pl-4 school-item discretLink" href="#">
+                <div class="img-profile-xxm mr-4 ">
+                    <img src="../../../assets/images/istpec_logo_yellow.png">
+                </div>
+                <span class="bold-500 irrelevant-text-xm text-ellips ">
+                    Instituto Superior Politécnico de Tecnologia e Ciências
+                </span>
+            </a>
+
+            <a class="d-flex pl-4 school-item discretLink" href="#">
+                <div class="img-profile-xxm mr-4 ">
+                    <img src="../../assets/images/catolica_logo.jpg">
+                </div>
+                <span class="bold-500 irrelevant-text-xm text-ellips ">
+                    Universidade Católica de Angola
+                </span>
+            </a>
+
+            <a class="d-flex pl-4 school-item discretLink" href="#">
+                <div class="img-profile-xxm mr-4 ">
+                    <img src="../../assets/images/bfa_logo.png">
+                </div>
+                <span class="bold-500 irrelevant-text-xm text-ellips ">
+                    Banco Fomento Angola
+                </span>
+            </a>        
+
+            <button mat-button class="w-100 d-flex justify-content-start pl-4">
+                <mat-icon class="mr-4">keyboard_arrow_down</mat-icon>
+                <span class="irrelevant-text-xm">Mostrar Mais 4</span>
+            </button>
+
+            <mat-divider></mat-divider>
+
+            <ul class="flex-column p-0 w-100 justfy-content-start mt-1">
+                <li class="nav-item">
+                    <a class="d-flex pl-4" routerLink="/definitions" routerLinkActive="nav-active"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        <mat-icon [style.fontSize.rem]="1.6"> settings</mat-icon> <span class="ml-4">Definições</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="d-flex pl-4" routerLink="/definitions" routerLinkActive="nav-active"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        <mat-icon [style.fontSize.rem]="1.6"> feedback</mat-icon> <span class="ml-4">Contacte-nos</span>
+                    </a>
+                </li>
+            </ul>
+
         </mat-sidenav>
 
         <!-- End Nav Bar -->

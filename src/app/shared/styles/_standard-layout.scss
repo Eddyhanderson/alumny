@@ -7,7 +7,7 @@
     width: 100%;
     padding-top: 2rem;
 }
-
+ 
 %section{
     height: 100%;
     width: 96%;
@@ -17,10 +17,15 @@
 
 %container-row{
     display: flex;
-    flex-direction: row;
+    flex-direction: row; 
     width: 100%;    
 }
 
+%container-column{
+    display: flex;
+    flex-direction: column;
+    width: 100%;    
+}
 @mixin item-config($width) {
     width: $width;
 }

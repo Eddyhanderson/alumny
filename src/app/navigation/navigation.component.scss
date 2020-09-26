@@ -30,7 +30,7 @@
     border-right: 1px solid var(--palette-black-alpha-10);
 }
 
-.nav-container ul li {
+.nav-container ul li{
     list-style-type: none;
     line-height: 1.5rem;    
     width: 100%;
@@ -39,7 +39,7 @@
     height: 2.7rem;
 }
 
-.nav-item:hover {
+.nav-item:hover, .school-item:hover {
     cursor: pointer;
     background-color: rgb(var(--palette-neutral-2));
 }
@@ -64,4 +64,18 @@ li a {
 
 .nav-active {
     background-color: rgb(var(--palette-primary-lighter), 0.15);
+}
+
+.school-item .text-ellips{
+    width: 60%;
+}
+
+.school-item{
+    height: 2.7rem;
+    display: flex;
+    align-items: center;
+}
+
+.nav-sidenav{
+    overflow: hidden !important;
 }

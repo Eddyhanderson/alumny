@@ -68,7 +68,7 @@ export class VideoLessonViewComponent implements OnInit, AfterViewInit, OnDestro
   playBackButton: boolean = false;
 
   //#region(events declarations )
-
+/*
   playToggle() {
 
     if (this.video.nativeElement.paused || this.video.nativeElement.ended) {
@@ -246,13 +246,13 @@ export class VideoLessonViewComponent implements OnInit, AfterViewInit, OnDestro
       this.renderer.addClass(pipEl, 'hidden');
     else
       this.renderer.removeClass(pipEl, 'hidden');
-  }
+  }*/
 
   //#endregion
 
   //#region(LIFE CYCLE HOOKS)
   ngAfterViewInit(): void {
-
+/*
     if (!('pictureInPictureEnabled' in document)) {
       this.renderer.addClass(this.pipButton.nativeElement, 'hidden');
     }
@@ -301,7 +301,7 @@ export class VideoLessonViewComponent implements OnInit, AfterViewInit, OnDestro
     this.renderer.listen(this.fullscreenButton.nativeElement, 'click', () => this.fullScreenModeToggle());
 
 
-
+*/
 
   }
 
@@ -310,15 +310,18 @@ export class VideoLessonViewComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   ngOnDestroy(): void {
+    /*
     this.initializationVideo = null;
 
     this.updateElapsedTime = null;
 
     this.displaySeekTooltip = null;
+    */
   }
   //#endregion
 
   //#region(UTILS)
+  /*
   formatTime(seconds: number): any {
     const result = new Date(seconds * 1000).toISOString().substr(11, 8);
 
@@ -339,6 +342,7 @@ export class VideoLessonViewComponent implements OnInit, AfterViewInit, OnDestro
       this.renderer.removeClass(el, 'hidden');
     }
   }
+  */
   //#endregion
 
 
