@@ -188,7 +188,7 @@ a.primaryLink:hover{
     color: rgb(var(--palette-primary));
 }
 a.discretLink{
-    color: inherit !important;
+    color: var(--text-disabled-color) !important;
 }
 
 a.discretLink:hover{
@@ -410,15 +410,11 @@ img {
     color: rgb(var(--text-secondary-color));
 }
 
-.text-secondary {
-    color: rgb(var(--text-secondary-color)) !important;
-}
-
-.text-desabled {
+.text-disabled {
     color: var(--text-disabled-color) !important;
 }
 
-.text-desabled-1 {
+.text-disabled-1 {
     color: rgba(var(--palette-neutral-100), 0.45) !important;
 }
 
