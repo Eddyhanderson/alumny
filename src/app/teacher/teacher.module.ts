@@ -8,10 +8,11 @@ import { TeacherProfileSpotlightComponent } from './teacher-profile-spotlight/te
 import { TeacherProfileAboutComponent } from './teacher-profile-about/teacher-profile-about.component';
 import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
+import { ControlPainelComponent } from './control-painel/control-painel.component';
 
 
 @NgModule({
-  declarations: [TeacherProfileComponent, TeacherProfileTeacherPlacesComponent, TeacherProfileSpotlightComponent, TeacherProfileAboutComponent],
+  declarations: [TeacherProfileComponent, TeacherProfileTeacherPlacesComponent, TeacherProfileSpotlightComponent, TeacherProfileAboutComponent, ControlPainelComponent],
   imports: [
     CommonModule,
     TeacherRoutingModule,

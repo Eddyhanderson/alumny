@@ -7,10 +7,9 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChildren } from '@
 })
 export class NavigationComponent implements OnInit {
   homeActive = true;
+  role:string="teacher";
 
-  markNav(e: HTMLElement) {
-
-  }
+ 
   constructor() { }
 
   ngOnInit(): void {
