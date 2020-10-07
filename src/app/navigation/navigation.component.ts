@@ -7,7 +7,7 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChildren } from '@
 })
 export class NavigationComponent implements OnInit {
   homeActive = true;
-  role:string="teacher";
+  role:string="studant";
 
  
   constructor() { }

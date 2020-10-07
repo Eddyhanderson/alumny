@@ -136,6 +136,12 @@ button:focus{
 }
 
 /* Common in Components */
+
+.brand {
+    color: rgb(var(--palette-primary));
+    font-size: 1.1rem;
+}
+
 a.primaryLink{
     color: rgb(var(--palette-primary-light));
 }
@@ -411,6 +417,10 @@ img {
 
 .text-justify{
     text-align: justify;
+}
+
+.text-center{
+    text-align: center;
 }
 
 .text-ellips{

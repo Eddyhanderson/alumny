@@ -1,0 +1,77 @@
+<div class="main">
+    <div class="login-card rounded border shadow">
+
+        <!-- Brand image-->
+        <div class="w-100 d-flex justify-content-center mb-4">
+            <h1 class="brand d-flex align-items-center">
+                <mat-icon class="mr-2">school</mat-icon> alumni
+            </h1>
+        </div>
+        <!-- End -->
+
+        <!-- Form itens -->
+        <div class="mb-5 w-100">
+            <!-- Email input -->
+            <p class="w-100">
+                <mat-form-field appearance="legacy" class="w-100">
+                    <mat-label>Email</mat-label>
+                    <input matInput >
+                    <!--<mat-hint>Hint</mat-hint>-->
+                </mat-form-field>
+            </p>
+            <!-- End -->
+            
+            <!-- Password input -->
+            <p class="w-100">
+                <mat-form-field appearance="legacy" class="w-100">
+                    <mat-label>Palavra passe</mat-label>
+                    <input matInput type="password">
+                    <button matSuffix mat-icon-button>
+                        <mat-icon>
+                            visibility
+                        </mat-icon>
+                    </button>
+                    <!--<mat-hint>Hint</mat-hint>-->
+                </mat-form-field>
+            </p>
+            <!-- End -->
+        </div>          
+        <!-- End -->      
+
+        <!-- Sign in button -->
+        <div class="d-flex justify-content-center w-100 mb-2">
+            <button mat-flat-button class="button-bg-accent1 w-100">
+                Entrar
+            </button>
+        </div>
+        <!-- End -->
+
+        <!-- Forget of passowrd -->
+        <div class="d-flex flex-column mb-4">
+            <span class="irrelevant-text">
+                <a href="#">esqueci-me da palavra passe</a>
+            </span>
+        </div>
+        <!-- End -->
+
+        <!-- Registrate -->
+        <mat-divider class="w-100 my-2"></mat-divider>
+        <div class="w-100 d-flex justify-content-center">
+            <button mat-button color="accent" [matMenuTriggerFor]="registerType">
+                Registar
+            </button>
+            <mat-menu #registerType="matMenu">
+                <button mat-menu-item (click)="gotoRegistrationStudant()">
+                    <mat-icon>face</mat-icon>
+                    Como estudante
+                </button>
+
+                <button mat-menu-item (click)="gotoRegistrationTeacher()">
+                    <mat-icon>support_agent</mat-icon>
+                    Como professor
+                </button>
+            </mat-menu>
+        </div>
+        <!-- End -->
+    </div>
+</div>
