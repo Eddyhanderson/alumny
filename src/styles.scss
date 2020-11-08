@@ -166,12 +166,12 @@ button.discretButton:hover{
     color: var(--palette-black-alpha-100) !important;    
 }
 
-.button-bg-accent1{
+.button-bg-accent-1{
     background-color: var(--button-background-accent1);
     color: white;
 }
 
-.button-bg-accent2{
+.button-bg-accent-2{
     background-color: var(--button-background-accent2);
     color: white;
 }
@@ -242,11 +242,27 @@ button.discretButton:hover{
     border-radius: 50%;
 }
 
+.img-profile-md-none > div{
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+    border-radius: 50%;
+    background-color: rgba(var(--palette-neutral-60));
+}
+
 .img-profile-xm > img {
     width: 2rem;
     height: 2rem;
     object-fit: cover;
     border-radius: 50%;
+}
+
+.img-profile-xm-none > div {
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+    border-radius: 50%;
+    background-color: rgba(var(--palette-neutral-60));
 }
 
 .img-profile-sm > img {
@@ -256,12 +272,29 @@ button.discretButton:hover{
     border-radius: 50%;
 }
 
+.img-profile-sm-none > div {
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+    border-radius: 50%;
+    background-color: rgba(var(--palette-neutral-60));
+}
+
 .img-profile-xxm > img{
     width: 24px;
     height: 24px;
     object-fit: cover;
     border-radius: 100%;
 }
+
+.img-profile-xxm-none > div{
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    border-radius: 100%;
+    background-color: rgba(var(--palette-neutral-60));
+}
+
 .bg-neutral-2 {
     background-color: rgb(var(--palette-neutral-2));
 }
@@ -316,7 +349,7 @@ img {
     justify-content: space-evenly !important;
 }
 
-.b-none {
+.border-none {
     border: none !important;
 }
 

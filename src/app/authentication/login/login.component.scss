@@ -15,3 +15,12 @@
     align-items: center;
 }
 
+.progress-section{
+    width: 300px;
+}
+
+.progress-section mat-progress-bar{
+    height: 2px;
+    border-radius: 5rem;    
+}
+

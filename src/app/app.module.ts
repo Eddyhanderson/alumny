@@ -6,36 +6,50 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './navigation/navigation.component';
 
-import {MaterialModule} from './material/material.module';
-import { LoginComponent } from './authentication/login/login.component';
+import { MaterialModule } from './material/material.module';
 
-import { RegistrationStudantComponent } from './authentication/registration/registration-studant/registration-studant.component';
-import { RegistrationTeacherComponent } from './authentication/registration/registration-teacher/registration-teacher.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { AuthenticationModule } from './authentication/authentication.module';
 
+import { SplashComponent } from './splash/splash.component';
 
+import {AccountService} from "./services/account-service/account.service";
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import {AuthenticationInterceptor} from './interceptors/authentication/authentication.interceptor';
+import { AcademyService } from './services/academy-service/academy.service';
+import { SharedModule } from './shared/shared.module';
+import { TeacherService } from './services/teacher-service/teacher.service';
+import { SchoolService } from './services/school-service/school.service';
+import { ManagerService } from './services/manager-service/manager.service';
+import { LoadingDataComponent } from './loading-data/loading-data.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent,  
-    LoginComponent,
-    RegistrationStudantComponent,
-    RegistrationTeacherComponent
+    NavigationComponent,
+    SplashComponent,
+    LoadingDataComponent
   ],
   imports: [
-    BrowserModule, 
-    MaterialModule,    
+    HttpClientModule,
+    BrowserModule,
+    MaterialModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
-    ],
+    AuthenticationModule,
+    SharedModule
+  ],
   providers: [
     {
-      provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: { displayDefaultIndicatorType: false }
-    }
+      provide:HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptor,
+      multi:true
+    },    
+    AccountService,
+    AcademyService,
+    TeacherService,
+    SchoolService,
+    ManagerService
   ],
   bootstrap: [AppComponent]
 })

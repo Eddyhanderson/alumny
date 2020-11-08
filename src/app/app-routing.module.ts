@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LoginComponent } from './authentication/login/login.component';
-import { RegistrationStudantComponent } from './authentication/registration/registration-studant/registration-studant.component';
-import { RegistrationTeacherComponent } from './authentication/registration/registration-teacher/registration-teacher.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { SplashComponent } from './splash/splash.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'login' },
+  { path: '', pathMatch: 'full', component: SplashComponent },
   { path: "home", loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
   { path: "teacherPlace", loadChildren: () => import('./teacher-place/teacher-place.module').then(m => m.TeacherPlaceModule) },
   { path: "lesson", loadChildren: () => import('./lesson/lesson.module').then(m => m.LessonModule) },
@@ -15,14 +14,8 @@ const routes: Routes = [
   { path: "teacher", loadChildren: () => import('./teacher/teacher.module').then(m => m.TeacherModule) },
   { path: "school", loadChildren: () => import('./school/school.module').then(m => m.SchoolModule) },
   { path: "manager-school", loadChildren: () => import('./manager-school/manager-school.module').then(m => m.ManagerSchoolModule) },
-  { path: "auth/login", component: LoginComponent },
-  {
-    path: 'auth/registration', children: [
-      { path: 'studant', component: RegistrationStudantComponent },
-      { path: 'teacher', component: RegistrationTeacherComponent }
-    ]
-  },
-  { path: '**', redirectTo: 'home' }
+  { path: "auth", loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },  
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
