@@ -29,18 +29,20 @@ export class TeacherSchoolsService {
      * @param data contain the data about the teacher request to make part 
      * @returns the state of the creation
      */
-    async create(data: TeacherSchoolsModel): Promise<any> {
-        this.teacherSchoolReq = {
-            schoolId: data.school.id,
-            teacherId: data.teacher.id
-        };
+    async create(data: TeacherSchoolSRequest): Promise<any> {
+       
+        if(data == null) return null; 
+        
+        try {
+            let response = await this.http.post<any>(Routes.TEACHER_SCHOOLS_CREATE_ROUTE, data).toPromise();
+            
+            if (response.succeded) {
+                return response.data;
+            } else return null;
 
-        let response = await this.http.post<any>(Routes.TEACHER_SCHOOLS_CREATE_ROUTE, this.teacherSchoolReq).toPromise()
-            .catch(r => { console.log(r.message); return null; });
-
-        if (response.succeded) {
-            return response.data;
-        } else return null;
+        } catch (error) {
+            console.log(error.message)
+        }        
     }
 
     /**
@@ -64,29 +66,25 @@ export class TeacherSchoolsService {
      * @param teacherId the key to search the teacher schools that not are confirmed
      * @returns the list of teacher schools that aren't confirmed
      */
-    async getAllPendingTeacherSchoolByTeacher(teacherId: string): Promise<any> {
-        let response = await this.http.get(Routes.TEACHER_SCHOOLS_GET_ALL_PENDING_BY_SCHOOL_ROUTE.replace('{teacherId}', teacherId)).toPromise()
-            .catch(r => { console.log(r.message); return null; });
-
-        if (response.data != null) {
-            return response.data;
-        } else return null;
+    public getAllPendingTeacherSchoolByTeacher(teacherId: string): Observable<TeacherSchoolsModel[]> {
+        try {            
+            return this.http.get<PageResponse<TeacherSchoolsModel>>(Routes.TEACHER_SCHOOLS_GET_ALL_PENDING_BY_TEACHER_ROUTE.replace('{teacherId}', teacherId))
+                .pipe(map(result => result.data));
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
     /**
      * Get all the teacher schools from this teacher
      * @param teacherId the key to search the teachers who are confirmed
      */
-    async getAllNormalTeacherSchoolByTeacher(teacherId: string): Promise<TeacherSchoolsModel[]> {
+    public getAllNormalTeacherSchoolByTeacher(teacherId: string): Observable<TeacherSchoolsModel[]> {
 
         try {
-            let pageResponse = await this.http
+            return this.http
                 .get<PageResponse<TeacherSchoolsModel>>(Routes.TEACHER_SCHOOLS_GET_ALL_NORMAL_BY_TEACHER_ROUTE.replace('{teacherId}', teacherId))
-                .toPromise();
-
-            if (pageResponse.data != null) {
-                return pageResponse.data;
-            } else return null;
+                .pipe(map(result => result.data));            
         } catch (error) {
             console.log(error.message);
         }
@@ -123,11 +121,7 @@ export class TeacherSchoolsService {
                         role: query.role
                     }
                 }).pipe(
-                    map((pageResponse) => {
-                        if (pageResponse.data != null) {
-                            return pageResponse.data;
-                        } else return null;
-                    })
+                    map((pageResponse) => pageResponse.data)
                 );
 
         } catch (error) {

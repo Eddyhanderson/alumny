@@ -2,7 +2,7 @@ export class Constants {
     // Users roles 
     static STUDANT = "STUDANT";
     static TEACHER = "TEACHER";
-    static SCHOOL_MANAGER = "Manager";
+    static SCHOOL_MANAGER = "MANAGER";
 
     // Api url
     static ROOT = "api";

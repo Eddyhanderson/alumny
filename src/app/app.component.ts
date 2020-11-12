@@ -8,15 +8,15 @@ import { AccountService } from './services/account-service/account.service';
 })
 export class AppComponent {
   title = 'alumni';
+  
+  isLogedIn: boolean = false;
 
-  loadingMode: boolean = false;
-  isLogin: boolean;
-
-  constructor(private accountService: AccountService, private router: Router, private route: ActivatedRoute) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.accountService.logStatus.subscribe(v => {
-      this.isLogin = v;
-    });
+  }
+
+  public checkAuthState(state: boolean) {
+    this.isLogedIn = state;
   }
 }

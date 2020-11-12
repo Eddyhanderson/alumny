@@ -16,11 +16,13 @@ export class LoginComponent implements OnInit {
   password: FormControl;
   authGroup: FormGroup;
   inProgress: boolean = false;
+  authenticated: boolean;
 
-  constructor(private router: Router, private route: ActivatedRoute, private accountService: AccountService) {    
+  constructor(private router: Router, private route: ActivatedRoute, private accountService: AccountService) {
   }
 
   ngOnInit(): void {
+    this.checkLoginStatus();
     this.formFieldBuild();
   }
 
@@ -42,17 +44,24 @@ export class LoginComponent implements OnInit {
     let result = await this.accountService.login(formValues.email, formValues.password);
 
     if (result.authenticated) {
+      
       let role = localStorage.getItem('userRole');
       let returnUrl = this.route.snapshot.paramMap.get('returnUrl');
-
-      if (role === Constants.STUDANT) {
-        let navigateTo = returnUrl ?? 'home';
-        await this.router.navigate([navigateTo]);
-      } else if (role === Constants.TEACHER) {
-        let navigateTo = returnUrl ?? '/teacher/school-choice/schools';
-        await this.router.navigate([navigateTo]);
+      let navigateTo;
+      if (role.toUpperCase() === Constants.STUDANT) {
+        navigateTo = returnUrl ?? 'home';
+      } else if (role.toUpperCase() === Constants.TEACHER) {
+        navigateTo = returnUrl ?? 'teacher/control-painel';
+      } else if (role.toUpperCase() === Constants.SCHOOL_MANAGER) {
+        navigateTo = returnUrl ?? 'manager-school/home';
       }
+
+      this.router.navigate([navigateTo]);
     };
+  }
+
+  private checkLoginStatus(){
+    this.accountService.logStatus.subscribe(state => this.authenticated = state);
   }
 
   private formFieldBuild() {

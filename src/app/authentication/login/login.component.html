@@ -1,4 +1,4 @@
-<div class="main">
+<div *ngIf="!authenticated" class="main">
     <div class="progress-section">
         <mat-progress-bar mode="indeterminate" color="accent" *ngIf="inProgress"></mat-progress-bar>
     </div>

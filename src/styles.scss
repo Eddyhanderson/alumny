@@ -63,7 +63,7 @@
     --status-info-foreground: rgba(0, 120, 212, 1);
     --status-info-background: rgba(0, 120, 212, 1);
 
-    --status-error-foreground: rgba(205, 74, 69, 1);
+    --status-error-foreground: rgb(234,67,0);
     --status-error-background: rgba(var(--palette-accent1-light), 1);
     --status-error-text: rgba(var(--palette-accent1), 1);
     --status-error-strong: rgba(var(--palette-accent1-dark), 1);
@@ -158,12 +158,13 @@ a.discretLink:hover{
 }
 
 button.discretButton{
-    opacity: 0;
-    color: rgba(var(--palette-neutral-100), 0.45) !important;    
+    background-color: transparent;
+    border: none;
+    color: rgba(var(--palette-neutral-100), 0.45);    
 }
 
 button.discretButton:hover{
-    color: var(--palette-black-alpha-100) !important;    
+    color: var(--palette-black-alpha-100);    
 }
 
 .button-bg-accent-1{
@@ -369,6 +370,9 @@ img {
     position: relative !important;
 }
 
+.d-inline{
+    display: inline;
+}
 /* End */
 
 /* Texts styles */
@@ -379,7 +383,7 @@ img {
 }
 
 .relevant-text-error {
-    color: var(--status-error-foreground);
+    color: var(--status-error-foreground) !important;
     margin: 0 !important;
 }
 

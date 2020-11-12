@@ -20,14 +20,11 @@ export class NavigationComponent implements OnInit {
   role:string;
 
   // Models  if teacher
-  teacher: TeacherModel;
-  schools: SchoolModel[];
+  teacher: TeacherModel;  
 
   // Models if manager
 
-  constructor(private tsService: TeacherSchoolsService, 
-    private teacherService: TeacherService,
-    private accountService:AccountService) { }
+  constructor() { }
 
   ngOnInit(): void {
 
@@ -37,11 +34,11 @@ export class NavigationComponent implements OnInit {
   }
 
   private getUser() {    
-    this.user = JSON.parse(localStorage['user']);        
+    this.user = JSON.parse(localStorage.user);        
   }
 
   private getRole(){
-    this.role = localStorage.getItem('userRole');
+    this.role = localStorage.userRole;
   }
 
   getRoleData() {
@@ -51,17 +48,7 @@ export class NavigationComponent implements OnInit {
   }
 
   private async getTeacherData() {
-    this.teacher = JSON.parse(localStorage['teacher']);        
-
-    this.getTeacherSchools();
+    this.teacher = JSON.parse(localStorage.teacher);        
   }  
-
-  private async getTeacherSchools() {
-    let teacherSchools = await this.tsService.getAllNormalTeacherSchoolByTeacher(this.teacher.id);
-
-    teacherSchools.forEach(ts => {
-      this.schools.push(ts.school);
-    })
-  }
 
 }

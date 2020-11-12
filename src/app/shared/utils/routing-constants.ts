@@ -13,6 +13,7 @@ export class Routes {
 
     // Manager routes
     static MANAGER_CREATE_ROUTE = Routes.BASE_URL + "manager/create";
+    static MANAGER_GET_BY_USER_ROUTE = Routes.BASE_URL + "manager/getByUser/{userId}";
 
     // Academy routes
     static ACADEMY_CREATE_ROUTE = Routes.BASE_URL + "academy/create";

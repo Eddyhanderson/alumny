@@ -134,7 +134,7 @@
 
                 <!-- Schools nav item -->
                 <li class="nav-item" *ngIf="role.toUpperCase() == 'TEACHER'">
-                    <a class="d-flex pl-4" [routerLink]='["/teacher/school-choice", teacher.id]' routerLinkActive="nav-active"
+                    <a class="d-flex pl-4" [routerLink]='["/teacher-school", teacher.id]' routerLinkActive="nav-active"
                         >
                         <mat-icon [style.fontSize.rem]="1.6"> school</mat-icon> <span class="ml-4">Escolas</span>
                     </a>
@@ -219,7 +219,7 @@
             <mat-divider></mat-divider>
 
             <!-- Schools of the user -->
-            <div *ngIf="role.toUpperCase() == 'TEACHER' && schools">
+            <!--<div *ngIf="role.toUpperCase() == 'TEACHER' && schools">
                 <div class="pl-4 mt-2">
                     <span class="bold-500  text-disabled-1">ESCOLAS</span>
                 </div>
@@ -240,7 +240,7 @@
                     <span class="irrelevant-text-xm">Mostrar Mais {{schools.length - 5}}</span>
                 </button>
 
-            </div>
+            </div>-->
             <!-- End -->
             <mat-divider></mat-divider>
 

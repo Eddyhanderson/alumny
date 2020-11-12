@@ -10,8 +10,6 @@ import { MaterialModule } from './material/material.module';
 
 import { AuthenticationModule } from './authentication/authentication.module';
 
-import { SplashComponent } from './splash/splash.component';
-
 import {AccountService} from "./services/account-service/account.service";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -21,13 +19,14 @@ import { SharedModule } from './shared/shared.module';
 import { TeacherService } from './services/teacher-service/teacher.service';
 import { SchoolService } from './services/school-service/school.service';
 import { ManagerService } from './services/manager-service/manager.service';
-import { LoadingDataComponent } from './loading-data/loading-data.component';
+import { LoadingDataComponent } from './splash/loading-data/loading-data.component';
+import { AuthContainerComponent } from './splash/auth-container/auth-container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
-    SplashComponent,
+    AuthContainerComponent,
     LoadingDataComponent
   ],
   imports: [
@@ -35,8 +34,7 @@ import { LoadingDataComponent } from './loading-data/loading-data.component';
     BrowserModule,
     MaterialModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    AuthenticationModule,
+    BrowserAnimationsModule,    
     SharedModule
   ],
   providers: [
