@@ -9,6 +9,7 @@ export class Routes {
 
     // School routes
     static SCHOOL_CREATE_ROUTE = Routes.BASE_URL + "school/create";
+    static SCHOOL_GET_ROUTE = Routes.BASE_URL + "school/get/{id}"
     static SCHOOL_GET_ALL_ROUTE = Routes.BASE_URL + "school/getAll";
 
     // Manager routes

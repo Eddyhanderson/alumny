@@ -7,6 +7,7 @@ import { UserModel } from 'src/app/models/user-model/user-model';
 import { AcademyModel } from 'src/app/models/academy-model/academy.model';
 import { CourseModel } from 'src/app/models/course-model/course.model';
 import { TeacherModel } from 'src/app/models/teacher-model/teacher-model';
+import {AcademicLevelModel} from 'src/app/models/academic-level-model/academic-level.model';
 
 // Services
 import { AccountService } from 'src/app/services/account-service/account.service';
@@ -146,8 +147,9 @@ export class RegistrationTeacherComponent implements OnInit {
 
       let academy = await this.academyRegistration();
       let course = await this.courseRegistration();
+      let academyLevel = this.getAcademicLevel();
 
-      let teacher = this.getTeacher(academy, course, authResult.user);
+      let teacher = this.getTeacher(academy, course, authResult.user, academyLevel);
       let stt = this.teacherRegister(teacher);
 
       this.inProgress = false;
@@ -257,19 +259,27 @@ export class RegistrationTeacherComponent implements OnInit {
     return user;
   }
 
+  private getAcademicLevel(){
+    let academicLevelId = this.academicInfo.value.academicLevel;
+
+     let academicLevel:AcademicLevelModel = {
+        id:academicLevelId
+     }
+       
+    return academicLevel;
+  }
+
   /**
    * This method is to create the data about teacher that the user are trying to register
    * @param academy the academy of the teacher
    * @param course the course of the course
    */
-  private getTeacher(academy: AcademyModel, course: CourseModel, user: UserModel) {
-    let academicLevel = this.academicInfo.value.academicLevel;
-
+  private getTeacher(academy: AcademyModel, course: CourseModel, user: UserModel, academicLevel:AcademicLevelModel) {    
     let teacher: TeacherModel = {
       course:course,
       academy:academy,
       user:user,
-      academicLevelId: academicLevel
+      academicLevel: academicLevel
     };
 
     return teacher;

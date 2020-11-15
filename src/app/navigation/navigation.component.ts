@@ -9,6 +9,7 @@ import { TeacherService } from '../services/teacher-service/teacher.service';
 import { TeacherModel } from '../models/teacher-model/teacher-model';
 import { TeacherSchoolsModel } from '../models/teacher-schools-model/teacher-schools.model';
 import { AccountService } from '../services/account-service/account.service';
+import { ManagerModel } from '../models/manager-model/manager.model';
 
 @Component({
   selector: 'app-navigation',
@@ -23,6 +24,7 @@ export class NavigationComponent implements OnInit {
   teacher: TeacherModel;  
 
   // Models if manager
+  manager:ManagerModel;
 
   constructor() { }
 
@@ -44,11 +46,17 @@ export class NavigationComponent implements OnInit {
   getRoleData() {
     if (this.role.toUpperCase() === Constants.TEACHER.toUpperCase()) {
       this.getTeacherData();
+    }else if (this.role.toUpperCase() === Constants.SCHOOL_MANAGER.toUpperCase()) {
+      this.getManagerData();
     }
   }
 
   private async getTeacherData() {
     this.teacher = JSON.parse(localStorage.teacher);        
+  } 
+  
+  private async getManagerData() {
+    this.manager = JSON.parse(localStorage.manager);        
   }  
 
 }

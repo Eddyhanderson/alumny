@@ -1,6 +1,7 @@
 import { AcademyModel } from '../academy-model/academy.model';
 import { CourseModel } from '../course-model/course.model';
 import { UserModel } from '../user-model/user-model';
+import { AcademicLevelModel } from '../academic-level-model/academic-level.model';
 
 export class TeacherModel {
 
@@ -14,5 +15,5 @@ export class TeacherModel {
     
     teacherCode?: string;
 
-    academicLevelId: string;
+    academicLevel?: AcademicLevelModel;
 }

@@ -33,7 +33,7 @@ export class TeacherService {
     public create(teacherModel: TeacherModel): Promise<TeacherModel> {
         this.teacherReq = {
             id: teacherModel.id,
-            academicLevelId: teacherModel.academicLevelId,
+            academicLevelId: teacherModel.academicLevel.id,
             academyId: teacherModel.academy.id,
             courseId: teacherModel.course.id,
             userId: teacherModel.user.id

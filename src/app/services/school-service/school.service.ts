@@ -1,6 +1,7 @@
 import { HttpClient, HttpClientModule, HttpParams } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
+import {Response} from '../../models/response/response';
 import { SchoolModel } from 'src/app/models/school-model/school.model';
 import { PaginationQuery } from 'src/app/models/pagination-query/pagination-query';
 import { Routes } from 'src/app/shared/utils/routing-constants';
@@ -35,4 +36,19 @@ export class SchoolService {
 
         return response;
     }
+
+    /**
+     * Get all the schools in the database
+     * @param query the data with specification of page number and size
+     */
+    async get(id:string):Promise<SchoolModel> {
+        try {            
+            var response = await this.http.get<Response<SchoolModel>>(Routes.SCHOOL_GET_ROUTE.replace('{id}', id)).toPromise();
+
+            return response.data;
+        } catch (error) {
+            console.log("ERROR LOG:", error.message);
+        }
+    }
+
 } 

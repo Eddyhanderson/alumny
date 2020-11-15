@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { VideoComponent } from './video/video.component';
+import { VideoComponent } from './components/video/video.component';
 import { MaterialModule } from '../material/material.module';
 import { MatCarouselSlide, MatCarouselSlideComponent, MatCarouselModule } from '@ngmodule/material-carousel';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';

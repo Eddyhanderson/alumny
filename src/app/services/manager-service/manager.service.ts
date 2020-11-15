@@ -36,11 +36,11 @@ export class ManagerService {
 
     /**
      * To persist in local storage the information about manager by user id
-     * @param userId the user of the teacher
+     * @param userId the user of the manager
      */
-    public async setTeacherData(userId: string): Promise<boolean> {
+    public async setManagerData(userId: string): Promise<boolean> {
 
-        if (localStorage['manager'] !== undefined) return true;
+        if (localStorage.manager !== undefined) return true;
 
         try {
             let response = await this.http
@@ -61,5 +61,4 @@ export class ManagerService {
     persistManagerData(manager: ManagerModel) {
         localStorage.manager = JSON.stringify(manager);
     }
-
 }

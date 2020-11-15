@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ManagerSchoolRoutingModule } from './manager-school-routing.module';
 import { ManagerSchoolHomeComponent } from './manager-school-home/manager-school-home.component';
 import { MaterialModule } from '../material/material.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { MaterialModule } from '../material/material.module';
   imports: [
     CommonModule,
     ManagerSchoolRoutingModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule
   ]
 })
 export class ManagerSchoolModule { }

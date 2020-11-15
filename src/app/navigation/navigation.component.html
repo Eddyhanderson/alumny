@@ -1,6 +1,6 @@
 <div>
     <!-- Tool Bar Section -->
-    <mat-toolbar class="material-toolbar p-4 justify-content-between fixed-top">
+    <mat-toolbar class="material-toolbar p-4 justify-content-between fixed-top shadow-sm">
         <div class="d-flex justfy-content-between align-items-center">
             <button mat-icon-button class="d-flex mr-2 actions" (click)="sidenav.toggle()">
                 <span class="navbar-toggler-icon">
@@ -11,7 +11,7 @@
                 <mat-icon class="mr-2">school</mat-icon> alumny
             </h1>
         </div>
-        <div class="input-group" style="width: 30%">
+        <div class="input-group align-self-center" style="width: 30%">
             <input class="form-control" type="text" placeholder="Pesquisar">
             <div class="input-group-prepend">
                 <div class="input-group-text">
@@ -41,7 +41,7 @@
                 </mat-icon>
             </button>
             <div class="img-profile-xm" *ngIf="user.pictureProfilePath">
-                <img [src]="user.pictureProfilePath"> 
+                <img [src]="user.pictureProfilePath">
             </div>
             <div class="img-profile-xm-none" *ngIf="!user.pictureProfilePath">
                 <div></div>
@@ -59,16 +59,20 @@
             <div *ngIf="role.toUpperCase()=='MANAGER'"
                 class="mt-1 w-100 p-3 d-flex flex-column justify-content-center align-items-center"
                 [style.height.px]="208">
-                <div class="img-profile-md">
-                    <img src="../../assets/images/catolica_logo.jpg">
+                <div *ngIf="manager.school.badgeInformation.profilePhotoPath;else noSchoolPhoto"
+                    class="img-profile-md">
+                    <img [src]="manager.school.badgeInformation.profilePhotoPath">
                 </div>
+                <ng-template class="img-profile-md-none" #noSchoolPhoto>
+                    <div></div>
+                </ng-template>
                 <div class="relevant-text-principal">
                     <h5>
                         Escola
                     </h5>
                 </div>
                 <div class="irrelevant-text bold-500">
-                    Universidade Católica de Angola
+                    {{manager.school.name}}
                 </div>
             </div>
 
@@ -122,7 +126,8 @@
             <!-- End -->
 
             <!-- Studant or teacher nav items -->
-            <ul class="flex-column p-0 w-100 justfy-content-start mt-1" *ngIf="role.toUpperCase() == 'STUDANT' || role.toUpperCase() == 'TEACHER'">
+            <ul class="flex-column p-0 w-100 justfy-content-start mt-1"
+                *ngIf="role.toUpperCase() == 'STUDANT' || role.toUpperCase() == 'TEACHER'">
                 <!-- Home nav item -->
                 <li class="nav-item" *ngIf="role.toUpperCase() == 'STUDANT'">
                     <a class="d-flex pl-4" routerLink="/home" routerLinkActive="nav-active"
@@ -134,8 +139,7 @@
 
                 <!-- Schools nav item -->
                 <li class="nav-item" *ngIf="role.toUpperCase() == 'TEACHER'">
-                    <a class="d-flex pl-4" [routerLink]='["/teacher-school", teacher.id]' routerLinkActive="nav-active"
-                        >
+                    <a class="d-flex pl-4" [routerLink]='["/teacher-school", teacher.id]' routerLinkActive="nav-active">
                         <mat-icon [style.fontSize.rem]="1.6"> school</mat-icon> <span class="ml-4">Escolas</span>
                     </a>
                 </li>
@@ -145,7 +149,8 @@
                 <li class="nav-item" *ngIf="role.toUpperCase() == 'TEACHER'">
                     <a class="d-flex pl-4" routerLink="/teacher/control-painel" routerLinkActive="nav-active"
                         [routerLinkActiveOptions]="{exact:true}">
-                        <mat-icon [style.fontSize.rem]="1.6"> dashboard</mat-icon> <span class="ml-4">Painel de controlo</span>
+                        <mat-icon [style.fontSize.rem]="1.6"> dashboard</mat-icon> <span class="ml-4">Painel de
+                            controlo</span>
                     </a>
                 </li>
                 <!-- End -->
@@ -197,19 +202,20 @@
                 <!-- End -->
 
                 <!-- Statistic nav item -->
-                <li *ngIf="role.toUpperCase() == 'TEACHER'" class="nav-item" >
+                <li *ngIf="role.toUpperCase() == 'TEACHER'" class="nav-item">
                     <a routerLink="/statistic" routerLinkActive="nav-active" class="pl-4 d-flex"
                         [routerLinkActiveOptions]="{exact:true}">
                         <mat-icon [style.fontSize.rem]="1.5">analytics</mat-icon><span class="ml-4">Estatística</span>
                     </a>
-                </li>   
-                <!-- End -->             
+                </li>
+                <!-- End -->
 
-                 <!-- Finances nav item -->
+                <!-- Finances nav item -->
                 <li class="nav-item" *ngIf="role.toUpperCase()=='TEACHER'">
                     <a routerLink="/finances" routerLinkActive="nav-active" class="pl-4 d-flex"
                         [routerLinkActiveOptions]="{exact:true}">
-                        <mat-icon [style.fontSize.rem]="1.5">monetization_on</mat-icon><span class="ml-4">Finanças</span>
+                        <mat-icon [style.fontSize.rem]="1.5">monetization_on</mat-icon><span
+                            class="ml-4">Finanças</span>
                     </a>
                 </li>
                 <!-- End -->

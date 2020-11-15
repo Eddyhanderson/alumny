@@ -30,19 +30,19 @@ export class TeacherSchoolsService {
      * @returns the state of the creation
      */
     async create(data: TeacherSchoolSRequest): Promise<any> {
-       
-        if(data == null) return null; 
-        
+
+        if (data == null) return null;
+
         try {
             let response = await this.http.post<any>(Routes.TEACHER_SCHOOLS_CREATE_ROUTE, data).toPromise();
-            
+
             if (response.succeded) {
                 return response.data;
             } else return null;
 
         } catch (error) {
             console.log(error.message)
-        }        
+        }
     }
 
     /**
@@ -50,15 +50,14 @@ export class TeacherSchoolsService {
      * @param schoolId the key to search the teacher schools that not are confirmed
      * @returns the list of teacher schools that aren't confirmed
      */
-    async getAllPendingTeacherSchoolBySchool(schoolId: string): Promise<any> {
-        let response = await this.http
-            .get(Routes.TEACHER_SCHOOLS_GET_ALL_PENDING_BY_SCHOOL_ROUTE.replace('{schoolId}', schoolId))
-            .toPromise()
-            .catch(r => { console.log(r.message); return null; });
-
-        if (response.data != null) {
-            return response.data;
-        } else return null;
+    public getAllPendingTeacherSchoolBySchool(schoolId: string): Observable<TeacherSchoolsModel[]> {
+        try {
+            return this.http
+                .get<PageResponse<TeacherSchoolsModel>>(Routes.TEACHER_SCHOOLS_GET_ALL_PENDING_BY_SCHOOL_ROUTE.replace('{schoolId}', schoolId))
+                .pipe(map(result => { console.log(result.data); return result.data }));
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
     /**
@@ -67,7 +66,7 @@ export class TeacherSchoolsService {
      * @returns the list of teacher schools that aren't confirmed
      */
     public getAllPendingTeacherSchoolByTeacher(teacherId: string): Observable<TeacherSchoolsModel[]> {
-        try {            
+        try {
             return this.http.get<PageResponse<TeacherSchoolsModel>>(Routes.TEACHER_SCHOOLS_GET_ALL_PENDING_BY_TEACHER_ROUTE.replace('{teacherId}', teacherId))
                 .pipe(map(result => result.data));
         } catch (error) {
@@ -84,7 +83,7 @@ export class TeacherSchoolsService {
         try {
             return this.http
                 .get<PageResponse<TeacherSchoolsModel>>(Routes.TEACHER_SCHOOLS_GET_ALL_NORMAL_BY_TEACHER_ROUTE.replace('{teacherId}', teacherId))
-                .pipe(map(result => result.data));            
+                .pipe(map(result => result.data));
         } catch (error) {
             console.log(error.message);
         }
@@ -112,17 +111,17 @@ export class TeacherSchoolsService {
 
         try {
             return this.http.
-                get<PageResponse<SchoolModel>>(Routes.TEACHER_SCHOOLS_GET_ALL_NOTCONTAINED_ROUTE.replace('{teacherId}', teacherId), 
-                {
-                    params: {
-                        pageNumber: query.pageNumber.toString(),
-                        pageSize: query.pageSize.toString(),
-                        searchValue: query.searchValue,
-                        role: query.role
-                    }
-                }).pipe(
-                    map((pageResponse) => pageResponse.data)
-                );
+                get<PageResponse<SchoolModel>>(Routes.TEACHER_SCHOOLS_GET_ALL_NOTCONTAINED_ROUTE.replace('{teacherId}', teacherId),
+                    {
+                        params: {
+                            pageNumber: query.pageNumber.toString(),
+                            pageSize: query.pageSize.toString(),
+                            searchValue: query.searchValue,
+                            role: query.role
+                        }
+                    }).pipe(
+                        map((pageResponse) => pageResponse.data)
+                    );
 
         } catch (error) {
             console.log(error.message);
