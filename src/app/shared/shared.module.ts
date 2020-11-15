@@ -5,12 +5,12 @@ import { MaterialModule } from '../material/material.module';
 import { MatCarouselSlide, MatCarouselSlideComponent, MatCarouselModule } from '@ngmodule/material-carousel';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { DataFormaterDirective } from './directives/data-formater/data-formater.directive';
-import { MessageFallBackDirective } from './directives/message-fallBack/message-fall-back.directive';
+import { MessageCallBackDirective } from './directives/message-callBack/message-call-back.directive';
 
 
 @NgModule({
-  declarations: [VideoComponent, ProgressBarComponent, DataFormaterDirective, MessageFallBackDirective],
-  exports:[VideoComponent, ProgressBarComponent, DataFormaterDirective, MessageFallBackDirective],
+  declarations: [VideoComponent, ProgressBarComponent, DataFormaterDirective, MessageCallBackDirective],
+  exports:[VideoComponent, ProgressBarComponent, DataFormaterDirective, MessageCallBackDirective],
   imports: [
     CommonModule,
     MaterialModule,

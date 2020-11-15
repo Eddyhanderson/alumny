@@ -1,0 +1,4 @@
+<div *ngIf="loading" class="w-100 h-100 d-flex align-items-center justify-content-center">
+    <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+</div>
+<app-navigation *ngIf="!loading"></app-navigation>

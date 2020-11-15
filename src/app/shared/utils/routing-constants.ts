@@ -31,6 +31,7 @@ export class Routes {
 
     // TeacherSchools routes
     static TEACHER_SCHOOLS_CREATE_ROUTE = Routes.BASE_URL + "teacherSchools/create";
+    static TEACHER_SCHOOLS_UPDATE_ROUTE = Routes.BASE_URL + "teacherSchools/update/{teacherId}/{schoolId}";
     static TEACHER_SCHOOLS_GET_ALL_PENDING_BY_TEACHER_ROUTE = Routes.BASE_URL + "teacherSchools/getAllByTeacher/pending/{teacherId}";
     static TEACHER_SCHOOLS_GET_ALL_PENDING_BY_SCHOOL_ROUTE = Routes.BASE_URL + "teacherSchools/getAllBySchool/pending/{schoolId}";
     static TEACHER_SCHOOLS_GET_ALL_NORMAL_BY_SCHOOL_ROUTE = Routes.BASE_URL + "teacherSchools/getAllBySchool/normal/{schoolId}";

@@ -13,7 +13,8 @@ import { Observable } from 'rxjs';
 
 export interface TeacherSchoolSRequest {
     teacherId: string,
-    schoolId: string
+    schoolId: string,
+    situation?:string
 }
 
 @Injectable({
@@ -44,6 +45,29 @@ export class TeacherSchoolsService {
             console.log(error.message)
         }
     }
+
+    /**
+     * Send the data to be persisted
+     * @param data contain the data about the teacher request to make part 
+     * @returns the state of the creation
+     */
+    async update(teacherId:string, schoolId:string, tsReq:TeacherSchoolSRequest): Promise<any> {
+
+        if(teacherId == null || schoolId == null) return null;
+
+        if(teacherId !== tsReq.teacherId || schoolId !== tsReq.schoolId)
+            return null;
+
+        try {
+            await this.http.put<any>(
+                Routes.TEACHER_SCHOOLS_UPDATE_ROUTE.replace("{teacherId}", teacherId)
+                .replace("{schoolId}", schoolId), tsReq).toPromise();
+            
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
 
     /**
      * Get all teacher schools by schoolId with status pending

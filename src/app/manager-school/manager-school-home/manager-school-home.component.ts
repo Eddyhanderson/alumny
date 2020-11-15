@@ -3,8 +3,10 @@ import { Observable } from 'rxjs';
 import { CourseModel } from 'src/app/models/course-model/course.model';
 import { ManagerModel } from 'src/app/models/manager-model/manager.model';
 import { TeacherModel } from 'src/app/models/teacher-model/teacher-model';
-import { TeacherSchoolsService } from 'src/app/services/teacher-schools-service/teacher-schools.service';
+import { TeacherSchoolsService, TeacherSchoolSRequest } from 'src/app/services/teacher-schools-service/teacher-schools.service';
+import { Constants } from 'src/app/shared/utils/constants';
 import {TeacherSchoolsModel} from '../../models/teacher-schools-model/teacher-schools.model';
+
 
 @Component({
   selector: 'app-manager-school-home',
@@ -38,7 +40,21 @@ export class ManagerSchoolHomeComponent implements OnInit {
   }
 
   private getSchoolTeachers(){
-    //TODO: get all teachers of school
+    let schoolId = this.manager.school.id;
+    
+    this.teachers$
+  }
+
+  // Events handlers
+  public async acceptRequest(teacherId:string){
+    let schoolId = this.manager.school.id;
+
+    let tsReq:TeacherSchoolSRequest = {
+      teacherId:teacherId,
+      schoolId:schoolId,
+      situation:Constants.NORMAL_MODEL_STATE
+    }
+    await this.teacherSchoolService.update(teacherId, schoolId, tsReq);
   }
 
 }
