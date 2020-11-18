@@ -3,8 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PaginationQuery } from 'src/app/models/pagination-query/pagination-query';
 import { SchoolModel } from 'src/app/models/school-model/school.model';
+import { TeacherModel } from 'src/app/models/teacher-model/teacher-model';
 import { TeacherSchoolsModel } from 'src/app/models/teacher-schools-model/teacher-schools.model';
-import { TeacherSchoolSRequest, TeacherSchoolsService } from 'src/app/services/teacher-schools-service/teacher-schools.service';
+import { TeacherSchoolsService } from 'src/app/services/teacher-schools-service/teacher-schools.service';
 import { Constants } from 'src/app/shared/utils/constants';
 
 @Component({
@@ -49,10 +50,10 @@ export class TeacherSchoolComponent implements OnInit {
 
   public sendTeacherSchoolRequest(schoolId:string){
 
-    if(schoolId == null) return null;
+    if(schoolId == null) return null;    
 
-    let teacherSchool:TeacherSchoolSRequest = {
-      teacherId:this.teacherId,
+    let teacherSchool:TeacherSchoolsModel = {
+      teacherId: this.teacherId,
       schoolId:schoolId
     };
 
@@ -63,7 +64,6 @@ export class TeacherSchoolComponent implements OnInit {
     this.paginationSchools = {
       pageNumber: 1,
       pageSize: 12,
-      role: Constants.TEACHER,
       searchValue:''
     };
   }

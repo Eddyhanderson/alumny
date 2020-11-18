@@ -4,6 +4,4 @@ export interface PaginationQuery {
     pageSize: number;
 
     searchValue?: string;
-
-    role: string;
 }

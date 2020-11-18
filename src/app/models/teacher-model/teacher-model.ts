@@ -5,15 +5,29 @@ import { AcademicLevelModel } from '../academic-level-model/academic-level.model
 
 export class TeacherModel {
 
-    id?: string;
+        id?:string;
 
-    user: UserModel;
+        firstName?:string;
 
-    academy?: AcademyModel;
-    
-    course?: CourseModel;
-    
-    teacherCode?: string;
+        lastName?:string;
 
-    academicLevel?: AcademicLevelModel;
+        userId?:string;
+
+        pictureProfilePath?:string;
+
+        academicLevelId?:string;
+
+        academicLevelName?:string;
+
+        academyId?:string;
+
+        academyName?:string;
+
+        courseId?:string;
+
+        courseName?:string;
+
+        teacherPlaceQnt?:string;
+
+        teacherCode?:string;
 }

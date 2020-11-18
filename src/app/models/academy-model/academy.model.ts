@@ -1,7 +1,7 @@
 export interface AcademyModel {
     id?: string;
 
-    badgeInformationId?: string;
+    profilePhotoPath?:string;
 
     name: string;
 }

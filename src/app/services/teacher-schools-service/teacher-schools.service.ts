@@ -11,11 +11,6 @@ import { TeacherSchoolsModel } from '../../models/teacher-schools-model/teacher-
 import { SchoolModel } from 'src/app/models/school-model/school.model';
 import { Observable } from 'rxjs';
 
-export interface TeacherSchoolSRequest {
-    teacherId: string,
-    schoolId: string,
-    situation?:string
-}
 
 @Injectable({
     providedIn: "root"
@@ -23,14 +18,12 @@ export interface TeacherSchoolSRequest {
 export class TeacherSchoolsService {
     constructor(private http: HttpClient) { }
 
-    private teacherSchoolReq: TeacherSchoolSRequest;
-
     /**
      * Send the data to be persisted
      * @param data contain the data about the teacher request to make part 
      * @returns the state of the creation
      */
-    async create(data: TeacherSchoolSRequest): Promise<any> {
+    async create(data: TeacherSchoolsModel): Promise<any> {
 
         if (data == null) return null;
 
@@ -51,18 +44,18 @@ export class TeacherSchoolsService {
      * @param data contain the data about the teacher request to make part 
      * @returns the state of the creation
      */
-    async update(teacherId:string, schoolId:string, tsReq:TeacherSchoolSRequest): Promise<any> {
+    async update(teacherId: string, schoolId: string, teacherSchool: TeacherSchoolsModel): Promise<boolean> {
 
-        if(teacherId == null || schoolId == null) return null;
+        if (teacherId == null || schoolId == null) return null;
 
-        if(teacherId !== tsReq.teacherId || schoolId !== tsReq.schoolId)
+        if (teacherId !== teacherSchool.teacher.id || schoolId !== teacherSchool.school.id)
             return null;
 
         try {
-            await this.http.put<any>(
+            return await this.http.put<boolean>(
                 Routes.TEACHER_SCHOOLS_UPDATE_ROUTE.replace("{teacherId}", teacherId)
-                .replace("{schoolId}", schoolId), tsReq).toPromise();
-            
+                    .replace("{schoolId}", schoolId), teacherSchool).toPromise();
+
         } catch (error) {
             console.log(error.message)
         }
@@ -117,14 +110,14 @@ export class TeacherSchoolsService {
      * Get all the teacher from this school
      * @param teacherId the key to searching for teachers that is part of
      */
-    async getAllNormalTeacherSchoolBySchool(schoolId: string): Promise<any> {
-        let response = await this.http
-            .get(Routes.TEACHER_SCHOOLS_GET_ALL_NORMAL_BY_SCHOOL_ROUTE.replace('{schoolId}', schoolId)).toPromise()
-            .catch(r => { console.log(r.message); return null; });
-
-        if (response.data != null) {
-            return response.data;
-        } else return null;
+    public getAllNormalTeacherSchoolBySchool(schoolId: string): Observable<TeacherModel[]> {
+        try {
+            return this.http
+                .get<PageResponse<TeacherModel>>(Routes.TEACHER_SCHOOLS_GET_ALL_NORMAL_BY_SCHOOL_ROUTE.replace('{schoolId}', schoolId))
+                .pipe(map(result => result.data));
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
     /**
@@ -140,8 +133,7 @@ export class TeacherSchoolsService {
                         params: {
                             pageNumber: query.pageNumber.toString(),
                             pageSize: query.pageSize.toString(),
-                            searchValue: query.searchValue,
-                            role: query.role
+                            searchValue: query.searchValue                            
                         }
                     }).pipe(
                         map((pageResponse) => pageResponse.data)

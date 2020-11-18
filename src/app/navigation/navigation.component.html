@@ -59,9 +59,9 @@
             <div *ngIf="role.toUpperCase()=='MANAGER'"
                 class="mt-1 w-100 p-3 d-flex flex-column justify-content-center align-items-center"
                 [style.height.px]="208">
-                <div *ngIf="manager.school.badgeInformation.profilePhotoPath;else noSchoolPhoto"
+                <div *ngIf="manager.school.profilePhotoPath;else noSchoolPhoto"
                     class="img-profile-md">
-                    <img [src]="manager.school.badgeInformation.profilePhotoPath">
+                    <img [src]="manager.school.profilePhotoPath">
                 </div>
                 <ng-template class="img-profile-md-none" #noSchoolPhoto>
                     <div></div>

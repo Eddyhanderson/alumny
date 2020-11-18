@@ -3,5 +3,7 @@ export interface CourseModel {
 
     badgeInformationId?: string;
 
+    profilePhotoPath?: String;
+
     name: string;
 }

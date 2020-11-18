@@ -27,9 +27,9 @@
                             class="d-flex align-items-center px-3 w-100 mb-3">
                             <!-- School image -->
                             <div class="img-profile-xm align-self-start mr-2 mt-2">
-                                <img [src]="teacherSchool.school.badgeInformation.profilePhotoPath">
+                                <img [src]="teacherSchool.school.profilePhotoPath">
                             </div>
-                            <!-- End -->
+                            <!-- End --> 
     
                             <!-- Relevant metadata -->
                             <div class="d-flex flex-column w-100">
@@ -43,7 +43,7 @@
     
                                 <!-- Elapsed time -->
                                 <div class="irrelevant-text-xm text-disabled">
-                                    <div [appDataFormater]="teacherRequest.dateSituation"></div>
+                                    <div [appDataFormater]="teacherSchool.dateSituation"></div>
                                 </div>
                                 <!-- End -->
                             </div>
@@ -82,7 +82,7 @@
                             class="d-flex align-items-center px-3 w-100 mb-3">
                             <!-- School image -->
                             <div class="img-profile-xm align-self-start mr-2 mt-2">
-                                <img [src]="teacherRequest.school.badgeInformation.profilePhotoPath">
+                                <img [src]="teacherRequest.school.profilePhotoPath">
                             </div>
                             <!-- End -->
 
@@ -135,14 +135,14 @@
 
                 <div class="d-flex flex-wrap">
 
-                    <ng-container *ngIf="schools$ | async as schools;">
-                        <ng-container *ngIf="schools .length > 0; else noSchools">
+                    <ng-container *ngIf="schools$ | async as schools">
+                        <ng-container *ngIf="schools.length > 0; else noSchools">
                             <!-- School information -->
                             <div *ngFor="let school of schools"
                                 class="d-flex flex-column align-items-center px-3 w-100 mb-3">
                                 <!-- School image -->
                                 <div class="img-profile-xm mb-2 mt-2">
-                                    <img [src]="school.badgeInformation.profilePhotoPath">
+                                    <img [src]="school.profilePhotoPath">
                                 </div>
                                 <!-- End -->
 
@@ -168,23 +168,26 @@
                                 <!-- End -->
                             </div>
                             <!-- End -->
+                            
+                            <ng-template *ngIf="schools.length > 12">
+                                <div class="w-100 d-flex justify-content-center">
+                                    <button mat-button class="w-100">
+                                        Ver tudo
+                                    </button>
+                                </div>
+                            </ng-template>
                         </ng-container>
+                        <ng-template #noSchools>
+                            <div class="irrelevant-text-xm text-disabled m-auto p-4">
+                                <button mat-flat-button color="primary">
+                                    Crie a tua própria escola
+                                </button>
+                            </div>
+                        </ng-template>
                     </ng-container>
 
-                    <ng-template #noSchools>
-                        <div class="irrelevant-text-xm text-disabled m-auto p-4">
-                            <button mat-flat-button color="primary">
-                                Crie a tua própria escola
-                            </button>
-                        </div>
-                    </ng-template>
                 </div>
 
-                <div class="w-100 d-flex justify-content-center">
-                    <button mat-button class="w-100">
-                        Ver tudo
-                    </button>
-                </div>
             </div>
             <!-- End -->
 

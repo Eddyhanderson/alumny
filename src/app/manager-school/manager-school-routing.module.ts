@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ManagerSchoolHomeComponent } from './manager-school-home/manager-school-home.component'
 
 const routes: Routes = [
-  { path: 'home', component: ManagerSchoolHomeComponent }
+  { path: 'home', component: ManagerSchoolHomeComponent, runGuardsAndResolvers: 'always' }
 ];
 
 @NgModule({

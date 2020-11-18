@@ -2,7 +2,7 @@ import {BadgeInformationModel} from '../badge-information-model/badge-informatio
 
 export interface SchoolModel {
     id?: string;
-    badgeInformation?: BadgeInformationModel;
+    badgeInformationId?: string;
     nif?: string;
     name: string;
     shortName: string;

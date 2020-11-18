@@ -213,7 +213,7 @@ export class RegistrationTeacherComponent implements OnInit {
     let newCourse: CourseModel = {
       name: courseName
     };
-
+ 
     var response = await this.courseService.create(newCourse)
     .catch((e: HttpErrorResponse) => {
       console.error(e.message)
@@ -276,10 +276,10 @@ export class RegistrationTeacherComponent implements OnInit {
    */
   private getTeacher(academy: AcademyModel, course: CourseModel, user: UserModel, academicLevel:AcademicLevelModel) {    
     let teacher: TeacherModel = {
-      course:course,
-      academy:academy,
-      user:user,
-      academicLevel: academicLevel
+      courseId:course.id,
+      academyId:academy.id,
+      userId:user.id,
+      academicLevelId: academicLevel.id
     };
 
     return teacher;

@@ -7,13 +7,6 @@ import { CreationResult } from '../../models/creation-result/creation-result';
 import { Routes } from '../../shared/utils/routing-constants';
 import { BehaviorSubject, Observable, Subject, } from 'rxjs';
 
-export interface TeacherRequest {
-    id: string,
-    userId: string,
-    courseId: string,
-    academyId: string,
-    academicLevelId: string
-};
 
 @Injectable(
     { providedIn: "root" }
@@ -22,23 +15,14 @@ export class TeacherService {
 
     constructor(private http: HttpClient) { }
 
-    private teacherReq: TeacherRequest;
-
     private teacherLoged = new BehaviorSubject<TeacherModel>(null);
 
     /**
      * Registration of teacher
      * @param teacherModel the teacher who will be persisted
      */
-    public create(teacherModel: TeacherModel): Promise<TeacherModel> {
-        this.teacherReq = {
-            id: teacherModel.id,
-            academicLevelId: teacherModel.academicLevel.id,
-            academyId: teacherModel.academy.id,
-            courseId: teacherModel.course.id,
-            userId: teacherModel.user.id
-        };
-        let creationResult = this.http.post<CreationResult<TeacherModel>>(Routes.TEACHER_CREATE_ROUTE, this.teacherReq)
+    public create(teacherModel: TeacherModel): Promise<TeacherModel> {        
+        let creationResult = this.http.post<CreationResult<TeacherModel>>(Routes.TEACHER_CREATE_ROUTE, teacherModel)
             .toPromise()
             .then(creationResult => {
                 if (creationResult.succeded) {

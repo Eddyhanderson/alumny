@@ -94,16 +94,13 @@ export class RegistrationSchoolComponent implements OnInit {
           this.setErrorsMessages(Array.of(e.message));
           return null;
         });
-
         if (!responseX.succeded) {
           this.setErrorsMessages(responseX.errors);
         }
-
         return this.router.navigateByUrl('manager-school/home');
       } else {
         this.setErrorsMessages(responseK.errors);
       }
-
     } else {
       this.setErrorsMessages(authResult.errors);
     }

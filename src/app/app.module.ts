@@ -21,6 +21,7 @@ import { SchoolService } from './services/school-service/school.service';
 import { ManagerService } from './services/manager-service/manager.service';
 import { LoadingDataComponent } from './splash/loading-data/loading-data.component';
 import { AuthContainerComponent } from './splash/auth-container/auth-container.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [

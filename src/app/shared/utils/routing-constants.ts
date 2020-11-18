@@ -7,10 +7,14 @@ export class Routes {
     static USER_REGISTER_ROUTE = Routes.BASE_URL + "user/registration";
     static USER_LOGIN_ROUTE = Routes.BASE_URL + "user/login";
 
+    // SchoolCourse routes
+    static SCHOOL_COURSE_CREATE_ROUTE = Routes.BASE_URL + "schoolCourse/create";
+    static SCHOOL_COURSE_GET_ALL_BY_SCHOOL_ROUTE = Routes.BASE_URL + "schoolCourse/getAllBySchool/{schoolId}";
+
     // School routes
     static SCHOOL_CREATE_ROUTE = Routes.BASE_URL + "school/create";
     static SCHOOL_GET_ROUTE = Routes.BASE_URL + "school/get/{id}"
-    static SCHOOL_GET_ALL_ROUTE = Routes.BASE_URL + "school/getAll";
+    static SCHOOL_GET_ALL_ROUTE = Routes.BASE_URL + "school/getAll";    
 
     // Manager routes
     static MANAGER_CREATE_ROUTE = Routes.BASE_URL + "manager/create";
@@ -23,6 +27,7 @@ export class Routes {
     // Course routes    
     static COURSE_CREATE_ROUTE = Routes.BASE_URL + "course/create";
     static COURSE_GET_BY_NAME_ROUTE = Routes.BASE_URL + "course/getByName/{name}";
+    static COURSE_GET_ALL_ROUTE = Routes.BASE_URL + "course/getAll";
 
     // Teacher routes
     static TEACHER_CREATE_ROUTE = Routes.BASE_URL + "teacher/create";
