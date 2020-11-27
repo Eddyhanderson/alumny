@@ -1,4 +1,5 @@
-export interface AcademicLevelModel {
+export declare class AcademicLevelModel {
     id: string;
+
     name?: string;
 }

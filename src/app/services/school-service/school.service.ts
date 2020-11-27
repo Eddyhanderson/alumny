@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
 import { Response } from '../../models/response/response';
 import { SchoolModel } from 'src/app/models/school-model/school.model';
-import { PaginationQuery } from 'src/app/models/pagination-query/pagination-query';
+import { PaginationQuery } from 'src/app/interfaces/pagination-query/pagination-query';
+
+import { SchoolQuery } from '../../interfaces/school-query/school.query';
 import { Routes } from 'src/app/shared/utils/routing-constants';
 import { PageResponse } from 'src/app/models/page-response/page-response';
 import { CourseModel } from 'src/app/models/course-model/course.model';
@@ -28,23 +30,23 @@ export class SchoolService {
      * Get all the schools in the database
      * @param query the data with specification of page number and size
      */
-    async getAll(query: PaginationQuery) {
-        var response = await this.http.get(Routes.SCHOOL_GET_ALL_ROUTE, {
-            params: {
-                pageNumber: query.pageNumber.toString(),
-                pageSize: query.pageSize.toString(),
-                searchValue: query.searchValue                
-            }
-        }).toPromise().catch(r => { console.log(r.message); return null; });
+    public getAll(query: PaginationQuery, param?: SchoolQuery): Observable<PageResponse<SchoolModel>> {
+        let queryParams = this.createQueryParams(query, param);
 
-        return response;
+        try {
+            return this.http.get<PageResponse<SchoolModel>>(Routes.SCHOOL_GET_ALL_ROUTE, {
+                params: queryParams
+            })
+        } catch (error) {
+            console.log(error.message)
+        }
     }
 
     /**
      * Get all schools 
      * @param query the data with specification of page number and size
      */
-    async get(id: string): Promise<SchoolModel> {
+    public async get(id: string): Promise<SchoolModel> {
         try {
             var response = await this.http.get<Response<SchoolModel>>(Routes.SCHOOL_GET_ROUTE.replace('{id}', id)).toPromise();
 
@@ -52,6 +54,15 @@ export class SchoolService {
         } catch (error) {
             console.log("ERROR LOG:", error.message);
         }
-    }    
+    }
+
+    private createQueryParams(query: PaginationQuery, params: SchoolQuery): HttpParams {
+        return new HttpParams()
+            .set('pageNumber', query.pageNumber.toString() ?? '')
+            .set('pageSize', query.pageSize.toString() ?? '')
+            .set('searchValue', query.searchValue ?? '')
+            .set('teacherId', params.teacherId ?? '')
+            .set('subscribed', params.subscribed ? 'true' : 'false');
+    }
 
 } 

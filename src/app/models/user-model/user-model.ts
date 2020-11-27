@@ -1,4 +1,4 @@
-export interface UserModel {  
+export declare class UserModel {  
     id?:string;
 
     email?:string;

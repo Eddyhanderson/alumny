@@ -6,11 +6,13 @@ import { MatCarouselSlide, MatCarouselSlideComponent, MatCarouselModule } from '
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { DataFormaterDirective } from './directives/data-formater/data-formater.directive';
 import { MessageCallBackDirective } from './directives/message-callBack/message-call-back.directive';
+import { LoadingPageComponent } from './components/loading-page/loading-page.component';
+import { LoadingItemComponent } from './components/loading-item/loading-item.component';
 
 
 @NgModule({
-  declarations: [VideoComponent, ProgressBarComponent, DataFormaterDirective, MessageCallBackDirective],
-  exports:[VideoComponent, ProgressBarComponent, DataFormaterDirective, MessageCallBackDirective],
+  declarations: [VideoComponent, ProgressBarComponent, DataFormaterDirective, MessageCallBackDirective, LoadingPageComponent, LoadingItemComponent],
+  exports:[VideoComponent, ProgressBarComponent, DataFormaterDirective, MessageCallBackDirective, LoadingPageComponent, LoadingItemComponent],
   imports: [
     CommonModule,
     MaterialModule,

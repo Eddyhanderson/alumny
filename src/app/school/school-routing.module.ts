@@ -4,6 +4,7 @@ import { SchoolProfileComponent } from './school-profile/school-profile.componen
 import { SchoolTeachersComponent } from './school-profile/school-teachers/school-teachers.component';
 import { SchoolAboutComponent } from './school-profile/school-about/school-about.component';
 import { SchoolCoursesComponent } from './school-profile/school-courses/school-courses.component';
+import { SchoolChoiceComponent } from './school-choice/school-choice.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,9 @@ const routes: Routes = [
       { path: 'courses', component: SchoolCoursesComponent },
       { path: 'about', component: SchoolAboutComponent }
     ]
+  },
+  {
+    path:'choice/:id', component: SchoolChoiceComponent
   }
 ];
 

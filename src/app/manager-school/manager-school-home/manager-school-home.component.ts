@@ -7,12 +7,15 @@ import { TeacherSchoolsService } from 'src/app/services/teacher-schools-service/
 import { Constants } from 'src/app/shared/utils/constants';
 import { TeacherSchoolsModel } from '../../models/teacher-schools-model/teacher-schools.model';
 import { TeacherModel } from 'src/app/models/teacher-model/teacher-model';
-import { PaginationQuery } from 'src/app/models/pagination-query/pagination-query';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CourseCreateDialogComponent } from '../../dialogs/course/create/course-create-dialog/course-create-dialog.component';
 import { SchoolCourseModel } from 'src/app/models/school-course-model/school-course.model';
-import { SchoolModel } from 'src/app/models/school-model/school.model';
+import { PaginationAdapter } from '../../shared/utils/pagination-adapter/pagination-adapter';
 import { NavigationEnd, Router } from '@angular/router';
+import { PaginationQuery } from 'src/app/interfaces/pagination-query/pagination-query';
+import { TeacherSchoolQuery } from 'src/app/interfaces/teacher-schools-query/teacher-school.query';
+import { SchoolCourseQuery } from 'src/app/interfaces/school-course-query/school-course.query';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -22,23 +25,22 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class ManagerSchoolHomeComponent implements OnInit, OnDestroy {
   manager: ManagerModel;
-  teacherSchools$: Observable<TeacherSchoolsModel[]>;
-  courses$: Observable<CourseModel[]>;
-  teachers$: Observable<TeacherModel[]>;
-  schoolCourse: SchoolCourseModel;
+  teacherSchoolsPending$: PaginationAdapter;
+  schoolCourses$: PaginationAdapter;
+  teacherSchoolsNormal$: PaginationAdapter;
 
   reloadStrategy: Subscription;
 
-  constructor(private teacherSchoolService: TeacherSchoolsService,
+  constructor(private tss: TeacherSchoolsService,
     private scs: SchoolCourseService,
     private matDialog: MatDialog,
     private router: Router) { }
 
   ngOnInit(): void {
-    this.setStrategyToreloadPage();
-    this.setManager();
+    this.setStrategyToReloadPage();
+    this.getManager();
     this.getTeacherSchoolsRequests();
-    this.getSchoolTeachers();
+    this.getTeachersSchool();
     this.getSchoolCourses();
   }
 
@@ -46,67 +48,80 @@ export class ManagerSchoolHomeComponent implements OnInit, OnDestroy {
     this.reloadStrategy.unsubscribe();
   }
 
-  private setManager() {
+  private getManager() {
     this.manager = JSON.parse(localStorage.manager);
   }
 
   private getTeacherSchoolsRequests() {
     let schoolId = this.manager.school.id;
-    this.teacherSchools$ = this.teacherSchoolService.getAllPendingTeacherSchoolBySchool(schoolId);
-  }
 
-  private getSchoolCourses() {
-    let schoolId = this.manager.school.id;
-    let paginationQuery: PaginationQuery = {
-      pageNumber: 1,
-      pageSize: 50,
-      searchValue: ''
+    let param: TeacherSchoolQuery = {
+      schoolId: schoolId,
+      situation: Constants.PENDING_MODEL_STATE
     }
 
-    this.courses$ = this.scs.getAllSchoolCoursesBySchool(paginationQuery, schoolId);
+    this.teacherSchoolsPending$ = new PaginationAdapter(this.teacherSchoolGetAllPrototype(), param);
   }
 
-  private getSchoolTeachers() {
-    let schoolId = this.manager.school.id;
-    this.teachers$ = this.teacherSchoolService.getAllNormalTeacherSchoolBySchool(schoolId);
+
+  private getSchoolCourses() {
+    let param: SchoolCourseQuery = {
+      schoolId: this.manager.school.id,
+      situation: Constants.NORMAL_MODEL_STATE
+    }
+
+    this.schoolCourses$ = new PaginationAdapter(this.schoolCoursesGetAllPrototype(), param);
+  }
+
+  private schoolCoursesGetAllPrototype() {
+    return (query, param): Observable<any> => {
+      return this.scs.getAll(query, param).pipe(map((data) => data))
+    }
+  }
+
+  private getTeachersSchool() {
+    let param: TeacherSchoolQuery = {
+      schoolId: this.manager.school.id,
+      situation: Constants.NORMAL_MODEL_STATE
+    }
+
+    this.teacherSchoolsNormal$ = new PaginationAdapter(this.teacherSchoolGetAllPrototype(), param);
+  }
+
+  private teacherSchoolGetAllPrototype() {
+    return (query, param): Observable<any> => {
+      return this.tss.getAll(query, param).pipe(map((data) => data))
+    }
   }
 
   /* To reload component */
-  private setStrategyToreloadPage() {
+  private setStrategyToReloadPage() {
     this.reloadStrategy = this.router.events.subscribe(
       (evt) => {
         if (evt instanceof NavigationEnd) {
           this.getTeacherSchoolsRequests();
-          this.getSchoolTeachers();
+          this.getTeachersSchool();
           this.getSchoolCourses();
         }
       }
     )
   }
 
-  private reloadComponent(){
+  private reloadComponent() {
     this.router.navigate([this.router.url]);
   }
 
   // Events handlers
   public async acceptRequest(teacherId: string) {
-    let school: SchoolModel = {
-      name: '',
-      shortName: '',
-      id: this.manager.school.id
-    };
-
-    let teacher: TeacherModel = {
-      id: teacherId
-    }
+    let schoolId = this.manager.school.id;
 
     let tsModel: TeacherSchoolsModel = {
-      teacherId: teacher.id,
-      schoolId: school.id,
+      teacherId: teacherId,
+      schoolId: schoolId,
       situation: Constants.NORMAL_MODEL_STATE
     }
 
-    var updated = await this.teacherSchoolService.update(teacher.id, school.id, tsModel);
+    var updated = await this.tss.update(teacherId, schoolId, tsModel);
 
     if (updated)
       this.reloadComponent();
@@ -120,14 +135,14 @@ export class ManagerSchoolHomeComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(
       async (course) => {
-        this.schoolCourse = {
+        let schoolCourse: SchoolCourseModel = {
           courseId: course.id,
           schoolId: this.manager.school.id
         }
-        var result = await this.scs.create(this.schoolCourse);
+        var result = await this.scs.create(schoolCourse);
 
-        if (result.succeded){
-          
+        if (result.succeded) {
+
           this.reloadComponent();
         }
       }

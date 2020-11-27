@@ -1,13 +1,12 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from '@angular/core';
-import { AcademyModel } from '../../models/academy-model/academy.model';
 import { Routes } from 'src/app/shared/utils/routing-constants';
 import { CourseModel } from 'src/app/models/course-model/course.model';
-import { PaginationQuery } from 'src/app/models/pagination-query/pagination-query';
 import { Observable } from 'rxjs';
 import { PageResponse } from 'src/app/models/page-response/page-response';
 import { map } from 'rxjs/operators';
 import { CreationResult } from 'src/app/models/creation-result/creation-result';
+import { PaginationQuery } from 'src/app/interfaces/pagination-query/pagination-query';
 
 @Injectable({ providedIn: "root" })
 export class CourseService {

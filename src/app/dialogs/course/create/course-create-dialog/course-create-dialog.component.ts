@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { PaginationQuery } from 'src/app/interfaces/pagination-query/pagination-query';
 import { CourseModel } from 'src/app/models/course-model/course.model';
-import { PaginationQuery } from 'src/app/models/pagination-query/pagination-query';
 import { CourseService } from 'src/app/services/course-service/course.service';
 import { Constants } from 'src/app/shared/utils/constants';
 

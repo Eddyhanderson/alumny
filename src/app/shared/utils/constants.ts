@@ -40,4 +40,5 @@ export class Constants {
     // Model Situations
     static NORMAL_MODEL_STATE = "Normal";
     static PENDING_MODEL_STATE = "Pending";
+    static UNSUBSCRIBED = "Unsubscribed";
 }

@@ -19,15 +19,15 @@
                 </div>
 
                 <!-- Teacher requests list-->
-                <ng-container *ngIf="teacherSchools$ | async as teacherSchools">
-                    <ng-container *ngIf="teacherSchools.length > 0; else noTeacherRequests">
-                        <ng-container *ngFor="let ts of teacherSchools; let i = index">
+                <ng-container *ngIf="teacherSchoolsPending$ | async as teacherSchoolsPending; else loadingItem">
+                    <ng-container *ngIf="teacherSchoolsPending.length > 0; else noTeacherRequests">
+                        <ng-container *ngFor="let tsPending of teacherSchoolsPending; let i = index">
                             <!-- Teachers request list item-->
                             <div class="d-flex mb-3">
-                                <ng-container *ngIf="ts.teacher.pictureProfilePath; else noTeacherPic">
+                                <ng-container *ngIf="tsPending.teacher.pictureProfilePath; else noTeacherPic">
                                     <!-- Teacher image -->
                                     <div class="img-profile-xm mr-3">
-                                        <img [src]="ts.teacher.pictureProfilePath">
+                                        <img [src]="tsPending.teacher.pictureProfilePath">
                                     </div>
                                     <!-- End -->
                                 </ng-container>
@@ -40,16 +40,16 @@
                                 <!-- Teacher information -->
                                 <div class="d-flex flex-column w-100">
                                     <div class="irrelevant-text">
-                                        <a [routerLink]="['/teacher/profile', ts.teacher.id]" class="discretLink">
-                                            {{ts.teacher.firstName}} {{ts.teacher.lastName}}
+                                        <a [routerLink]="['/teacher/profile', tsPending.teacher.id]" class="discretLink">
+                                            {{tsPending.teacher.firstName}} {{tsPending.teacher.lastName}}
                                         </a>
                                     </div>
-                                    <div class="irrelevant-text" [appDataFormater]="ts.creationAt">
+                                    <div class="irrelevant-text" [appDataFormater]="tsPending.creationAt">
 
                                     </div>
                                     <div class="bold-500">
                                         <h5>
-                                            {{ts.teacher.academicLevelName}} em {{ts.teacher.courseName}}
+                                            {{tsPending.teacher.academicLevelName}} em {{tsPending.teacher.courseName}}
                                         </h5>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                 <!-- Actions to requests -->
                                 <div class="d-flex align-items-center">
                                     <div appMessageCallBack="acceptingRequest" mode="all"
-                                        (click)="acceptRequest(ts.teacher.id)">
+                                        (click)="acceptRequest(tsPending.teacher.id)">
                                         <button mat-button class="ml-3">
                                             Aceitar
                                         </button>
@@ -95,20 +95,20 @@
                 <!-- End -->
 
                 <!-- Create new course -->
-                <div class="d-flex w-100 justify-content-center mb-2" (click)="onCreateCourse()">                    
-                    <button mat-button class="relevant-text-info" >
+                <div class="d-flex w-100 justify-content-center mb-2" (click)="onCreateCourse()">
+                    <button mat-button class="relevant-text-info">
                         ADICIONAR NOVO CURSO
                     </button>
                 </div>
                 <!-- End -->
 
-                <ng-container *ngIf="courses$ | async as courses">
-                    <ng-container *ngIf="courses.length > 0; else noCourses">                        
+                <ng-container *ngIf="schoolCourses$ | async as schoolCourses; else loadingItem">
+                    <ng-container *ngIf="schoolCourses.length > 0; else noCourses">
                         <!-- Course list item -->
-                        <div *ngFor="let course of courses; let i index" class="d-flex flex-column mb-3">
+                        <div *ngFor="let course of schoolCourses; let i index" class="d-flex flex-column mb-3">
                             <div class="d-flex justify-content-start align-items-center">
                                 <div class="mr-2 w-100">
-                                    {{course.name}}
+                                    {{course.course.name}}
                                 </div>
                                 <div>
                                     <button mat-icon-button matTooltip="Editar">
@@ -123,7 +123,7 @@
                     </ng-container>
                     <ng-template #noCourses>
                         <div class="irrelevant-text-xm text-disabled m-auto p-4">
-                            Sem cursos registados. Crie, para os professores conseguirem 
+                            Sem cursos registados. Crie, para os professores conseguirem
                             criar as suas turmas
                         </div>
                     </ng-template>
@@ -136,17 +136,16 @@
                 <!-- Title card -->
                 <div class="relevant-text-title mb-4">
                     Professores
-                </div>
+                </div>  
                 <!-- End -->
-                <ng-container *ngIf="teachers$ | async as teachers">
+                <ng-container *ngIf="teacherSchoolsNormal$ | async as teacherSchoolsNormal; else loadingItem">
                     <!-- If exists some teachers -->
-                    <ng-container *ngIf="teachers.length > 0; else noTeachers">
-
-                        <ng-container *ngFor="let teacher of teachers; let i index">
+                    <ng-container *ngIf="teacherSchoolsNormal.length > 0; else noTeachers">
+                        <ng-container *ngFor="let tsNormal of teacherSchoolsNormal; let i index">
                             <div class="d-flex align-items-center">
-                                <ng-container *ngIf="teacher.pictureProfilePath; else noPhotoProfile">
+                                <ng-container *ngIf="tsNormal.teacher.pictureProfilePath; else noPhotoProfile">
                                     <div class="img-profile-xm mr-2">
-                                        <img [src]="teacher.pictureProfilePath">
+                                        <img [src]="tsNormal.teacher.pictureProfilePath">
                                     </div>
                                 </ng-container>
                                 <ng-template #noPhotoProfile>
@@ -155,20 +154,22 @@
                                     </div>
                                 </ng-template>
 
-                                <div class="d-flex flex-column">
+                                <div class="d-flex flex-column ml-2">
                                     <div>
                                         <a class="discretLink"
-                                            [routerLink]="['/teacher/teacher-profile/teacher-places',teacher.teacherId]">
-                                            {{teacher.firstName}} {{teacher.lastName}}
+                                            [routerLink]="['/teacher/teacher-profile',tsNormal.teacher.id]">
+                                            {{tsNormal.teacher.firstName}} {{tsNormal.teacher.lastName}}
                                         </a>
                                     </div>
                                     <div class="text-color-primary">
-                                        <h5>{{teacher.teacherPlaceQnt}} turmas</h5>
+                                        <h5>{{tsNormal.teacher.teacherPlaceQnt}} turmas</h5>
                                     </div>
                                     <div>
                                         <h5>
-                                            {{teacher.academicLevelName}} em {{teacher.courseName}} na(o) 
-                                            <!--TODO: Set the school id --> <a [routerLink]="['/school/school-profile/about']" class="primaryLink">{{teacher.academyName}}</a> 
+                                            {{tsNormal.teacher.academicLevelName}} em {{tsNormal.teacher.courseName}} na(o)
+                                            <!--TODO: Set the school id --> <a
+                                                [routerLink]="['/school/school-profile/about']"
+                                                class="primaryLink">{{tsNormal.teacher.academyName}}</a>
                                         </h5>
                                     </div>
                                 </div>
@@ -189,3 +190,8 @@
         </div>
     </div>
 </div>
+<ng-template #loadingItem>
+    <app-loading-item>
+
+    </app-loading-item>
+</ng-template>

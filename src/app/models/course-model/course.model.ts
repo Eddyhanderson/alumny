@@ -1,4 +1,4 @@
-export interface CourseModel {
+export declare class CourseModel {
     id?: string;
 
     badgeInformationId?: string;

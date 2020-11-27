@@ -3,7 +3,7 @@ import { CourseModel } from '../course-model/course.model';
 import { UserModel } from '../user-model/user-model';
 import { AcademicLevelModel } from '../academic-level-model/academic-level.model';
 
-export class TeacherModel {
+export declare class TeacherModel {
 
         id?:string;
 

@@ -9,7 +9,7 @@ export class Routes {
 
     // SchoolCourse routes
     static SCHOOL_COURSE_CREATE_ROUTE = Routes.BASE_URL + "schoolCourse/create";
-    static SCHOOL_COURSE_GET_ALL_BY_SCHOOL_ROUTE = Routes.BASE_URL + "schoolCourse/getAllBySchool/{schoolId}";
+    static SCHOOL_COURSE_GET_ALL_ROUTE = Routes.BASE_URL + "schoolCourse/getAll";
 
     // School routes
     static SCHOOL_CREATE_ROUTE = Routes.BASE_URL + "school/create";
@@ -37,9 +37,9 @@ export class Routes {
     // TeacherSchools routes
     static TEACHER_SCHOOLS_CREATE_ROUTE = Routes.BASE_URL + "teacherSchools/create";
     static TEACHER_SCHOOLS_UPDATE_ROUTE = Routes.BASE_URL + "teacherSchools/update/{teacherId}/{schoolId}";
-    static TEACHER_SCHOOLS_GET_ALL_PENDING_BY_TEACHER_ROUTE = Routes.BASE_URL + "teacherSchools/getAllByTeacher/pending/{teacherId}";
-    static TEACHER_SCHOOLS_GET_ALL_PENDING_BY_SCHOOL_ROUTE = Routes.BASE_URL + "teacherSchools/getAllBySchool/pending/{schoolId}";
-    static TEACHER_SCHOOLS_GET_ALL_NORMAL_BY_SCHOOL_ROUTE = Routes.BASE_URL + "teacherSchools/getAllBySchool/normal/{schoolId}";
-    static TEACHER_SCHOOLS_GET_ALL_NORMAL_BY_TEACHER_ROUTE = Routes.BASE_URL + "teacherSchools/getAllByTeacher/normal/{teacherId}";
-    static TEACHER_SCHOOLS_GET_ALL_NOTCONTAINED_ROUTE = Routes.BASE_URL + "teacherSchools/getAll/notContained/{teacherId}";
+    static TEACHER_SCHOOLS_GET_ALL_ROUTE = Routes.BASE_URL + "teacherSchools/getAll";
+    static TEACHER_SCHOOLS_CHECK_TEACHER_HAS_SCHOOL_ROUTE = Routes.BASE_URL + "teacherSchools/checkTeacherHasSchool/{teacherId}";
+
+    // TeacherPlace routes
+    static TEACHER_PLACE_GET_ALL_ROUTE = Routes.BASE_URL + "teacherPlace/getAll";
 }

@@ -1,4 +1,4 @@
-export interface AcademyModel {
+export declare class AcademyModel {
     id?: string;
 
     profilePhotoPath?:string;

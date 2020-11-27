@@ -22,13 +22,14 @@ import { ManagerService } from './services/manager-service/manager.service';
 import { LoadingDataComponent } from './splash/loading-data/loading-data.component';
 import { AuthContainerComponent } from './splash/auth-container/auth-container.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoadingPageComponent } from './shared/components/loading-page/loading-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     AuthContainerComponent,
-    LoadingDataComponent
+    LoadingDataComponent,    
   ],
   imports: [
     HttpClientModule,

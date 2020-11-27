@@ -11,7 +11,6 @@ const routes: Routes = [
   { path: "question", loadChildren: () => import('./question/question.module').then(m => m.QuestionModule) },
   { path: "studant", loadChildren: () => import('./studant/studant.module').then(m => m.StudantModule) },
   { path: "school", loadChildren: () => import('./school/school.module').then(m => m.SchoolModule) },
-  { path: "teacher-school", loadChildren: () => import('./teacher-school/teacher-school.module').then(m => m.TeacherSchoolModule) },
   { path: "teacherPlace", loadChildren: () => import('./teacher-place/teacher-place.module').then(m => m.TeacherPlaceModule) },
   { path: "teacher", loadChildren: () => import('./teacher/teacher.module').then(m => m.TeacherModule) },
   { path: '**', redirectTo: '' }
