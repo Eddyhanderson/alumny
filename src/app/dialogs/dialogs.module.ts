@@ -8,24 +8,27 @@ import { SchoolRequestComponentDialog } from '../dialogs/school-request-dialog/s
 import { MatDialog, MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CourseCreateDialogComponent } from './course/create/course-create-dialog/course-create-dialog.component';
+import { TeacherPlaceCreateDialog } from './teacher-place/teacher-place-create-dialog/teacher-place-create.dialog';
 
 @NgModule({
   declarations: [
     CreateAnswerDialogComponent,
     TopicChoiceDialogComponent,
     SchoolRequestComponentDialog,
-    CourseCreateDialogComponent  
+    CourseCreateDialogComponent,
+    TeacherPlaceCreateDialog  
   ],
   imports: [
     CommonModule,
     MaterialModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule  
   ],
   exports:[
     CreateAnswerDialogComponent,
     TopicChoiceDialogComponent,
     SchoolRequestComponentDialog,
+    TeacherPlaceCreateDialog
   ],
   
   providers: [

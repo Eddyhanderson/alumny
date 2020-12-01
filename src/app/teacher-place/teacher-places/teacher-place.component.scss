@@ -29,6 +29,11 @@
     object-fit: cover;
 }
 
+.bg-none-teacherPlace div{
+    height: 5rem;
+    background-color: rgba(var(--palette-neutral-60));
+}
+
 .teacher-place-item:hover{
     cursor: pointer;
 }

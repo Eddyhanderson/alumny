@@ -39,7 +39,7 @@ export class SchoolCourseService {
      * @param schoolId the school id key 
      */
     public getAll(query: PaginationQuery, param: SchoolCourseQuery): Observable<PageResponse<CourseModel>> {
-        let queryParams = this.createQueryParams(query, param);
+        let queryParams = this.queryParamsBuild(query, param);
 
         try {
             return this.http
@@ -50,7 +50,7 @@ export class SchoolCourseService {
         }
     }
 
-    private createQueryParams(query: PaginationQuery, params: SchoolCourseQuery): HttpParams {
+    private queryParamsBuild(query: PaginationQuery, params: SchoolCourseQuery): HttpParams {
         return new HttpParams()
             .set('pageNumber', query.pageNumber.toString() ?? '')
             .set('pageSize', query.pageSize.toString() ?? '')

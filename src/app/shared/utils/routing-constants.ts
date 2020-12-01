@@ -29,6 +29,10 @@ export class Routes {
     static COURSE_GET_BY_NAME_ROUTE = Routes.BASE_URL + "course/getByName/{name}";
     static COURSE_GET_ALL_ROUTE = Routes.BASE_URL + "course/getAll";
 
+    // Course routes    
+    static DISCIPLINE_CREATE_ROUTE = Routes.BASE_URL + "discipline/create";
+    static DISCIPLINE_GET_ALL_ROUTE = Routes.BASE_URL + "discipline/getAll";
+
     // Teacher routes
     static TEACHER_CREATE_ROUTE = Routes.BASE_URL + "teacher/create";
     static TEACHER_GET_ROUTE = Routes.BASE_URL + "teacher/get/{teacherId}";
@@ -41,5 +45,6 @@ export class Routes {
     static TEACHER_SCHOOLS_CHECK_TEACHER_HAS_SCHOOL_ROUTE = Routes.BASE_URL + "teacherSchools/checkTeacherHasSchool/{teacherId}";
 
     // TeacherPlace routes
+    static TEACHER_PLACE_CREATE_ROUTE = Routes.BASE_URL + "teacherPlace/create";
     static TEACHER_PLACE_GET_ALL_ROUTE = Routes.BASE_URL + "teacherPlace/getAll";
 }

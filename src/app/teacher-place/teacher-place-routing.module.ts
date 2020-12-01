@@ -6,16 +6,16 @@ import { TeacherPlaceLessonsComponent } from './teacher-place-profile/teacher-pl
 import { TeacherPlaceAboutComponent } from './teacher-place-profile/teacher-place-about/teacher-place-about.component';
 import { TeacherPlaceStudantsComponent } from './teacher-place-profile/teacher-place-studants/teacher-place-studants.component';
 
-const routes: Routes = [  
+const routes: Routes = [
   {
     path: 'profile', component: TeacherPlaceProfileComponent,
     children: [
       { path: 'lessons', component: TeacherPlaceLessonsComponent },
       { path: 'about', component: TeacherPlaceAboutComponent },
       { path: 'studants', component: TeacherPlaceStudantsComponent },
-    ]    
+    ]
   },
-  { path: '', component: TeacherPlacesComponent },
+  { path: '', component: TeacherPlacesComponent, runGuardsAndResolvers: 'always' },
 ];
 
 @NgModule({

@@ -29,7 +29,7 @@ export class ManagerSchoolHomeComponent implements OnInit, OnDestroy {
   schoolCourses$: PaginationAdapter;
   teacherSchoolsNormal$: PaginationAdapter;
 
-  reloadStrategy: Subscription;
+  private _reloadStrategy: Subscription;
 
   constructor(private tss: TeacherSchoolsService,
     private scs: SchoolCourseService,
@@ -45,7 +45,7 @@ export class ManagerSchoolHomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.reloadStrategy.unsubscribe();
+    this._reloadStrategy.unsubscribe();
   }
 
   private getManager() {
@@ -96,7 +96,7 @@ export class ManagerSchoolHomeComponent implements OnInit, OnDestroy {
 
   /* To reload component */
   private setStrategyToReloadPage() {
-    this.reloadStrategy = this.router.events.subscribe(
+    this._reloadStrategy = this.router.events.subscribe(
       (evt) => {
         if (evt instanceof NavigationEnd) {
           this.getTeacherSchoolsRequests();

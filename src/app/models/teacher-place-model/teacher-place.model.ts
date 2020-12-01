@@ -1,5 +1,14 @@
-export declare class TeacherPlaceModel {
+export class TeacherPlaceModel {
 
+    constructor(teacherId:string, schoolId:string, courseId:string, disciplineId:string, name:string, description:string){
+        this.teacherId = teacherId;
+        this.schoolId = schoolId;
+        this.courseId = courseId;
+        this.disciplineId = disciplineId;
+        this.name = name;
+        this.description = description;
+
+    }
     id?: string;
 
     teacherId: string;
@@ -32,5 +41,5 @@ export declare class TeacherPlaceModel {
 
     profilePhotoPath?: string;
 
-    acedmicYear?: string;
+    acedmicYear?: number;
 }

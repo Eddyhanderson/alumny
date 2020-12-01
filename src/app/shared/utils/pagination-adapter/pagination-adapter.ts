@@ -60,7 +60,7 @@ export class PaginationAdapter implements Subscribable<any> {
                     )
                 }),
                 scan((acc, data) => {
-                    if (data.length == 0)
+                    if (data != null && data.length == 0)
                         this.hasMore$.next(false);
 
                     return [...acc, ...data]

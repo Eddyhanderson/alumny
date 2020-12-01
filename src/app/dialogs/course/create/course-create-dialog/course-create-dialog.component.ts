@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { PaginationQuery } from 'src/app/interfaces/pagination-query/pagination-query';
 import { CourseModel } from 'src/app/models/course-model/course.model';
@@ -21,7 +21,9 @@ export class CourseCreateDialogComponent implements OnInit {
 
   filteredCourses$: Observable<CourseModel[]>;
 
-  constructor(public dialogRef: MatDialogRef<CourseCreateDialogComponent>,
+  constructor(
+    
+    public dialogRef: MatDialogRef<CourseCreateDialogComponent>,
     private courseService: CourseService,
     private fb: FormBuilder) { }
 

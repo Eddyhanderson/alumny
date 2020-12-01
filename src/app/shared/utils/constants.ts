@@ -22,9 +22,9 @@ export class Constants {
 
     static TEXT_WITH_SPACE_AND_NUMBER_REGEX = "^[a-zA-Z0-9áÁàÀêÊéèÉÈíìÌÍÔôõÕóòÓÒÚúùÙ ]+$";
 
-    static SIMPLE_INFORMATION_REGEX = "^[a-zA-Z0-9 ]*{1,15}$";
+    static SIMPLE_INFORMATION_REGEX = "^[a-zA-Z0-9áÁàÀêÊéèÉÈíìÌÍÔôõÕóòÓÒÚúùÙ ]*{1,15}$";
 
-    static STANDARD_INFORMATION_REGEX = "^[a-zA-Z]*{1,15}$";
+    static STANDARD_INFORMATION_REGEX = "^[a-zA-ZáÁàÀêÊéèÉÈíìÌÍÔôõÕóòÓÒÚúùÙ]*{1,15}$";
 
     static EMAIL_REGEX = "^[a-zA-Z0-9_]+@[a-zA-Z]+[.][a-zA-Z]+$";
 
