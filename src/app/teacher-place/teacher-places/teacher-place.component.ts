@@ -138,7 +138,8 @@ export class TeacherPlacesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((data) => {
-      if (data != null) {
+      if (data !== null) {
+        console.dir(data);
         this.reloadComponent();
       }
     });

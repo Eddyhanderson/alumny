@@ -8,11 +8,24 @@ import { DataFormaterDirective } from './directives/data-formater/data-formater.
 import { MessageCallBackDirective } from './directives/message-callBack/message-call-back.directive';
 import { LoadingPageComponent } from './components/loading-page/loading-page.component';
 import { LoadingItemComponent } from './components/loading-item/loading-item.component';
+import { LoadingDeterminateComponent } from './components/loading-determinate/loading-determinate.component';
 
 
 @NgModule({
-  declarations: [VideoComponent, ProgressBarComponent, DataFormaterDirective, MessageCallBackDirective, LoadingPageComponent, LoadingItemComponent],
-  exports:[VideoComponent, ProgressBarComponent, DataFormaterDirective, MessageCallBackDirective, LoadingPageComponent, LoadingItemComponent],
+  declarations: [VideoComponent, 
+    ProgressBarComponent, 
+    DataFormaterDirective, 
+    MessageCallBackDirective, 
+    LoadingPageComponent, 
+    LoadingItemComponent, 
+    LoadingDeterminateComponent],
+  exports:[VideoComponent, 
+    ProgressBarComponent, 
+    DataFormaterDirective, 
+    MessageCallBackDirective, 
+    LoadingPageComponent,     
+    LoadingItemComponent,
+    LoadingDeterminateComponent],
   imports: [
     CommonModule,
     MaterialModule,

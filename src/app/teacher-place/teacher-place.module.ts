@@ -11,6 +11,7 @@ import { TeacherPlaceLessonsComponent } from './teacher-place-profile/teacher-pl
 import { TopicChoiceDialogComponent } from '../dialogs/topic-choice-dialog/topic-choice-dialog.component';
 import { TeacherPlaceAboutComponent } from './teacher-place-profile/teacher-place-about/teacher-place-about.component';
 import { TeacherPlaceStudantsComponent } from './teacher-place-profile/teacher-place-studants/teacher-place-studants.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { TeacherPlaceStudantsComponent } from './teacher-place-profile/teacher-p
     TeacherPlaceRoutingModule,
     LessonModule,
     MaterialModule,
-    DialogsModule
+    DialogsModule,
+    SharedModule
   ],
   entryComponents: [ TopicChoiceDialogComponent]
 })

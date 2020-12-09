@@ -1,7 +1,7 @@
 <ng-container >
-    <div *ngIf="hasSchool; else noHaveSchool"class="teacher-place-main bg-lighter">
+    <div *ngIf="hasSchool; else noHaveSchool" class="teacher-place-main bg-lighter">
         <!-- Create Teacher Place -->
-        <div class="teacher-place-section">
+        <div class="teacher-place-section"> 
             <div (click)="onCreateTeacherPlace()">
                 <!-- To activate only when is the teacher of the teacher place -->
                 <button class="border-radius-0 button-bg-accent-1 mr-4" mat-flat-button>
@@ -43,7 +43,7 @@
         </div>
         <!-- End -->
 
-        <ng-container *ngIf="teacherPlaces$ | async as teacherPlaces; else loadingPage">
+        <ng-container *ngIf="false; else loadingPage">
             <ng-container *ngIf="teacherPlaces.length > 0; else noTeacherPlaces">
                 <!-- The teacher places lists -->
                 <div class="teacher-place-section" *ngFor="let teacherPlace of teacherPlaces;">
@@ -59,16 +59,21 @@
                                 </div>
                             </ng-template>
                             <div class="d-flex flex-column p-3">
-                                <div class="relevant-content-normal justify-content-start d-flex">
+                                <div class="relevant-content-normal justify-content-start d-flex mb-1">
                                     <span class="m-0 bold-500"> {{teacherPlace.name}} </span>
                                 </div>
                                 <div class="d-flex flex-row justify-content-start">
                                     <div class="img-profile-xxm mr-3">
                                         <img [src]="teacherPlace.teacherPictureProfilePath">
                                     </div>
-                                    <a class="irrelevant-text-xm bold-500 discretLink" href="#">
-                                        Prof. {{teacherPlace.teacherFirstName}} {{teacherPlace.teacherLastName}}
-                                    </a>
+                                    <div class="d-flex flex-column">
+                                        <a class="irrelevant-text-xm bold-500 discretLink" href="#">
+                                            Prof. {{teacherPlace.teacherFirstName}} {{teacherPlace.teacherLastName}}
+                                        </a>
+                                        <span class="irrelevant-text-xm text-color-primary">
+                                            {{teacherPlace.courseName}}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                             <!-- End -->
@@ -100,7 +105,7 @@
             </ng-template>
         </ng-container>
         <ng-template #loadingPage>
-            <app-loading-page></app-loading-page>
+            <app-loading-page class="w-100"></app-loading-page>
         </ng-template>
     </div>
 </ng-container>

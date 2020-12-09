@@ -7,23 +7,14 @@
 }
 
 %loading {
-    background-color: rgb(241, 239, 233);
+    background-color: rgba(238, 237, 234,.5);
     @include animation-defining(loading-animation 1s ease-in 0s infinite alternate-reverse);
 }
 .loading-presentation {
-    height: 10rem;
+    height: 17rem;
     @extend %loading;
 }
 
-.loading-presentation-md {
-    height: 5rem;
-    @extend %loading;
-}
-
-.loading-presentation-xm {
-    height: 15rem;
-    @extend %loading;
-}
 
 @-webkit-keyframes loading-animation {
     from {
