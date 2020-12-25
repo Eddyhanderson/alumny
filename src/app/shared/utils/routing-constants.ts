@@ -47,4 +47,7 @@ export class Routes {
     // TeacherPlace routes
     static TEACHER_PLACE_CREATE_ROUTE = Routes.BASE_URL + "teacherPlace/create";
     static TEACHER_PLACE_GET_ALL_ROUTE = Routes.BASE_URL + "teacherPlace/getAll";
+
+    // Video routes
+    static VIDEO_UPLOAD = Routes.BASE_URL + "video/upload";
 }

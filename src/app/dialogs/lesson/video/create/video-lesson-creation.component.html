@@ -1,0 +1,68 @@
+<div>
+    <div class="d-flex justify-content-between">
+        <h2 mat-dialog-title>
+            Carregar video-aula
+        </h2>
+        <button mat-icon-button>
+            <mat-icon mat-dialog-close>
+                close
+            </mat-icon>
+        </button>
+    </div>
+    <mat-dialog-content>
+        <mat-horizontal-stepper #stepper [linear]="true">
+            <mat-step [stepControl]="videoFg">
+                <form [formGroup]="videoFg" class="d-flex justify-content-center">
+                    <div class="w-50 p-relative">
+                        <button mat-flat-button color="warn" class="w-100">
+                            SELECIONAR VIDEO <mat-icon class="ml-1"> video_library </mat-icon>
+                        </button>
+                        <!-- Fetch selected filed on change -->
+                        <input type="file" #fileInput id="uploadFile" (change)="uploadFileEvt($event)" name="uploadFile"
+                            formControlName="videoCtl" accept="video/*" />
+                    </div>
+                </form>
+                <div class="d-flex flex-column align-items-center justify-content-center irrelevant-text-sm text-disabled-1 mt-4 "
+                    [style.height.rem]="5">
+                    <p>
+                        Certifique-se que o video que deseja carregar não viola as <a href="#" class="ml-1"> regras da
+                            comunidade Alumny</a>
+                    </p>
+                </div>
+            </mat-step>
+            <mat-step [stepControl]="videoInfoFg">
+                <form [formGroup]="videoInfoFg" class="d-flex flex-column">
+                    <mat-form-field class="w-100 mb-4">
+                        <mat-label> Insira o título da aula </mat-label>
+                        <input type="text" matInput [formControl]="title">
+                        <mat-error *ngIf="title.touched && title.errors?.maxlength">
+                            Nome demasiado extenso
+                        </mat-error>
+                        <mat-error *ngIf="title.touched && title.hasError('required')">
+                            O campo não pode estar vazio
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="w-100">
+                        <mat-label>
+                            Qual é o objectivo da aula
+                        </mat-label>
+                        <textarea id="description-field" [formControl]="description" matInput></textarea>
+                        <mat-error *ngIf="description.touched && description.hasError('required')">
+                            O campo não pode estar vazio
+                        </mat-error>
+                        <mat-error *ngIf="description.touched && description.errors?.maxlength">
+                            Descrição demasiado extensa
+                        </mat-error>
+                    </mat-form-field>
+                </form>
+                <div class="d-flex flex-column align-items-center justify-content-center irrelevant-text-sm text-disabled-1 mt-4 "
+                    [style.height.rem]="5">
+                    <mat-progress-bar [value]="progress" color="accent">
+                        {{progress}}
+                    </mat-progress-bar>
+                </div>
+            </mat-step>
+        </mat-horizontal-stepper>
+    </mat-dialog-content>
+</div>

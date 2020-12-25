@@ -10,6 +10,8 @@ import { TeacherModel } from '../models/teacher-model/teacher-model';
 import { TeacherSchoolsModel } from '../models/teacher-schools-model/teacher-schools.model';
 import { AccountService } from '../services/account-service/account.service';
 import { ManagerModel } from '../models/manager-model/manager.model';
+import { MatDialog } from '@angular/material/dialog';
+import { VideoLessonCreationComponent } from '../dialogs/lesson/video/create/video-lesson-creation.component';
 
 @Component({
   selector: 'app-navigation',
@@ -18,45 +20,51 @@ import { ManagerModel } from '../models/manager-model/manager.model';
 })
 export class NavigationComponent implements OnInit {
   user: UserModel;
-  role:string;
+  role: string;
 
   // Models  if teacher
-  teacher: TeacherModel;  
+  teacher: TeacherModel;
 
   // Models if manager
-  manager:ManagerModel;
+  manager: ManagerModel;
 
-  constructor() { }
+  constructor(private matDialog: MatDialog) { }
 
   ngOnInit(): void {
-
     this.getUser();
     this.getRole();
     this.getRoleData();
   }
 
-  private getUser() {    
-    this.user = JSON.parse(localStorage.user);        
+  public openCreateVideoLessonDialog() {
+    this.matDialog.open(VideoLessonCreationComponent, {
+      width: '50%',
+      height: 'auto'
+    })
   }
 
-  private getRole(){
+  private getUser() {
+    this.user = JSON.parse(localStorage.user);
+  }
+
+  private getRole() {
     this.role = localStorage.userRole;
   }
 
-  getRoleData() {
+  private getRoleData() {
     if (this.role.toUpperCase() === Constants.TEACHER.toUpperCase()) {
       this.getTeacherData();
-    }else if (this.role.toUpperCase() === Constants.SCHOOL_MANAGER.toUpperCase()) {
+    } else if (this.role.toUpperCase() === Constants.SCHOOL_MANAGER.toUpperCase()) {
       this.getManagerData();
     }
   }
 
   private async getTeacherData() {
-    this.teacher = JSON.parse(localStorage.teacher);        
-  } 
-  
+    this.teacher = JSON.parse(localStorage.teacher);
+  }
+
   private async getManagerData() {
-    this.manager = JSON.parse(localStorage.manager);        
-  }  
+    this.manager = JSON.parse(localStorage.manager);
+  }
 
 }

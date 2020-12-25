@@ -23,6 +23,7 @@ import { LoadingDataComponent } from './splash/loading-data/loading-data.compone
 import { AuthContainerComponent } from './splash/auth-container/auth-container.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoadingPageComponent } from './shared/components/loading-page/loading-page.component';
+import { DialogsModule } from './dialogs/dialogs.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { LoadingPageComponent } from './shared/components/loading-page/loading-p
     MaterialModule,
     AppRoutingModule,
     BrowserAnimationsModule,    
-    SharedModule
+    SharedModule,
+    DialogsModule
   ],
   providers: [
     {

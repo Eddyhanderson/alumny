@@ -46,7 +46,7 @@ export class TeacherPlacesComponent implements OnInit {
   ngOnInit(): void {
     this.initialization();
   }
-
+ 
   private async initialization() {
     this.getTeaecher();
     await this.verifierIfTeacherHasSchool();

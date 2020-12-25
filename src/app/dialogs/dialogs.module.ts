@@ -9,6 +9,7 @@ import { MatDialog, MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CourseCreateDialogComponent } from './course/create/course-create-dialog/course-create-dialog.component';
 import { TeacherPlaceCreateDialog } from './teacher-place/teacher-place-create-dialog/teacher-place-create.dialog';
+import { VideoLessonCreationComponent } from './lesson/video/create/video-lesson-creation.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +17,15 @@ import { TeacherPlaceCreateDialog } from './teacher-place/teacher-place-create-d
     TopicChoiceDialogComponent,
     SchoolRequestComponentDialog,
     CourseCreateDialogComponent,
-    TeacherPlaceCreateDialog  
+    TeacherPlaceCreateDialog,
+    VideoLessonCreationComponent  
   ],
   imports: [
     CommonModule,
     MaterialModule,
     MatDialogModule,
-    ReactiveFormsModule  
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports:[
     CreateAnswerDialogComponent,
@@ -34,7 +37,7 @@ import { TeacherPlaceCreateDialog } from './teacher-place/teacher-place-create-d
   providers: [
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
-      useValue: { hasBackdrop: false }
+      useValue: { hasBackdrop: true }
     }
   ], 
 })

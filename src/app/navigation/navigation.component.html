@@ -27,7 +27,7 @@
                 </mat-icon>
             </button>
             <mat-menu #typeLessons="matMenu">
-                <button mat-menu-item>
+                <button mat-menu-item (click)="openCreateVideoLessonDialog()">
                     <mat-icon class="text-color-primary">video_library</mat-icon>
                     Video aula
                 </button>
