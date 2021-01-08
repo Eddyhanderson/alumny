@@ -1,4 +1,4 @@
-<div>
+<div class="h-100">
     <div class="d-flex justify-content-between">
         <h2 mat-dialog-title>
             Carregar video-aula
@@ -11,25 +11,50 @@
     </div>
     <mat-dialog-content>
         <mat-horizontal-stepper #stepper [linear]="true">
-            <mat-step [stepControl]="videoFg">
-                <form [formGroup]="videoFg" class="d-flex justify-content-center">
-                    <div class="w-50 p-relative">
-                        <button mat-flat-button color="warn" class="w-100">
-                            SELECIONAR VIDEO <mat-icon class="ml-1"> video_library </mat-icon>
-                        </button>
-                        <!-- Fetch selected filed on change -->
-                        <input type="file" #fileInput id="uploadFile" (change)="uploadFileEvt($event)" name="uploadFile"
-                            formControlName="videoCtl" accept="video/*" />
+            <ng-template matStepperIcon="videoChoice">
+                <mat-icon>
+                    add_to_photos
+                </mat-icon>
+            </ng-template>
+
+            <ng-template matStepperIcon="details">
+                <mat-icon>
+                    panorama_fish_eye
+                </mat-icon>
+            </ng-template>
+
+            <mat-step [stepControl]="videoFg" editable="false" label="Escolher video" state="videoChoice">
+                <div class="d-flex flex-column justify-content-between dialog-content">
+                    <form [formGroup]="videoFg" class="d-flex justify-content-center mt-5">
+                        <div class="w-50 p-relative">
+                            <button mat-flat-button color="warn" class="w-100">
+                                SELECIONAR VIDEO <mat-icon class="ml-1"> video_library </mat-icon>
+                            </button>
+                            <!-- Fetch selected filed on change -->
+                            <input type="file" #fileInput id="uploadFile" (change)="uploadFileEvt($event)"
+                                name="uploadFile" formControlName="videoCtl" accept="video/*" />
+                        </div>
+                    </form>
+                    <div class="d-flex flex-column align-items-center justify-content-center irrelevant-text-sm text-disabled-1">
+                        <p>
+                            Certifique-se que o video que deseja carregar não viola as <a href="#" class="ml-1"> regras
+                                da
+                                comunidade Alumny</a>
+                        </p>
                     </div>
-                </form>
-                <div class="d-flex flex-column align-items-center justify-content-center irrelevant-text-sm text-disabled-1 mt-4 "
-                    [style.height.rem]="5">
-                    <p>
-                        Certifique-se que o video que deseja carregar não viola as <a href="#" class="ml-1"> regras da
-                            comunidade Alumny</a>
-                    </p>
                 </div>
             </mat-step>
+
+            <mat-step label="Detalhes" state="details">
+                <div class="d-flex flex-column align-items-center justify-content-center">
+                    <h1>Aguarde, a video-aula está quase no ar :)</h1>
+                    <div class=" irrelevant-text-sm text-disabled-1 mt-4">
+                        {{progress}} % Enviado no servidor
+                    </div>
+                    <mat-progress-bar [value]="progress" color="primary"></mat-progress-bar>
+                </div>
+            </mat-step>
+            
             <mat-step [stepControl]="videoInfoFg">
                 <form [formGroup]="videoInfoFg" class="d-flex flex-column">
                     <mat-form-field class="w-100 mb-4">
@@ -56,12 +81,6 @@
                         </mat-error>
                     </mat-form-field>
                 </form>
-                <div class="d-flex flex-column align-items-center justify-content-center irrelevant-text-sm text-disabled-1 mt-4 "
-                    [style.height.rem]="5">
-                    <mat-progress-bar [value]="progress" color="accent">
-                        {{progress}}
-                    </mat-progress-bar>
-                </div>
             </mat-step>
         </mat-horizontal-stepper>
     </mat-dialog-content>

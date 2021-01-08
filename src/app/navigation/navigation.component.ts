@@ -38,8 +38,8 @@ export class NavigationComponent implements OnInit {
 
   public openCreateVideoLessonDialog() {
     this.matDialog.open(VideoLessonCreationComponent, {
-      width: '50%',
-      height: 'auto'
+      width: '70%',
+      height: '70%'
     })
   }
 

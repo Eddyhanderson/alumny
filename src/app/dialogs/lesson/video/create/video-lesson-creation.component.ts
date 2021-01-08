@@ -2,7 +2,10 @@ import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatStep, MatStepper } from '@angular/material/stepper';
+import { VideoModel } from 'src/app/models/video-model/video.model';
+import { Response } from 'src/app/models/response/response';
 import { VideoService } from '../../../../services/video-service/video.service';
+import { VideoUploadSignalR } from '../../../../signalRServices/video-upload-signalR';
 
 @Component({
   selector: 'app-video-lesson-creation',
@@ -25,7 +28,7 @@ export class VideoLessonCreationComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder, private vs: VideoService) { }
+  constructor(private fb: FormBuilder, private vs: VideoService, private vus: VideoUploadSignalR) { }
 
   ngOnInit(): void {
     this.videoFg = this.fb.group({
@@ -46,11 +49,16 @@ export class VideoLessonCreationComponent implements OnInit {
 
     this.stepper.next();
 
-    this.vs.upload(file).subscribe((event: HttpEvent<any>) => {
+    this.vs.upload(file).subscribe((event: HttpEvent<Response<VideoModel>>) => {
       switch (event.type) {
         case HttpEventType.UploadProgress:
           console.log(this.progress);
           this.progress = Math.round((event.loaded * 100) / event.total);
+          break;
+        case HttpEventType.Response:
+          var video = event.body.data;
+          this.vus.onInit();
+          this.vus.videoUploadWatch(video);
           break;
       }
     })

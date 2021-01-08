@@ -2,13 +2,13 @@ import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PageResponse } from 'src/app/models/page-response/page-response';
+import { PageResponse } from '../../models/page-response/page-response';
 import { PaginationQuery } from '../../interfaces/pagination-query/pagination-query';
-import { TeacherPlaceModel } from 'src/app/models/teacher-place-model/teacher-place.model';
-import { TeacherPlaceQuery } from 'src/app/interfaces/teacher-place-query/teacher-places.query';
+import { TeacherPlaceModel } from '../../models/teacher-place-model/teacher-place.model';
+import { TeacherPlaceQuery } from '../../interfaces/teacher-place-query/teacher-places.query';
 
-import { Routes } from 'src/app/shared/utils/routing-constants';
-import { CreationResult } from 'src/app/models/creation-result/creation-result';
+import { Routes } from '../../shared/utils/routing-constants';
+import { CreationResult } from '../../models/creation-result/creation-result';
 import { IfStmt } from '@angular/compiler';
 
 @Injectable({

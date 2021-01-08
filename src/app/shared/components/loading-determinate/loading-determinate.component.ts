@@ -11,7 +11,7 @@ export class LoadingDeterminateComponent implements OnInit, OnDestroy {
   progressValue: number = 0;
   stopProgress: boolean;
 
-  progressTimer: number;
+  progressTimer: any;
 
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {

@@ -50,4 +50,7 @@ export class Routes {
 
     // Video routes
     static VIDEO_UPLOAD = Routes.BASE_URL + "video/upload";
+
+    // SignalR routes
+    static VIDEO_UPLOAD_WATCH = Routes.BASE_URL + "video/upload/watch/{connectionId}";
 }
