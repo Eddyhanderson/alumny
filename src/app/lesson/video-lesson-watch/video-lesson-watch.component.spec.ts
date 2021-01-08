@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { VideoLessonViewComponent } from './video-lesson-watch.component';
 
@@ -6,7 +6,7 @@ describe('VideoLessonWatchComponent', () => {
   let component: VideoLessonViewComponent;
   let fixture: ComponentFixture<VideoLessonViewComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ VideoLessonViewComponent ]
     })

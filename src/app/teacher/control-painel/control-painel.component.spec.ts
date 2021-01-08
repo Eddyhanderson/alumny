@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ControlPainelComponent } from './control-painel.component';
 
@@ -6,7 +6,7 @@ describe('ControlPainelComponent', () => {
   let component: ControlPainelComponent;
   let fixture: ComponentFixture<ControlPainelComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ControlPainelComponent ]
     })
