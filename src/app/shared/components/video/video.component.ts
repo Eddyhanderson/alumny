@@ -1,6 +1,7 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Renderer2, HostListener, OnDestroy, NgZone } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Renderer2, HostListener, OnDestroy, NgZone, Input } from '@angular/core';
 import { trigger, state, style, animate, transition, keyframes, } from '@angular/animations';
 import { Router } from '@angular/router';
+import * as dashjs from 'dashjs';
 
 interface VideoElement extends HTMLVideoElement {
   requestPictureInPicture(): any;
@@ -32,6 +33,8 @@ export class VideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private renderer: Renderer2, private el: ElementRef, private router: Router) { }
 
+  @Input("videoSource") url: string;
+  @Input("thumbnail") poster:string;
 
   @ViewChild('video') video: ElementRef<VideoElement>;
 
@@ -299,14 +302,12 @@ export class VideoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.renderer.listen(this.videoContainer.nativeElement, 'fullscreenchange', () => this.fullScreenModeIconsToggle());
 
     this.renderer.listen(this.fullscreenButton.nativeElement, 'click', () => this.fullScreenModeToggle());
-
-
-
-
   }
 
   ngOnInit(): void {
-
+    var player = dashjs.MediaPlayer().create();
+    alert(this.el.nativeElement.querySelector('#video'));
+    player.initialize(this.el.nativeElement.querySelector('#video'), this.url, true);
   }
 
   ngOnDestroy(): void {

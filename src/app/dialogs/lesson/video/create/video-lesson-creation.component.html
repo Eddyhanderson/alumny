@@ -32,10 +32,11 @@
                             </button>
                             <!-- Fetch selected filed on change -->
                             <input type="file" #fileInput id="uploadFile" (change)="uploadFileEvt($event)"
-                                name="uploadFile" formControlName="videoCtl" accept="video/*" />
+                                name="uploadFile" formControlName="videoCtl" accept="video/mp4" />
                         </div>
                     </form>
-                    <div class="d-flex flex-column align-items-center justify-content-center irrelevant-text-sm text-disabled-1">
+                    <div
+                        class="d-flex flex-column align-items-center justify-content-center irrelevant-text-sm text-disabled-1">
                         <p>
                             Certifique-se que o video que deseja carregar não viola as <a href="#" class="ml-1"> regras
                                 da
@@ -46,15 +47,55 @@
             </mat-step>
 
             <mat-step label="Detalhes" state="details">
-                <div class="d-flex flex-column align-items-center justify-content-center">
-                    <h1>Aguarde, a video-aula está quase no ar :)</h1>
-                    <div class=" irrelevant-text-sm text-disabled-1 mt-4">
-                        {{progress}} % Enviado no servidor
+                <div class="d-flex align-items-center justify-content-center">
+                    <div style="width: 65%;">
+
                     </div>
-                    <mat-progress-bar [value]="progress" color="primary"></mat-progress-bar>
+                    <div id="video-loading-container" class="d-flex flex-column">
+                        <ng-container *ngIf="manifest; else videoLoading">
+                            <app-video [videoSource]="manifest" [thumbnail]="thumbnail">
+                            </app-video>
+                        </ng-container>
+                        <ng-template #videoLoading>
+                            <div class="d-flex justify-content-center align-items-center text-disabled-1 w-100"
+                                id="video-loading">
+                                Carregando o video...
+                            </div>
+                        </ng-template>
+                        <div class="d-flex justify-content-between mt-4">
+                            <div class="p-relative" style="width: 40%;">
+                                <div id="pic-thumbnail"
+                                    class="d-flex flex-column justify-content-center align-items-center">
+                                    <mat-icon>
+                                        add_photo_alternate
+                                    </mat-icon>
+                                    <span class="text-disabled-1 irrelevant-text-sm">
+                                        Carregar miniatura
+                                    </span>
+                                </div>
+                                <!-- Fetch selected filed on change -->
+                                <input type="file" id="uploadFile" formControlName="videoCtl" accept="img/jpg" />
+                            </div>
+
+                            <ng-container *ngIf="thumbnail; else thumblLoading">
+                                <div id="thumbnail-completed">
+                                    <img [src]="thumbnail">
+                                </div>
+                            </ng-container>
+
+                            <ng-template #thumblLoading>
+                                <div id="thumbnail-loading">
+                                    <div class="text-disabled-1 irrelevant-text-xm">
+                                        Extraindo miniatura...
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+
                 </div>
             </mat-step>
-            
+
             <mat-step [stepControl]="videoInfoFg">
                 <form [formGroup]="videoInfoFg" class="d-flex flex-column">
                     <mat-form-field class="w-100 mb-4">
@@ -84,4 +125,14 @@
             </mat-step>
         </mat-horizontal-stepper>
     </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <ng-container *ngIf="loadingMode">
+            <div class=" irrelevant-text-sm text-disabled-1 mt-4">
+                {{progress}} %
+            </div>
+            <mat-progress-bar [value]="progress" color="accent"></mat-progress-bar>
+        </ng-container>
+
+    </mat-dialog-actions>
 </div>

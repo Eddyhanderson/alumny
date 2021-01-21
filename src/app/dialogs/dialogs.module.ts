@@ -10,22 +10,24 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CourseCreateDialogComponent } from './course/create/course-create-dialog/course-create-dialog.component';
 import { TeacherPlaceCreateDialog } from './teacher-place/teacher-place-create-dialog/teacher-place-create.dialog';
 import { VideoLessonCreationComponent } from './lesson/video/create/video-lesson-creation.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     CreateAnswerDialogComponent,
-    TopicChoiceDialogComponent,
+    TopicChoiceDialogComponent, 
     SchoolRequestComponentDialog,
     CourseCreateDialogComponent,
     TeacherPlaceCreateDialog,
-    VideoLessonCreationComponent  
+    VideoLessonCreationComponent    
   ],
   imports: [
     CommonModule,
     MaterialModule,
     MatDialogModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   exports:[
     CreateAnswerDialogComponent,
@@ -38,7 +40,7 @@ import { VideoLessonCreationComponent } from './lesson/video/create/video-lesson
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
       useValue: { hasBackdrop: true }
-    }
+    }    
   ], 
 })
 export class DialogsModule { }
