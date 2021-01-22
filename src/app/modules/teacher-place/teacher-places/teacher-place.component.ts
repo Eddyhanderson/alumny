@@ -4,11 +4,11 @@ import { TeacherModel } from 'src/app/models/teacher-model/teacher-model';
 import { TeacherSchoolsService } from 'src/app/services/teacher-schools-service/teacher-schools.service';
 import { TeacherPlaceService } from 'src/app/services/teacher-place-service/teacher-place.service';
 
-import { TeacherPlaceCreateDialog } from '../../dialogs/teacher-place/teacher-place-create-dialog/teacher-place-create.dialog';
+import { TeacherPlaceCreateDialog } from '../../../dialogs/teacher-place/teacher-place-create-dialog/teacher-place-create.dialog';
 import { TeacherSchoolsModel } from 'src/app/models/teacher-schools-model/teacher-schools.model';
 import { SchoolModel } from 'src/app/models/school-model/school.model';
 
-import { PaginationQuery } from '../../interfaces/pagination-query/pagination-query';
+import { PaginationQuery } from '../../../interfaces/pagination-query/pagination-query';
 import { TeacherPlaceQuery } from 'src/app/interfaces/teacher-place-query/teacher-places.query';
 import { PaginationAdapter } from 'src/app/shared/utils/pagination-adapter/pagination-adapter';
 import { TeacherSchoolQuery } from 'src/app/interfaces/teacher-schools-query/teacher-school.query';

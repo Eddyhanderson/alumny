@@ -8,7 +8,7 @@ import { RegistrationStudantComponent } from './registration/registration-studan
 import { RegistrationTeacherComponent } from './registration/registration-teacher/registration-teacher.component';
 import { MaterialModule } from '../material/material.module';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { RegistrationSchoolComponent } from './registration/registration-school/registration-school.component';
 
 

@@ -66,7 +66,7 @@ export class TeacherSchoolsService {
     /**
      * Get all teacher schools 
      * @param pQuery query parameters of pagination
-     * @param tsQuery query parameters of teacher school
+     * @param tsQuery query strings of teacher school
      * @returns a page response with data necessary to create pagination
      */
     public getAll(pQuery: PaginationQuery, tsQuery: TeacherSchoolQuery): Observable<PageResponse<TeacherSchoolsModel>> {

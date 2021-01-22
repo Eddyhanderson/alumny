@@ -4,11 +4,11 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavigationComponent } from './navigation/navigation.component';
+import { NavigationComponent } from './modules/navigation/navigation.component';
 
-import { MaterialModule } from './material/material.module';
+import { MaterialModule } from './modules/material/material.module';
 
-import { AuthenticationModule } from './authentication/authentication.module';
+import { AuthenticationModule } from './modules/authentication/authentication.module';
 
 import {AccountService} from "./services/account-service/account.service";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';

@@ -2,14 +2,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, Injectable, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 
-import { PaginationQuery } from '../../interfaces/pagination-query/pagination-query';
-import { PageResponse } from '../../models/page-response/page-response';
-import { Response } from '../../models/response/response';
+import { PaginationQuery } from '../../../interfaces/pagination-query/pagination-query';
+import { PageResponse } from '../../../models/page-response/page-response';
+import { Response } from '../../../models/response/response';
 import { TeacherModel } from 'src/app/models/teacher-model/teacher-model';
 
 import { Routes } from 'src/app/shared/utils/routing-constants';
-import { TeacherSchoolsModel } from '../../models/teacher-schools-model/teacher-schools.model';
-import { TeacherSchoolQuery } from '../../interfaces/teacher-schools-query/teacher-school.query';
+import { TeacherSchoolsModel } from '../../../models/teacher-schools-model/teacher-schools.model';
+import { TeacherSchoolQuery } from '../../../interfaces/teacher-schools-query/teacher-school.query';
 import { Observable } from 'rxjs';
 import { PaginationAdapter } from 'src/app/shared/utils/pagination-adapter/pagination-adapter';
 import { SchoolService } from 'src/app/services/school-service/school.service';

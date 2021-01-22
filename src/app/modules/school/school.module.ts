@@ -8,7 +8,7 @@ import { SchoolTeachersComponent } from './school-profile/school-teachers/school
 import { SchoolCoursesComponent } from './school-profile/school-courses/school-courses.component';
 import { MaterialModule } from '../material/material.module';
 import { SchoolChoiceComponent } from './school-choice/school-choice.component';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
