@@ -1,5 +1,0 @@
-<app-auth-container *ngIf="!isLogedIn; else initApp" (isLogin)="checkAuthState($event)"></app-auth-container>
-
-<ng-template #initApp>
-    <app-loading-data></app-loading-data>
-</ng-template>
