@@ -12,8 +12,9 @@
     width: 200px;
 }
 
-.mat-form-field {
-    width: 100%;
+mat-form-field {
+    width: 100% !important;
+    margin: 0 0 1rem !important;
 }
 
 #uploadFile {
@@ -28,18 +29,27 @@
 }
 
 .dialog-content{
-    height: 22rem;
+    height: 100%;
 }
 
 mat-dialog-content{
     height: 80% !important;
 }
 
-#video-loading-container{
+textarea{
+    line-height: 1.2rem;
+    height: 4rem !important;
+    font-size: small;
+}
+
+.left-form-container{
+    width: 60% !important;
+}
+
+#rigth-form-container{
+    width: 28% !important;
     position: fixed;
-    bottom: 27%;
-    right: 18%;
-    width: 25%;
+    left: 57%;
 }
 
 #video-loading{
@@ -57,6 +67,9 @@ mat-dialog-content{
 #thumbnail-loading{
     width: 50%;
     height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     @extend %loading;
 }
 

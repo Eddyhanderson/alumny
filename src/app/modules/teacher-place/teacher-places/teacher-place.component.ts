@@ -26,7 +26,7 @@ export class TeacherPlacesComponent implements OnInit {
   // Models
   teacher: TeacherModel;
   school: SchoolModel;
-  academicYear: string;
+  academicYear: number;
   teacherSchools: TeacherSchoolsModel[];
   teacherPlaces$: PaginationAdapter;
 
@@ -65,7 +65,7 @@ export class TeacherPlacesComponent implements OnInit {
   }
 
   private getAcademicYear() {
-    this.academicYear = this.academicYear ?? new Date().getFullYear().toString();
+    this.academicYear = this.academicYear ?? new Date().getFullYear();
   }
 
   private async verifierIfTeacherHasSchool() {
@@ -138,7 +138,7 @@ export class TeacherPlacesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((data) => {
-      if (data !== null) {
+      if (data !== null || data != undefined) {
         console.dir(data);
         this.reloadComponent();
       }

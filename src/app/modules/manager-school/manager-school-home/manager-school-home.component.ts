@@ -8,7 +8,7 @@ import { Constants } from 'src/app/shared/utils/constants';
 import { TeacherSchoolsModel } from '../../../models/teacher-schools-model/teacher-schools.model';
 import { TeacherModel } from 'src/app/models/teacher-model/teacher-model';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { CourseCreateDialogComponent } from '../../../dialogs/course/create/course-create-dialog/course-create-dialog.component';
+import { CourseCreateDialogComponent } from '../../../dialogs/course/course-create-dialog/course-create-dialog.component';
 import { SchoolCourseModel } from 'src/app/models/school-course-model/school-course.model';
 import { PaginationAdapter } from '../../../shared/utils/pagination-adapter/pagination-adapter';
 import { NavigationEnd, Router } from '@angular/router';

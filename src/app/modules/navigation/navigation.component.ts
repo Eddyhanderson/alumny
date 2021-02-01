@@ -12,6 +12,7 @@ import { AccountService } from '../../services/account-service/account.service';
 import { ManagerModel } from '../../models/manager-model/manager.model';
 import { MatDialog } from '@angular/material/dialog';
 import { VideoLessonCreationComponent } from '../../dialogs/lesson/video/create/video-lesson-creation.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -28,7 +29,7 @@ export class NavigationComponent implements OnInit {
   // Models if manager
   manager: ManagerModel;
 
-  constructor(private matDialog: MatDialog) { }
+  constructor(private matDialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
     this.getUser();
@@ -38,8 +39,12 @@ export class NavigationComponent implements OnInit {
 
   public openCreateVideoLessonDialog() {
     this.matDialog.open(VideoLessonCreationComponent, {
-      width: '70%',
+      width: '80%',
       height: '70%'
+    })
+
+    this.matDialog.afterAllClosed.subscribe((value) => {
+      this.router.navigate(["lesson/lessons"]);
     })
   }
 

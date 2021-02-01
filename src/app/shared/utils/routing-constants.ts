@@ -51,6 +51,14 @@ export class Routes {
     // Video routes
     static VIDEO_UPLOAD = Routes.BASE_URL + "video/upload";
 
+    // Lesson routes
+    static LESSON_CREATE_ROUTE = Routes.BASE_URL + "lesson/create";
+    static LESSON_GET_ALL_ROUTE = Routes.BASE_URL + "lesson/getAll";
+
+    // Discipline topics routes
+    static DISCIPLINE_TOPIC_CREATE_ROUTE = Routes.BASE_URL + "disciplineTopic/create";
+    static DISCIPLINE_TOPIC_GET_ALL_ROUTE = Routes.BASE_URL + "disciplineTopic/getAll";
+
     // SignalR routes
     static VIDEO_UPLOAD_WATCH = Routes.BASE_URL + "video/upload/watch/{connectionId}";
 }

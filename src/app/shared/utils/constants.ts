@@ -37,8 +37,16 @@ export class Constants {
 
     static CREATED_STATUS_CODE = 201;
 
+    
     // Model Situations
     static NORMAL_MODEL_STATE = "Normal";
+
     static PENDING_MODEL_STATE = "Pending";
+
     static UNSUBSCRIBED = "Unsubscribed";
+}
+
+export enum PostTypes{
+    Video = "Video", 
+    Article = "Article"
 }

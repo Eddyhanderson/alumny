@@ -147,7 +147,7 @@
                     </mat-form-field>
                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                         <mat-option *ngFor="let discipline of disciplinesFiltered$ | async as disciplinesFiltered"
-                            [value]="discipline.name">
+                            [value]="discipline">
                             {{discipline.name}}
                         </mat-option>
                     </mat-autocomplete>

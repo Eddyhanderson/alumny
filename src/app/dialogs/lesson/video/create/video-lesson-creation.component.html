@@ -1,138 +1,305 @@
-<div class="h-100">
-    <div class="d-flex justify-content-between">
-        <h2 mat-dialog-title>
-            Carregar video-aula
-        </h2>
-        <button mat-icon-button>
-            <mat-icon mat-dialog-close>
-                close
-            </mat-icon>
-        </button>
-    </div>
-    <mat-dialog-content>
-        <mat-horizontal-stepper #stepper [linear]="true">
-            <ng-template matStepperIcon="videoChoice">
-                <mat-icon>
-                    add_to_photos
-                </mat-icon>
-            </ng-template>
-
-            <ng-template matStepperIcon="details">
-                <mat-icon>
-                    panorama_fish_eye
-                </mat-icon>
-            </ng-template>
-
-            <mat-step [stepControl]="videoFg" editable="false" label="Escolher video" state="videoChoice">
-                <div class="d-flex flex-column justify-content-between dialog-content">
-                    <form [formGroup]="videoFg" class="d-flex justify-content-center mt-5">
-                        <div class="w-50 p-relative">
-                            <button mat-flat-button color="warn" class="w-100">
-                                SELECIONAR VIDEO <mat-icon class="ml-1"> video_library </mat-icon>
-                            </button>
-                            <!-- Fetch selected filed on change -->
-                            <input type="file" #fileInput id="uploadFile" (change)="uploadFileEvt($event)"
-                                name="uploadFile" formControlName="videoCtl" accept="video/mp4" />
-                        </div>
-                    </form>
-                    <div
-                        class="d-flex flex-column align-items-center justify-content-center irrelevant-text-sm text-disabled-1">
-                        <p>
-                            Certifique-se que o video que deseja carregar não viola as <a href="#" class="ml-1"> regras
-                                da
-                                comunidade Alumny</a>
-                        </p>
-                    </div>
-                </div>
-            </mat-step>
-
-            <mat-step label="Detalhes" state="details">
-                <div class="d-flex align-items-center justify-content-center">
-                    <div style="width: 65%;">
-
-                    </div>
-                    <div id="video-loading-container" class="d-flex flex-column">
-                        <ng-container *ngIf="manifest; else videoLoading">
-                            <app-video [videoSource]="manifest" [thumbnail]="thumbnail">
-                            </app-video>
-                        </ng-container>
-                        <ng-template #videoLoading>
-                            <div class="d-flex justify-content-center align-items-center text-disabled-1 w-100"
-                                id="video-loading">
-                                Carregando o video...
-                            </div>
-                        </ng-template>
-                        <div class="d-flex justify-content-between mt-4">
-                            <div class="p-relative" style="width: 40%;">
-                                <div id="pic-thumbnail"
-                                    class="d-flex flex-column justify-content-center align-items-center">
-                                    <mat-icon>
-                                        add_photo_alternate
-                                    </mat-icon>
-                                    <span class="text-disabled-1 irrelevant-text-sm">
-                                        Carregar miniatura
-                                    </span>
-                                </div>
-                                <!-- Fetch selected filed on change -->
-                                <input type="file" id="uploadFile" formControlName="videoCtl" accept="img/jpg" />
-                            </div>
-
-                            <ng-container *ngIf="thumbnail; else thumblLoading">
-                                <div id="thumbnail-completed">
-                                    <img [src]="thumbnail">
-                                </div>
-                            </ng-container>
-
-                            <ng-template #thumblLoading>
-                                <div id="thumbnail-loading">
-                                    <div class="text-disabled-1 irrelevant-text-xm">
-                                        Extraindo miniatura...
-                                    </div>
-                                </div>
-                            </ng-template>
-                        </div>
-                    </div>
-
-                </div>
-            </mat-step>
-
-            <mat-step [stepControl]="videoInfoFg">
-                <form [formGroup]="videoInfoFg" class="d-flex flex-column">
-                    <mat-form-field class="w-100 mb-4">
-                        <mat-label> Insira o título da aula </mat-label>
-                        <input type="text" matInput [formControl]="title">
-                        <mat-error *ngIf="title.touched && title.errors?.maxlength">
-                            Nome demasiado extenso
-                        </mat-error>
-                        <mat-error *ngIf="title.touched && title.hasError('required')">
-                            O campo não pode estar vazio
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="w-100">
-                        <mat-label>
-                            Qual é o objectivo da aula
-                        </mat-label>
-                        <textarea id="description-field" [formControl]="description" matInput></textarea>
-                        <mat-error *ngIf="description.touched && description.hasError('required')">
-                            O campo não pode estar vazio
-                        </mat-error>
-                        <mat-error *ngIf="description.touched && description.errors?.maxlength">
-                            Descrição demasiado extensa
-                        </mat-error>
-                    </mat-form-field>
-                </form>
-            </mat-step>
-        </mat-horizontal-stepper>
-    </mat-dialog-content>
-
-    <mat-dialog-actions>
-        <ng-container *ngIf="loadingMode">
-            <div class=" irrelevant-text-sm text-disabled-1 mt-4">
-                {{progress}} %
-            </div>
-            <mat-progress-bar [value]="progress" color="accent"></mat-progress-bar>
-        </ng-container>
-
-    </mat-dialog-actions>
+<div class="d-flex justify-content-between">
+    <h2 mat-dialog-title>
+        Carregar video-aula
+    </h2>
+    <button mat-icon-button>
+        <mat-icon mat-dialog-close>
+            close
+        </mat-icon>
+    </button>
 </div>
+<mat-dialog-content>
+
+    <div class="w-100 d-flex justify-content-between">
+        <div  [class.left-form-container]="loadingMode">
+            <mat-vertical-stepper #stepper [linear]="true">
+                <ng-template matStepperIcon="videoChoice">
+                    <mat-icon>
+                        add_to_photos
+                    </mat-icon>
+                </ng-template>
+    
+                <ng-template matStepperIcon="details">
+                    <mat-icon>
+                        panorama_fish_eye
+                    </mat-icon>
+                </ng-template>
+    
+                <ng-template matStepperIcon="topic">
+                    <mat-icon>
+                        fact_check
+                    </mat-icon>
+                </ng-template>
+    
+                <mat-step editable="false" label="Escolher video" state="videoChoice" linear="true"
+                    [stepControl]="videoCtl">
+                    <div class="d-flex flex-column justify-content-between dialog-content">
+                        <div class="d-flex justify-content-center mb-5">
+                            <div class="w-50 p-relative">
+                                <button mat-flat-button color="warn" class="w-100">
+                                    SELECIONAR VIDEO <mat-icon class="ml-1"> video_library </mat-icon>
+                                </button>
+    
+                                <!-- Fetch selected filed on change -->
+                                <input type="file" #fileInput id="uploadFile" (change)="uploadFileEvt($event)"
+                                    name="uploadFile" [formControl]="videoCtl" accept="video/mp4" />
+    
+                            </div>
+                        </div>
+                        <div
+                            class="d-flex flex-column align-items-center justify-content-center irrelevant-text-sm text-disabled-1">
+                            <p>
+                                Certifique-se que o video que deseja carregar não viola as <a href="#" class="ml-1"> regras
+                                    da
+                                    comunidade Alumny</a>
+                            </p>
+                        </div>
+                    </div>
+                </mat-step>
+    
+                <mat-step label="Detalhes" state="details" [stepControl]="detailFg">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <form [formGroup]="detailFg">
+                            <h3>Detalhes</h3>
+                            <div class="irrelevant-text text-disabled-1 mb-1">
+                                Informe aos seus alunos o assunto que a video-aula trata. Esta informação
+                                funcionará como título da sua video-aula.
+                            </div>
+                            <mat-form-field class="mt-1" style="width: 100% !important;" appearance="outline"
+                                color="accent">
+                                <mat-label>
+                                    Sumário da aula
+                                </mat-label>
+                                <input matInput type="text" placeholder="A origem do cosmos" [formControl]="titleCtl">
+                                <mat-error *ngIf="titleCtl.touched && titleCtl.hasError('required')">
+                                    Campo obrigatório
+                                </mat-error>
+                                <mat-error *ngIf="titleCtl.touched && titleCtl.errors?.maxlength">
+                                    Campo obrigatório
+                                </mat-error>
+                            </mat-form-field>
+    
+                            <div class="irrelevant-text text-disabled-1 mb-1">
+                                De forma resumida descreva os aspectos mais importantes da sua video-aula, bem como
+                                os seus objectivos, palavras chaves, ou alguma outra mensagem que ache oportuna.
+                            </div>
+                            <mat-form-field class="mt-1" style="width: 100% !important;" appearance="outline"
+                                color="accent">
+                                <mat-label>
+                                    Descrição
+                                </mat-label>
+                                <textarea matInput cols="10" placeholder="Fale resumidamente sobre a aula"
+                                    cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                                    cdkAutosizeMaxRows="50" [formControl]="descriptionCtl"> </textarea>
+                                <mat-error *ngIf="descriptionCtl.touched && descriptionCtl.hasError('required')">
+                                    Campo obrigatório
+                                </mat-error>
+                            </mat-form-field>
+    
+                            <div class="irrelevant-text text-disabled-1 mb-1">
+                                Escolha a turma onde se destina esta video-aula. Siga pela selecção
+                                da escola e do curso da respectiva turma.
+                            </div>
+                            <mat-accordion class="mt-1">
+                                <ng-container *ngIf="teacherPlacesGrouped">
+                                    <ng-container *ngFor="let groupedTeacherPlace of teacherPlacesGrouped">
+                                        <mat-expansion-panel>
+                                            <mat-expansion-panel-header>
+                                                <mat-panel-title>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="img-profile-xm mr-2">
+                                                            <img [src]="groupedTeacherPlace.school.profilePhotoPath">
+                                                        </div>
+                                                        <span>
+                                                            {{groupedTeacherPlace.school.shortName}}
+                                                        </span>
+                                                    </div>
+                                                </mat-panel-title>
+                                                <mat-panel-description>
+                                                    {{groupedTeacherPlace.school.name}}
+                                                </mat-panel-description>
+                                            </mat-expansion-panel-header>
+                                            <ng-template matExpansionPanelContent>
+                                                <mat-accordin>
+                                                    <ng-container
+                                                        *ngFor="let courseTeacherPlaces of groupedTeacherPlace.courseTeacherPlaces">
+                                                        <mat-expansion-panel class="mat-elevation-z0">
+                                                            <mat-expansion-panel-header>
+                                                                <mat-panel-title>
+                                                                    {{courseTeacherPlaces.course.name}}
+                                                                </mat-panel-title>
+                                                            </mat-expansion-panel-header>
+                                                            <ng-container
+                                                                *ngFor="let teacherPlace of courseTeacherPlaces.teacherPlaces">
+                                                                <ng-template matExpansionPanelContent>
+                                                                    <mat-selection-list [multiple]="false"
+                                                                        [formControl]="teacherPlaceCtl">
+                                                                        <mat-list-option [value]="teacherPlace.id">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <div class="img-profile-xm mr-2"
+                                                                                    *ngIf="teacherPlace.profilePhotoPath; else noImage">
+                                                                                    <img
+                                                                                        [src]="teacherPlace.profilePhotoPath">
+                                                                                </div>
+                                                                                <span class="irrelevant-text-sm">
+                                                                                    {{teacherPlace.name}}
+                                                                                </span>
+                                                                            </div>
+                                                                        </mat-list-option>
+                                                                    </mat-selection-list>
+                                                                </ng-template>
+                                                            </ng-container>
+                                                        </mat-expansion-panel>
+                                                    </ng-container>
+                                                </mat-accordin>
+                                            </ng-template>
+                                        </mat-expansion-panel>
+                                    </ng-container>
+                                </ng-container>
+                            </mat-accordion>
+                        </form>
+    
+                    </div>
+                    <div class="mt-4">
+                        <button matStepperNext mat-flat-button color="warn" (click)="onVideoDetailComplete()">
+                            Seguinte
+                        </button>
+                    </div>
+                </mat-step>
+    
+                <mat-step label="Tópico" state="topic" [stepControl]="disciplineTopicCtl">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <form [formGroup]="disciplineTopicCtl">
+
+                            <ng-container *ngIf="disciplineTopics$ | async as disciplineTopics; else loadingItems">
+                                <mat-error *ngIf="disciplineTopicCtl.touched && disciplineTopicCtl.hasError('required')">
+                                    Deve escolher um tópico para a nova aula
+                                </mat-error>
+
+                                <ng-container *ngIf="disciplineTopics?.length > 0">
+                                    <div class="irrelevant-text text-disabled-1 mb-1">
+                                        Seleccione o tópico do qual a video aula fará parte. 
+                                        Caso não exista o tópico, pode criar abaixo.
+                                    </div>
+        
+                                    <mat-selection-list [multiple]="false" [formControl]="disciplineTopicCtl" class="mt-1"> 
+                                        <mat-list-option *ngFor="let disciplineTopic of disciplineTopics"
+                                            [value]="disciplineTopic.id">
+                                            {{disciplineTopic.name}}
+                                        </mat-list-option>
+                                    </mat-selection-list>
+                                </ng-container>
+
+                                <div class="irrelevant-text text-disabled-1 mb-1 mt-4">
+                                    Os tópicos servem para agrupar um conjunto de aulas
+                                    que abordam um mesmo tema. É uma óptima forma de ter as aulas
+                                    organizadas sequencialmente.
+                                </div>
+                                <mat-form-field appearance="outline" class="mt-1">
+                                    <mat-label>
+                                        Criar um novo tópico
+                                    </mat-label>
+                                    <input [formControl]="disciplineTopicCtl" placeholder="Números Reais"
+                                        [matAutocomplete]="auto" matInput >                                    
+                                </mat-form-field>
+                                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                                    <mat-option
+                                        *ngFor="let disciplineTopic of disciplineTopicsFiltered$ | async "
+                                        [value]="disciplineTopic">
+                                        {{disciplineTopic.name}}
+                                    </mat-option>
+                                </mat-autocomplete>                               
+                            </ng-container>
+                        </form>
+    
+                    </div>
+    
+                    <ng-container *ngIf="progress >= 100">
+                        <div class="mt-4">
+                            <button mat-flat-button color="warn" (click)="onLessonCreate()">
+                                Criar
+                            </button>
+                        </div>
+                    </ng-container>
+    
+                </mat-step>
+            </mat-vertical-stepper>
+        </div>
+
+        <div class="d-flex flex-column" id="rigth-form-container" *ngIf="loadingMode">
+            <!-- Video loading or video template will be presented -->
+            <ng-container *ngTemplateOutlet="manifest ? video : videoLoading"></ng-container>
+
+            <div class="d-flex justify-content-between mt-4">
+                <!-- The thumbnail will be chosen manually -->
+                <ng-container *ngTemplateOutlet="chooseThumbnail"></ng-container>
+
+                <!-- Thumbnail loading or thumbnail will be presented -->
+                <ng-container *ngTemplateOutlet="thumbnail ? thumbnailCompleted : thumblLoading">
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<ng-container *ngIf="loadingMode">
+    <mat-dialog-actions>
+        <div class=" irrelevant-text-sm text-disabled-1">
+            {{progress}} %
+        </div>
+        <mat-progress-bar [value]="progress" color="accent"></mat-progress-bar>
+    </mat-dialog-actions>
+</ng-container>
+
+<!-- Reusables templates -->
+<ng-template #video>
+    <app-video [videoSource]="manifest" [thumbnail]="thumbnail">
+    </app-video>
+</ng-template>
+
+<ng-template #videoLoading>
+    <div class="d-flex justify-content-center align-items-center text-disabled-1 w-100" id="video-loading">
+        Carregando o video...
+    </div>
+</ng-template>
+
+<ng-template #thumbnailCompleted>
+    <div id="thumbnail-completed">
+        <img [src]="thumbnail">
+    </div>
+</ng-template>
+
+<ng-template #thumblLoading>
+    <div id="thumbnail-loading">
+        <div class="text-disabled-1 irrelevant-text-xm">
+            Extraindo miniatura...
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #chooseThumbnail>
+    <div class="p-relative" style="width: 40%;">
+        <div id="pic-thumbnail" class="d-flex flex-column justify-content-center align-items-center">
+            <mat-icon>
+                add_photo_alternate
+            </mat-icon>
+            <span class="text-disabled-1 irrelevant-text-sm">
+                Carregar miniatura
+            </span>
+        </div>
+        <!-- Fetch selected filed on change -->
+        <input type="file" id="uploadFile" accept="img/jpg" />
+    </div>
+</ng-template>
+
+<ng-template #noImage>
+    <div class="img-profile-xxm-none">
+        <div></div>
+    </div>
+</ng-template>
+
+<ng-template #loadingItems>
+    <div class="w-50 h-50 d-flex justify-content-center">
+        <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+    </div>
+</ng-template>

@@ -134,7 +134,7 @@ export class TeacherPlaceCreateDialog implements OnInit {
   private disciplineGetAll(value: string) {
     let query: PaginationQuery = {
       pageNumber: 1,
-      pageSize: 50,
+      pageSize: 10,
       searchValue: value ?? ''
     };
 
@@ -146,7 +146,7 @@ export class TeacherPlaceCreateDialog implements OnInit {
   // Auto complete feature
   private changeDetection() {
     this.teacherPlaceDiscipline.valueChanges.subscribe((value) => {
-      if (value == null) return null;
+      if (value == null || value == undefined) return null;
 
       typeof value === 'string' ?
         this.disciplineGetAll(value) :
@@ -155,7 +155,7 @@ export class TeacherPlaceCreateDialog implements OnInit {
   }
 
   public displayFn(discipline: DisciplineModel) {
-    return discipline != null ? discipline.name : '';
+    return discipline && discipline.name ? discipline.name : '';
   }
 
 

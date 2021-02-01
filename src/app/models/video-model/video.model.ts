@@ -3,7 +3,7 @@ export class VideoModel{
         
         duration:number;
         
-        fileName:string;
+        manifestPath:string;
 
         thumbnailPath:string;
 

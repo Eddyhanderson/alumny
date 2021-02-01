@@ -1,7 +1,7 @@
 import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map,  } from 'rxjs/operators';
 import { PageResponse } from '../../models/page-response/page-response';
 import { PaginationQuery } from '../../interfaces/pagination-query/pagination-query';
 import { TeacherPlaceModel } from '../../models/teacher-place-model/teacher-place.model';
@@ -38,7 +38,7 @@ export class TeacherPlaceService {
    * @param pQuery to pagination concerne query params
    * @param param to customize the data fecth
    */
-  public getAll(pQuery: PaginationQuery, param: TeacherPlaceQuery): Observable<PageResponse<TeacherPlaceModel>> {
+  public getAll(pQuery?: PaginationQuery, param?: TeacherPlaceQuery): Observable<PageResponse<TeacherPlaceModel>> {
     let queryParams = this.createQueryParams(pQuery, param);
 
     try {
@@ -53,11 +53,11 @@ export class TeacherPlaceService {
 
   private createQueryParams(query: PaginationQuery, params: TeacherPlaceQuery): HttpParams {
     return new HttpParams()
-      .set('pageNumber', query.pageNumber.toString())
-      .set('pageSize', query.pageSize.toString())
-      .set('searchValue', query.searchValue ?? '')
-      .set('schoolId', params.schoolId)
-      .set('teacherId', params.teacherId)
-      .set('academicYear', params.academicYear);;
+      .set('pageNumber', query?.pageNumber.toString())
+      .set('pageSize', query?.pageSize.toString())
+      .set('searchValue', query?.searchValue ?? '')
+      .set('schoolId', params?.schoolId)
+      .set('teacherId', params?.teacherId)
+      .set('academicYear', params?.academicYear.toString());;
   }
 }
