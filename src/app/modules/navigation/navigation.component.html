@@ -156,7 +156,7 @@
 
                 <!-- Teacher place nav item -->
                 <li class="nav-item">
-                    <a class="pl-4 d-flex" routerLink="/teacherPlace" routerLinkActive="nav-active"
+                    <a class="pl-4 d-flex" [routerLink]="['/teacher', teacher.id, 'teacher-places']" routerLinkActive="nav-active"
                         [routerLinkActiveOptions]="{exact:true}">
                         <mat-icon [style.fontSize.rem]="1.4">school</mat-icon><span class="ml-4">Turmas</span>
                     </a>
@@ -164,8 +164,8 @@
                 <!-- End -->
 
                 <!-- Lessons nav item -->
-                <li class="nav-item">
-                    <a class="pl-4 d-flex" routerLink="/lesson/lessons" routerLinkActive="nav-active"
+                <li class="nav-item" *ngIf="role.toUpperCase() == 'TEACHER'">
+                    <a class="pl-4 d-flex" routerLink="/lesson/managment" routerLinkActive="nav-active"
                         [routerLinkActiveOptions]="{exact:true}">
                         <mat-icon [style.fontSize.rem]="1.4">featured_play_list</mat-icon><span
                             class="ml-4">Aulas</span>

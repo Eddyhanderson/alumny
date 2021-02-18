@@ -4,12 +4,24 @@ export class LessonModel {
     title:string;
 
     teacherPlaceId: string;
+    
+    teacherPlaceName?:string;
+
+    teacherPlacePhotoPath?:string;
+
+    schoolId?:string;
+
+    schoolName?:string;
 
     postId?: string;
 
     discpilineTopicId: string;
 
     disciplineTopicName?: string;
+
+    disciplineId?: string;
+
+    disciplineName?: string;
 
     backgroundPhotoPath?: string;
 
@@ -21,5 +33,11 @@ export class LessonModel {
 
     lessonType:string;
 
-    contentId:string;
+    videoId?:string;
+
+    manifestPath?:string;
+
+    articleId?:string;
+
+    date?:Date;
 }

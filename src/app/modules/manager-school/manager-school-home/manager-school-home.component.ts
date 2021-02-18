@@ -25,9 +25,9 @@ import { map } from 'rxjs/operators';
 })
 export class ManagerSchoolHomeComponent implements OnInit, OnDestroy {
   manager: ManagerModel;
-  teacherSchoolsPending$: PaginationAdapter;
-  schoolCourses$: PaginationAdapter;
-  teacherSchoolsNormal$: PaginationAdapter;
+  teacherSchoolsPending$: PaginationAdapter<TeacherSchoolsModel, TeacherSchoolQuery>;
+  schoolCourses$: PaginationAdapter<SchoolCourseModel, SchoolCourseQuery>;
+  teacherSchoolsNormal$: PaginationAdapter<TeacherSchoolsModel, TeacherSchoolQuery>;
 
   private _reloadStrategy: Subscription;
 
@@ -60,7 +60,7 @@ export class ManagerSchoolHomeComponent implements OnInit, OnDestroy {
       situation: Constants.PENDING_MODEL_STATE
     }
 
-    this.teacherSchoolsPending$ = new PaginationAdapter(this.teacherSchoolGetAllPrototype(), param);
+    this.teacherSchoolsPending$ = new PaginationAdapter((query, param) => this.tss.getAll(query, param), param);
   }
 
 
@@ -70,14 +70,9 @@ export class ManagerSchoolHomeComponent implements OnInit, OnDestroy {
       situation: Constants.NORMAL_MODEL_STATE
     }
 
-    this.schoolCourses$ = new PaginationAdapter(this.schoolCoursesGetAllPrototype(), param);
+    this.schoolCourses$ = new PaginationAdapter((query, param) => this.scs.getAll(query, param), param);
   }
 
-  private schoolCoursesGetAllPrototype() {
-    return (query, param): Observable<any> => {
-      return this.scs.getAll(query, param).pipe(map((data) => data))
-    }
-  }
 
   private getTeachersSchool() {
     let param: TeacherSchoolQuery = {
@@ -85,13 +80,7 @@ export class ManagerSchoolHomeComponent implements OnInit, OnDestroy {
       situation: Constants.NORMAL_MODEL_STATE
     }
 
-    this.teacherSchoolsNormal$ = new PaginationAdapter(this.teacherSchoolGetAllPrototype(), param);
-  }
-
-  private teacherSchoolGetAllPrototype() {
-    return (query, param): Observable<any> => {
-      return this.tss.getAll(query, param).pipe(map((data) => data))
-    }
+    this.teacherSchoolsNormal$ = new PaginationAdapter((query, param) => this.tss.getAll(query, param), param);
   }
 
   /* To reload component */

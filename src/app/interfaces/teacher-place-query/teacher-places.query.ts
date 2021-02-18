@@ -1,11 +1,9 @@
 export class TeacherPlaceQuery {
-    constructor(teacherId?:string, schoolId?:string, academicYear?:number){
+    constructor(teacherId?:string, schoolId?:string){
         this.teacherId = teacherId ?? '';
-        this.schoolId = schoolId ?? '';
-        this.academicYear = academicYear ?? 0;
+        this.schoolId = schoolId ?? '';        
     }
 
     teacherId?: string;
-    schoolId?: string;
-    academicYear?: number;
+    schoolId?: string;    
 }

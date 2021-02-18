@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { TeacherModel } from 'src/app/models/teacher-model/teacher-model';
 import { AccountService } from 'src/app/services/account-service/account.service';
 import { Constants } from 'src/app/shared/utils/constants';
 
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   password: FormControl;
   authGroup: FormGroup;
   inProgress: boolean = false;
+  teacher:TeacherModel;
   authenticated: boolean;
 
   constructor(private router: Router, private route: ActivatedRoute, private accountService: AccountService) {
@@ -46,12 +48,13 @@ export class LoginComponent implements OnInit {
     if (result.authenticated) {
       
       let role = localStorage.getItem('userRole');
-      let returnUrl = this.route.snapshot.paramMap.get('returnUrl');
+      let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
       let navigateTo;
       if (role.toUpperCase() === Constants.STUDANT) {
         navigateTo = returnUrl ?? 'home';
       } else if (role.toUpperCase() === Constants.TEACHER) {
-        navigateTo = returnUrl ?? 'teacher/control-painel';
+        this.teacher = JSON.parse(localStorage.teacher);
+        navigateTo = returnUrl ?? 'teacher/' + this.teacher.id + '/control-painel';
       } else if (role.toUpperCase() === Constants.SCHOOL_MANAGER) {
         navigateTo = returnUrl ?? 'manager-school/home';
       }

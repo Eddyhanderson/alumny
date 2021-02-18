@@ -9,15 +9,17 @@ import { TeacherProfileAboutComponent } from './teacher-profile/teacher-profile-
 import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../../shared/shared.module';
 import { ControlPainelComponent } from './control-painel/control-painel.component';
+import { TeacherPlacesComponent } from './teacher-places/teacher-place.component';
 
 
 
 @NgModule({
-  declarations: [TeacherProfileComponent, 
-    TeacherProfileTeacherPlacesComponent, 
-    TeacherProfileSpotlightComponent, 
-    TeacherProfileAboutComponent, 
-    ControlPainelComponent],
+  declarations: [TeacherProfileComponent,
+    TeacherProfileTeacherPlacesComponent,
+    TeacherProfileSpotlightComponent,
+    TeacherProfileAboutComponent,
+    ControlPainelComponent,
+    TeacherPlacesComponent],
   imports: [
     CommonModule,
     TeacherRoutingModule,

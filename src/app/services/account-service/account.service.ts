@@ -130,10 +130,7 @@ export class AccountService {
    * Remove the values on local storage when user is log out 
    */
   private removeAuthDataPersisted() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('userId');
-    localStorage.removeItem("logStatus");
+    localStorage.clear()
   }
 
   // Observable that store the values of user login status

@@ -1,33 +1,48 @@
 <div class="teacher-place-profile-main bg-white">
-    <div id="teacher-place-image-profile">
-        <img src="../../../assets/images/lesson2.jpg">
+    <div class="w-100">
+        <ng-container *ngIf="teacherPlace; else loadingItem">
+            <div id="teacher-place-image-profile">
+                <img [src]="teacherPlace.profilePhotoPath">
+            </div>
+        </ng-container>
     </div>
 
     <!-- Teacher place relevant informations -->
     <div class="bg-white p-3 d-flex justify-content-between" [style.width.%]="96">
         <div id="teacher-place-information">
-            <div class="relevant-text-title-lg">
-                <span matTooltip="AP12020"> Turma de Algoritmo e Programação</span>
-            </div>
-            <div class="irrelevant-text-xm relevant-text-principal">
-                <span>Algoritmo e Programação</span>
-            </div>
-            <div>
-                <a href="#" class="badge badge-secondary">Prof. Alberto Mateus </a>
-            </div>
+            <ng-container *ngIf="teacherPlace">
+                <div class="relevant-text-title-lg mb-3">
+                    <span [matTooltip]="teacherPlace.teacherPlaceCode"> {{teacherPlace.name}}</span>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="img-profile-md" *ngIf="teacherPlace; else noImage">
+                        <img [src]="teacherPlace.teacherPictureProfilePath">
+                    </div>
+                    <div class="d-flex flex-column ml-3">
+                        <div class="irrelevant-text-xm bold-500">
+                            <span>{{teacherPlace.disciplineName}}</span>
+                        </div>
+                        <a [routerLink]='["/teacher", teacherPlace.teacherId,"profile","about"]' class="discretLink h-25">
+                            Professor {{teacherPlace.teacherFirstName}}
+                        </a>
+                    </div>
+                </div>
+            </ng-container>
         </div>
         <div class="d-flex justify-content-end" [style]="{width:'70%', height:'2.5rem'}">
-            <!-- To activate only when is the teacher of the teacher place -->
-            <button class="border-radius-0 button-bg-accent1 mr-4"  mat-flat-button>
-                <mat-icon [style.fontSize.rem]="1.2">
-                    post_add
-                </mat-icon>
-                 ADICIONAR AULA
-            </button>
-            <!-- End -->
-            <button class="border-radius-0" mat-flat-button color="primary">
-                MATRICULAR-SE
-            </button>
+            <ng-container *ngIf="role.toUpperCase() == 'TEACHER' && owner">
+                <button class="border-radius-0 button-bg-accent1 mr-4" mat-flat-button>
+                    <mat-icon [style.fontSize.rem]="1.2">
+                        post_add
+                    </mat-icon>
+                    ADICIONAR AULA
+                </button>
+            </ng-container>
+            <ng-container *ngIf="role.toUpperCase() == 'STUDANT'">
+                <button class="border-radius-0" mat-flat-button color="primary">
+                    MATRICULAR-SE
+                </button>
+            </ng-container>
         </div>
     </div>
 
@@ -35,26 +50,28 @@
     <div class="navigation-actions">
         <ul>
             <li>
-                <a class="nav-action text-disabled" routerLink="/teacherPlace/profile/about" routerLinkActive="nav-action-selected">
+                <a class="nav-action text-disabled" routerLink="about"
+                    routerLinkActive="nav-action-selected">
                     <span> ACERCA</span>
                 </a>
             </li>
 
             <li>
-                <a class="nav-action text-disabled" routerLink="/teacherPlace/profile/lessons" routerLinkActive="nav-action-selected">
+                <a class="nav-action text-disabled" routerLink="lessons"
+                    routerLinkActive="nav-action-selected">
                     <span> AULAS</span>
                 </a>
             </li>
 
             <li>
-                <a class="nav-action text-disabled" routerLink="/teacherPlace/profile/studants"
+                <a class="nav-action text-disabled" routerLink="studants"
                     routerLinkActive="nav-action-selected">
                     <span> MATRICULADOS (20)</span>
                 </a>
             </li>
 
             <li>
-                <a class="nav-action text-disabled" routerLink="/teacherPlace/profile/mensages"
+                <a class="nav-action text-disabled" routerLink="mensages"
                     routerLinkActive="nav-action-selected">
                     <span> MENSAGENS</span>
                 </a>
@@ -80,3 +97,8 @@
     </div>
     <!-- End -->
 </div>
+
+<!-- Templates -->
+<ng-template #loadingItem>
+    <app-loading-item></app-loading-item>
+</ng-template>

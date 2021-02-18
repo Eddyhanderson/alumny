@@ -25,6 +25,7 @@ import { PostTypes } from 'src/app/shared/utils/constants';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DisciplineTopicQuery } from 'src/app/interfaces/discipline-topic-query/discipline-topic.query';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -96,7 +97,9 @@ export class VideoLessonCreationComponent implements OnInit {
     private vus: VideoUploadSignalR,
     private tps: TeacherPlaceService,
     private ls: LessonService,
-    private dts: DisciplineTopicService) { }
+    private dts: DisciplineTopicService,
+    private router: Router,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -151,11 +154,7 @@ export class VideoLessonCreationComponent implements OnInit {
 
         this.disciplineTopic = stt.data;
       } else {
-        if (this.disciplineTopicCtl.value instanceof (Array)) {
-          this.disciplineTopic = this.disciplineTopicCtl.value[0];
-        } else {
-          this.disciplineTopic = this.disciplineTopicCtl.value;
-        }
+        this.disciplineTopic = this.disciplineTopicCtl.value[0];
       }
 
       let lesson: LessonModel = {
@@ -164,15 +163,22 @@ export class VideoLessonCreationComponent implements OnInit {
         discpilineTopicId: this.disciplineTopic.id,
         teacherPlaceId: this.teacherPlaceCtl.value[0],
         title: this.titleCtl.value,
-        contentId: this.video.id,
+        videoId: this.video.id,
         lessonType: PostTypes.Video
       }
-
-      console.dir(lesson);
 
       let stt = await this.createLesson(lesson);
 
       if (stt.succeded) {
+        let snackBarRef = this.snackBar.open('Parabéns! Video-aula publicada.');
+
+        snackBarRef.afterDismissed().subscribe(() => this.router.navigate(["lesson/managment"], {
+          queryParams: {
+            'teacherPlaceId': this.teacherPlaceCtl.value[0],
+            'disciplineTopicId': this.disciplineTopic.id
+          }
+        }));
+
         this.dialogRef.close(true);
       } else {
         this.dialogRef.close(false);
@@ -214,9 +220,7 @@ export class VideoLessonCreationComponent implements OnInit {
   private createDisciplineTopicQueryParam() {
     if (this.teacherPlaceCtl.valid) {
       let teacherPlaceId = this.teacherPlaceCtl.value;
-      this.disciplineTopicQueryParams = {
-        teacherPlaceId: teacherPlaceId
-      };
+      this.disciplineTopicQueryParams = new DisciplineTopicQuery(teacherPlaceId)
     }
   }
 

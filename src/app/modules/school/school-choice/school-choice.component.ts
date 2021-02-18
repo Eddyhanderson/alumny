@@ -17,6 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Constants } from 'src/app/shared/utils/constants';
 import { TeacherSchoolsService } from 'src/app/services/teacher-schools-service/teacher-schools.service';
 import { SchoolQuery } from 'src/app/interfaces/school-query/school.query';
+import { SchoolModel } from 'src/app/models/school-model/school.model';
 
 @Component({
   selector: 'app-school-choice',
@@ -27,9 +28,9 @@ export class SchoolChoiceComponent implements OnInit {
 
   // Model data
   teacherId: string;
-  teacherSchools$: PaginationAdapter;
-  teacherSchoolRequests$: PaginationAdapter;
-  unsubscribedSchools$: PaginationAdapter;
+  teacherSchools$: PaginationAdapter<TeacherSchoolsModel, TeacherSchoolQuery>;
+  teacherSchoolRequests$: PaginationAdapter<TeacherSchoolsModel, TeacherSchoolQuery>;
+  unsubscribedSchools$: PaginationAdapter<SchoolModel, SchoolQuery>;
 
   constructor(private ss: SchoolService,
     private tss: TeacherSchoolsService,
@@ -53,7 +54,7 @@ export class SchoolChoiceComponent implements OnInit {
       situation: Constants.NORMAL_MODEL_STATE
     };
 
-    this.teacherSchools$ = new PaginationAdapter(this.teacherSchoolGetAllPrototype(), tsQuery);
+    this.teacherSchools$ = new PaginationAdapter((query, param) => this.tss.getAll(query, param), tsQuery);
   }
 
   private getAllSchoolsRequested() {
@@ -62,16 +63,9 @@ export class SchoolChoiceComponent implements OnInit {
       situation: Constants.PENDING_MODEL_STATE
     };
 
-    this.teacherSchoolRequests$ = new PaginationAdapter(this.teacherSchoolGetAllPrototype(), tsQuery);
+    this.teacherSchoolRequests$ = new PaginationAdapter((query, param) => this.tss.getAll(query, param), tsQuery);
   }
 
-  private teacherSchoolGetAllPrototype() {
-    return (query, param): Observable<any> => {
-      return this.tss.getAll(query, param).pipe(
-        map(data => data)
-      )
-    }
-  }
 
   private getUnsubscribedSchools() {
     let sQuery: SchoolQuery = {
@@ -79,15 +73,7 @@ export class SchoolChoiceComponent implements OnInit {
       subscribed: false
     };
 
-    this.unsubscribedSchools$ = new PaginationAdapter(this.schoolGetAllPrototype(), sQuery);
-  }
-
-  private schoolGetAllPrototype() {
-    return (query, param): Observable<any> => {
-      return this.ss.getAll(query, param).pipe(
-        map(data => data)
-      )
-    }
+    this.unsubscribedSchools$ = new PaginationAdapter((query, param) => this.ss.getAll(query, param), sQuery);
   }
 
   public sendTeacherSchoolRequest(schoolId: string) {

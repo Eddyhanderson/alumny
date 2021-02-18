@@ -11,39 +11,37 @@ export class TeacherPlaceModel {
     
     id?: string;
 
-    teacherId: string;
+    teacherId?: string;
 
-    teacherFirstName: string;
+    teacherFirstName?: string; 
 
-    teacherLastName: string;
+    teacherLastName?: string;
 
-    description: string;
+    description?: string;
 
-    teacherPictureProfilePath: string;
+    teacherPictureProfilePath?: string;
 
-    disciplineId: string;
+    disciplineId?: string;
 
-    displineName: string;
+    displineName?: string;
 
-    courseId: string;
+    courseId?: string;
 
-    courseName: string;
+    courseName?: string;
 
-    schoolId: string;
+    schoolId?: string;
 
-    schoolName: string;
+    schoolName?: string;
 
-    schoolShortName: string;
+    schoolShortName?: string;
 
-    schoolPictureProfilePath: string;
+    schoolPictureProfilePath?: string;
 
     situation?: string;
 
-    teacherPlaceCode: string;
+    teacherPlaceCode?: string;
 
     name: string;
 
     profilePhotoPath?: string;
-
-    acedmicYear?: number;
 }

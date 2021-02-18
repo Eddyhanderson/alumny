@@ -5,6 +5,8 @@ export class PageResponse<T>{
 
     pageSize?: number;
 
+    totalElements?:number;
+
     nextPage?: string;
 
     previousPage?: string;

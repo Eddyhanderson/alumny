@@ -20,6 +20,8 @@ import { PaginationQuery } from 'src/app/interfaces/pagination-query/pagination-
 import { PageResponse } from 'src/app/models/page-response/page-response';
 import { TeacherPlaceModel } from 'src/app/models/teacher-place-model/teacher-place.model';
 import { TeacherPlaceService } from 'src/app/services/teacher-place-service/teacher-place.service';
+import { TeacherSchoolsModel } from 'src/app/models/teacher-schools-model/teacher-schools.model';
+import { SchoolCourseModel } from 'src/app/models/school-course-model/school-course.model';
 
 
 @Component({
@@ -48,8 +50,8 @@ export class TeacherPlaceCreateDialog implements OnInit {
   discipline: DisciplineModel;
   teacherPlace: TeacherPlaceModel;
   disciplinesFiltered$: Observable<DisciplineModel[]>;
-  teacherSchools$: PaginationAdapter;
-  schoolCourses$: PaginationAdapter;
+  teacherSchools$: PaginationAdapter<TeacherSchoolsModel, TeacherSchoolQuery>;
+  schoolCourses$: PaginationAdapter<SchoolCourseModel, SchoolCourseQuery>;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { teacherId: string },

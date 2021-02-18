@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { TeacherPlacesComponent } from './teacher-places/teacher-place.component'
+import { TeacherPlacesComponent } from '../teacher/teacher-places/teacher-place.component'
 import { TeacherPlaceProfileComponent } from './teacher-place-profile/teacher-place-profile.component';
 import { TeacherPlaceLessonsComponent } from './teacher-place-profile/teacher-place-lessons/teacher-place-lessons.component';
 import { TeacherPlaceAboutComponent } from './teacher-place-profile/teacher-place-about/teacher-place-about.component';
@@ -14,8 +14,7 @@ const routes: Routes = [
       { path: 'about', component: TeacherPlaceAboutComponent },
       { path: 'studants', component: TeacherPlaceStudantsComponent },
     ]
-  },
-  { path: '', component: TeacherPlacesComponent, runGuardsAndResolvers: 'always' },
+  }  
 ];
 
 @NgModule({

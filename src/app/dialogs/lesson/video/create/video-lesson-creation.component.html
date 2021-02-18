@@ -184,7 +184,7 @@
         
                                     <mat-selection-list [multiple]="false" [formControl]="disciplineTopicCtl" class="mt-1"> 
                                         <mat-list-option *ngFor="let disciplineTopic of disciplineTopics"
-                                            [value]="disciplineTopic.id">
+                                            [value]="disciplineTopic">
                                             {{disciplineTopic.name}}
                                         </mat-list-option>
                                     </mat-selection-list>
@@ -214,7 +214,7 @@
     
                     </div>
     
-                    <ng-container *ngIf="progress >= 100">
+                    <ng-container *ngIf="manifest">
                         <div class="mt-4">
                             <button mat-flat-button color="warn" (click)="onLessonCreate()">
                                 Criar

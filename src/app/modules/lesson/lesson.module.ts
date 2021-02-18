@@ -8,6 +8,7 @@ import { MaterialModule } from '../material/material.module';
 import { VideoLessonViewComponent } from './video-lesson-watch/video-lesson-watch.component';
 import { VideoLessonAboutComponent } from './video-lesson-about/video-lesson-about.component';
 import { VideoLessonQuestionsComponent } from './video-lesson-questions/video-lesson-questions.component';
+import { LessonManagmentComponent } from './lesson-managment/lesson-managment.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { VideoLessonQuestionsComponent } from './video-lesson-questions/video-le
     LessonsComponent,
     VideoLessonViewComponent,
     VideoLessonAboutComponent,
-    VideoLessonQuestionsComponent    
+    VideoLessonQuestionsComponent,
+    LessonManagmentComponent    
   ],
   imports: [
     CommonModule,

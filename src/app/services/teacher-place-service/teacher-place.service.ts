@@ -1,8 +1,9 @@
 import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map,  } from 'rxjs/operators';
+import { map, } from 'rxjs/operators';
 import { PageResponse } from '../../models/page-response/page-response';
+import { Response } from '../../models/response/response';
 import { PaginationQuery } from '../../interfaces/pagination-query/pagination-query';
 import { TeacherPlaceModel } from '../../models/teacher-place-model/teacher-place.model';
 import { TeacherPlaceQuery } from '../../interfaces/teacher-place-query/teacher-places.query';
@@ -10,6 +11,7 @@ import { TeacherPlaceQuery } from '../../interfaces/teacher-place-query/teacher-
 import { Routes } from '../../shared/utils/routing-constants';
 import { CreationResult } from '../../models/creation-result/creation-result';
 import { IfStmt } from '@angular/compiler';
+import { TeacherModel } from 'src/app/models/teacher-model/teacher-model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,12 +44,24 @@ export class TeacherPlaceService {
     let queryParams = this.createQueryParams(pQuery, param);
 
     try {
-
       return this.http.get<PageResponse<TeacherPlaceModel>>(Routes.TEACHER_PLACE_GET_ALL_ROUTE, { params: queryParams });
     } catch (error) {
       console.log(error.message);
     }
+  }
 
+  /**
+  * Fetch teacher place with the id
+  * @param pQuery to pagination concerne query params
+  * @param param to customize the data fecth
+  */
+  public async get(id: string): Promise<TeacherPlaceModel> {
+    try {
+      let response = await this.http.get<Response<TeacherPlaceModel>>(Routes.TEACHER_PLACE_GET_ROUTE.replace('{teacherPlaceId}', id)).toPromise();
+      return response.data;
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
 
@@ -58,6 +72,5 @@ export class TeacherPlaceService {
       .set('searchValue', query?.searchValue ?? '')
       .set('schoolId', params?.schoolId)
       .set('teacherId', params?.teacherId)
-      .set('academicYear', params?.academicYear.toString());;
   }
 }

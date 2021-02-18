@@ -38,12 +38,12 @@ export class SchoolCourseService {
      * @param query the query parameter to list result with pagination
      * @param schoolId the school id key 
      */
-    public getAll(query: PaginationQuery, param: SchoolCourseQuery): Observable<PageResponse<CourseModel>> {
+    public getAll(query: PaginationQuery, param: SchoolCourseQuery): Observable<PageResponse<SchoolCourseModel>> {
         let queryParams = this.queryParamsBuild(query, param);
 
         try {
             return this.http
-                .get<PageResponse<CourseModel>>(Routes.SCHOOL_COURSE_GET_ALL_ROUTE, { params: queryParams });
+                .get<PageResponse<SchoolCourseModel>>(Routes.SCHOOL_COURSE_GET_ALL_ROUTE, { params: queryParams });
                 
         } catch (error) {
             console.log("Error: " + error.message)

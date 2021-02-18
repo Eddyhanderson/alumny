@@ -2,6 +2,8 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Renderer2, Hos
 import { trigger, state, style, animate, transition, keyframes, } from '@angular/animations';
 import { Router } from '@angular/router';
 import * as dashjs from 'dashjs';
+import { BehaviorSubject, fromEvent, Observable } from 'rxjs';
+import { MediaPlayerClass } from 'dashjs';
 
 interface VideoElement extends HTMLVideoElement {
   requestPictureInPicture(): any;
@@ -34,7 +36,18 @@ export class VideoComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private renderer: Renderer2, private el: ElementRef, private router: Router) { }
 
   @Input("videoSource") url: string;
-  @Input("thumbnail") poster:string;
+
+  private _url = new BehaviorSubject<string>('');
+  @Input("source")
+  set source(value) {
+    this._url.next(value);
+  }
+
+  get source() {
+    return this._url.getValue();
+  }
+
+  @Input("thumbnail") poster: string;
 
   @ViewChild('video') video: ElementRef<VideoElement>;
 
@@ -80,8 +93,6 @@ export class VideoComponent implements OnInit, AfterViewInit, OnDestroy {
       this.video.nativeElement.pause();
       this.showDisplayControl();
     }
-
-
   }
 
   playIconToggle() {
@@ -253,6 +264,25 @@ export class VideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   //#endregion
 
+
+  private initPlayer() {
+    var player = dashjs.MediaPlayer().create();
+    if (this.url) {
+      player.initialize(this.el.nativeElement.querySelector('#video'), this.url, true);
+    } else {
+      this.initDynamicUrl(player);
+    }
+  }
+
+  private initDynamicUrl(player: MediaPlayerClass) {
+    let url = this._url.getValue();
+    player.initialize(this.el.nativeElement.querySelector('#video'), url, true);
+
+    this._url.subscribe((url) => {      
+      player.attachSource(url);
+    })
+  }
+
   //#region(LIFE CYCLE HOOKS)
   ngAfterViewInit(): void {
 
@@ -260,54 +290,52 @@ export class VideoComponent implements OnInit, AfterViewInit, OnDestroy {
       this.renderer.addClass(this.pipButton.nativeElement, 'hidden');
     }
 
-    this.renderer.listen(this.video.nativeElement, 'loadedmetadata', () => this.initializationVideo());
-
-    this.renderer.listen(this.video.nativeElement, 'timeupdate', () => this.updateElapsedTime());
-
-    this.renderer.listen(this.seek.nativeElement, 'mouseover', (e) => {
+    fromEvent(this.seek.nativeElement, 'mouseover').subscribe((e) => {
       this.renderer.listen(e.target, 'mousemove', (e) => this.displaySeekTooltip(e));
 
       this.renderer.listen(e.target, 'input', (e) => this.changeTimeReprodution(e));
     });
 
-    this.renderer.listen(this.volume.nativeElement, 'input', (e) => this.updateVolume(e));
-
-    this.renderer.listen(this.video.nativeElement, 'volumechange', () => this.updateVolumeIcon());
-
-    this.renderer.listen(this.video.nativeElement, 'click', () => {
+    fromEvent(this.video.nativeElement, 'click').subscribe(() => {
       this.playBackIconToggle();
 
       this.playToggle()
     });
 
-    this.renderer.listen(this.video.nativeElement, 'play', () => this.playIconToggle());
-
-    this.renderer.listen(this.video.nativeElement, 'pause', () => this.playIconToggle());
-
-    this.renderer.listen(this.video.nativeElement, 'enterpictureinpicture', () => {
+    fromEvent(this.video.nativeElement, 'enterpictureinpicture').subscribe(() => {
       this.togglePipIcon();
       this.router.navigate(['home']);
     });
 
-    this.renderer.listen(this.video.nativeElement, 'leavepictureinpicture', () => {
+    fromEvent(this.videoContainer.nativeElement, 'leavepictureinpicture').subscribe(() => {
       this.togglePipIcon()
 
       this.router.navigate(['lesson/watch']);
-    });
+    })
 
-    this.renderer.listen(this.videoContainer.nativeElement, 'mouseover', () => this.showDisplayControl());
+    fromEvent(this.video.nativeElement, 'loadedmetadata').subscribe(() => this.initializationVideo());
 
-    this.renderer.listen(this.videoContainer.nativeElement, 'mouseleave', () => this.hideDisplayControl());
+    fromEvent(this.video.nativeElement, 'timeupdate').subscribe(() => this.updateElapsedTime());
 
-    this.renderer.listen(this.videoContainer.nativeElement, 'fullscreenchange', () => this.fullScreenModeIconsToggle());
+    fromEvent(this.volume.nativeElement, 'input').subscribe((e: InputEvent) => this.updateVolume(e));
 
-    this.renderer.listen(this.fullscreenButton.nativeElement, 'click', () => this.fullScreenModeToggle());
+    fromEvent(this.video.nativeElement, 'volumechange').subscribe(() => this.updateVolumeIcon());
+
+    fromEvent(this.video.nativeElement, 'play').subscribe(() => this.playIconToggle());
+
+    fromEvent(this.video.nativeElement, 'pause').subscribe(() => this.playIconToggle());
+
+    fromEvent(this.videoContainer.nativeElement, 'mouseouver').subscribe(() => this.showDisplayControl())
+
+    fromEvent(this.videoContainer.nativeElement, 'mouseleave').subscribe(() => this.hideDisplayControl())
+
+    fromEvent(this.videoContainer.nativeElement, 'fullscreenchange').subscribe(() => this.fullScreenModeIconsToggle())
+
+    fromEvent(this.fullscreenButton.nativeElement, 'click').subscribe(() => this.fullScreenModeToggle())
   }
 
   ngOnInit(): void {
-    var player = dashjs.MediaPlayer().create();
-    alert(this.el.nativeElement.querySelector('#video'));
-    player.initialize(this.el.nativeElement.querySelector('#video'), this.url, true);
+    this.initPlayer();
   }
 
   ngOnDestroy(): void {
@@ -320,7 +348,7 @@ export class VideoComponent implements OnInit, AfterViewInit, OnDestroy {
   //#endregion
 
   //#region(UTILS)
-  formatTime(seconds: number): any {
+  private formatTime(seconds: number): any {
     const result = new Date(seconds * 1000).toISOString().substr(11, 8);
 
     return {
@@ -329,11 +357,11 @@ export class VideoComponent implements OnInit, AfterViewInit, OnDestroy {
     };
   }
 
-  hasClass(el: HTMLElement, className: string) {
+  private hasClass(el: HTMLElement, className: string) {
     return el.classList.contains(className);
   }
 
-  hiddenClassToggle(el: HTMLElement) {
+  private hiddenClassToggle(el: HTMLElement) {
     if (!this.hasClass(el, 'hidden')) {
       this.renderer.addClass(el, 'hidden');
     } else {

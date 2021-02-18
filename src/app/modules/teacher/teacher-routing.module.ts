@@ -7,6 +7,7 @@ import { TeacherProfileSpotlightComponent } from './teacher-profile/teacher-prof
 import { TeacherProfileTeacherPlacesComponent } from './teacher-profile/teacher-profile-teacher-places/teacher-profile-teacher-places.component';
 
 import { ControlPainelComponent } from './control-painel/control-painel.component';
+import { TeacherPlacesComponent } from './teacher-places/teacher-place.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
     ]
   },
   { path: 'control-painel', component: ControlPainelComponent },
+  { path: 'teacher-places', component: TeacherPlacesComponent },
 ];
 
 @NgModule({

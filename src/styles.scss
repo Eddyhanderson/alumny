@@ -477,6 +477,11 @@ img {
 a:hover {
     text-decoration: none;    
 }
+input.form-control:focus {
+    outline: none;
+    border-color: rgb(var(--palette-primary));
+    box-shadow: none;
+}
 /* Text Color types */
 .text-color-primary{
     color:rgb(var(--palette-primary)) !important;

@@ -50,3 +50,9 @@ export enum PostTypes{
     Video = "Video", 
     Article = "Article"
 }
+
+export enum UserRoles{
+    Studant = "Studant",
+    Teacher = "Teacher",
+    Manager = "Manager"
+}

@@ -47,6 +47,7 @@ export class Routes {
     // TeacherPlace routes
     static TEACHER_PLACE_CREATE_ROUTE = Routes.BASE_URL + "teacherPlace/create";
     static TEACHER_PLACE_GET_ALL_ROUTE = Routes.BASE_URL + "teacherPlace/getAll";
+    static TEACHER_PLACE_GET_ROUTE = Routes.BASE_URL + "teacherPlace/get/{teacherPlaceId}";
 
     // Video routes
     static VIDEO_UPLOAD = Routes.BASE_URL + "video/upload";
@@ -54,6 +55,7 @@ export class Routes {
     // Lesson routes
     static LESSON_CREATE_ROUTE = Routes.BASE_URL + "lesson/create";
     static LESSON_GET_ALL_ROUTE = Routes.BASE_URL + "lesson/getAll";
+    static LESSON_GET_ROUTE = Routes.BASE_URL + "lesson/get/{lessonId}";
 
     // Discipline topics routes
     static DISCIPLINE_TOPIC_CREATE_ROUTE = Routes.BASE_URL + "disciplineTopic/create";

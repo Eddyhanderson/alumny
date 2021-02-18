@@ -5,68 +5,83 @@ import { combineLatest } from 'rxjs';
 import { map, scan, switchMap, tap } from 'rxjs/operators';
 import { PageResponse } from 'src/app/models/page-response/page-response';
 
-export class PaginationAdapter implements Subscribable<any> {
+export type PaginatedEndpoint<T, Q> = (query: PaginationQuery, param?: Q) => Observable<PageResponse<T>>;
 
-    private param: any;
+export class PaginationAdapter<T, Q> implements Subscribable<T> {
 
-    set setParam(param: any) {
-        this.param = param;
+    private param: BehaviorSubject<Q>;
+
+    set setParam(param: Partial<Q>) {
+        const lastParam = this.param.getValue();
+        const nextParam = { ...lastParam, ...param }
+
+        this.param.next(nextParam);
     }
 
-    get getParam() {
-        return this.param;
+    get getParam(): Observable<Q> {
+        return this.param.asObservable();
     }
 
-    private pageNumber$ = new BehaviorSubject(1);
+    private pageNumber = new BehaviorSubject(1);
 
-    set setPageNumber(v: number) {
-        this.pageNumber$.next(v);
+    public nextPage() {
+        let lastNumber = this.pageNumber.getValue();
+        this.pageNumber.next(++lastNumber);
     }
 
     get getPagNumber() {
-        return this.pageNumber$.asObservable();
+        return this.pageNumber.asObservable();
     }
 
-    private dataSource$: Observable<any>;
+    private searchValue = new BehaviorSubject('');
 
-    private pageSize$ = new BehaviorSubject(50);
+    set setSearchValue(key: string) {
+        this.searchValue.next(key);
+    }
+
+    get getSearchValue() {
+        return this.searchValue.asObservable();
+    }
+
+    private dataSource$: Observable<T[]>;
+
+    get getDataSource(){
+        return this.dataSource$;
+    }
+
+    private pageSize = new BehaviorSubject(50);
 
     set setPageSize(v: number) {
-        this.pageNumber$.next(v);
+        this.pageNumber.next(v);
     }
 
     get getPageSize() {
-        return this.pageSize$.asObservable();
+        return this.pageSize.asObservable();
     }
 
-    private hasMore$ = new BehaviorSubject(true);
+    private hasMore = new BehaviorSubject(true);
 
-    public loading$ = new BehaviorSubject(false);
+    public loading = new BehaviorSubject(false);
 
-    constructor(dataSource: (query: PaginationQuery, param?: any) => Observable<any>, param:any) {
-        this.param = param;
-        
-        this.dataSource$ = combineLatest([this.pageNumber$, this.pageSize$])
-            .pipe(
-                tap(() => this.loading$.next(true)),
-                switchMap(([pNumber, pSize]) => {
-                    let pQuery: PaginationQuery = {
-                        pageNumber: pNumber,
-                        pageSize: pSize
-                    };                    
+    public totalElements: number;
 
-                    return dataSource(pQuery, this.param).pipe(
-                        map((pageResponse: PageResponse<any>) => pageResponse.data)
-                    )
-                }),
-                scan((acc, data) => {
-                    if (data != null && data.length == 0)
-                        this.hasMore$.next(false);
+    constructor(dataSource: PaginatedEndpoint<T, Q>, initialParam: Q) {
+        this.param = new BehaviorSubject<Q>(initialParam);
 
-                    return [...acc, ...data]
-                }, []),
-                tap(() => this.loading$.next(false))
-            )
+        this.dataSource$ = combineLatest([this.pageNumber, this.pageSize, this.searchValue]).pipe(
+            switchMap(([pageNumber, pageSize, searchValue]) => this.param.pipe(
+                tap(() => this.loading.next(true)),
+                switchMap((param) => dataSource({ pageNumber, pageSize, searchValue }, param))
+            )),
+            map((pageResponse) => { this.totalElements = pageResponse.totalElements; return pageResponse.data }),
+            scan((acc, data) => {
+                if (data != null && data.length == 0)
+                    this.hasMore.next(false);
+
+                return [...acc, ...data]
+            }, []),
+            tap(() => this.loading.next(false))
+        );
     }
 
     subscribe(observer?: PartialObserver<any>): Unsubscribable;
@@ -80,9 +95,8 @@ export class PaginationAdapter implements Subscribable<any> {
     }
 
     public loadMore() {
-        if (this.hasMore$.getValue()) {
-            let pageNumber = this.pageNumber$.getValue() + 1;
-            this.setPageNumber = pageNumber;
-        }
+        if (this.hasMore.getValue())
+            this.nextPage();
+
     }
 }

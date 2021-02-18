@@ -42,10 +42,6 @@ export class NavigationComponent implements OnInit {
       width: '80%',
       height: '70%'
     })
-
-    this.matDialog.afterAllClosed.subscribe((value) => {
-      this.router.navigate(["lesson/lessons"]);
-    })
   }
 
   private getUser() {

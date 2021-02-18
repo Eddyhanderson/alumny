@@ -61,8 +61,8 @@ export class SchoolService {
             .set('pageNumber', query.pageNumber.toString() ?? '')
             .set('pageSize', query.pageSize.toString() ?? '')
             .set('searchValue', query.searchValue ?? '')
-            .set('teacherId', params.teacherId ?? '')
-            .set('subscribed', params.subscribed ? 'true' : 'false');
+            .set('teacherId', params?.teacherId ?? '')
+            .set('subscribed', params?.subscribed ? 'true' : 'false');
     }
 
 } 
