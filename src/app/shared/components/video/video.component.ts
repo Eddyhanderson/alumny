@@ -344,6 +344,8 @@ export class VideoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.updateElapsedTime = null;
 
     this.displaySeekTooltip = null;
+
+    this._url.unsubscribe();
   }
   //#endregion
 

@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationStudantComponent } from './registration/registration-studant/registration-studant.component';
 import { RegistrationTeacherComponent } from './registration/registration-teacher/registration-teacher.component';
 import { RegistrationSchoolComponent } from './registration/registration-school/registration-school.component';
+import { AccountService } from 'src/app/services/account-service/account.service';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },  
@@ -21,4 +22,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AuthenticationRoutingModule { }
+export class AuthenticationRoutingModule {  }

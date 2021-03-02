@@ -56,3 +56,10 @@ export enum UserRoles{
     Teacher = "Teacher",
     Manager = "Manager"
 }
+
+export enum DocumentLeave{
+    Save = "Save",
+    Discard = "Discard",
+    Cancel = "Cancel",
+    Close = "Close"
+}

@@ -35,7 +35,8 @@
                             <div class="d-flex flex-column w-100">
                                 <!-- School name -->
                                 <div class="relevant-text-bold">
-                                    <a [routerLink]="['../../profile/about',teacherSchool.school.id]" class="discretLink">
+                                    <a [routerLink]="['../../profile/about',teacherSchool.school.id]"
+                                        class="discretLink">
                                         {{teacherSchool.school.name}}
                                     </a>
                                 </div>
@@ -43,7 +44,7 @@
 
                                 <!-- Elapsed time -->
                                 <div class="irrelevant-text-xm text-disabled">
-                                    <div [appDataFormater]="teacherSchool.dateSituation"></div>
+                                    {{teacherSchool.dateSituation | elapsed}}
                                 </div>
                                 <!-- End -->
                             </div>
@@ -90,7 +91,7 @@
                             <div class="d-flex flex-column w-100">
                                 <!-- Elapsed time -->
                                 <div class="irrelevant-text-xm text-disabled">
-                                    <div [appDataFormater]="teacherRequest.dateSituation"></div>
+                                    {{teacherRequest.dateSituation | elapsed}}
                                 </div>
                                 <!-- School name -->
                                 <div class="relevant-text-bold d-flex">
@@ -198,7 +199,7 @@
 <ng-template #loadingItem>
     <div class="w-100 p-3">
         <app-loading-item>
-    
+
         </app-loading-item>
     </div>
 </ng-template>

@@ -11,52 +11,53 @@
 <mat-dialog-content>
 
     <div class="w-100 d-flex justify-content-between">
-        <div  [class.left-form-container]="loadingMode">
+        <div [class.left-form-container]="loadingMode">
             <mat-vertical-stepper #stepper [linear]="true">
                 <ng-template matStepperIcon="videoChoice">
                     <mat-icon>
                         add_to_photos
                     </mat-icon>
                 </ng-template>
-    
+
                 <ng-template matStepperIcon="details">
                     <mat-icon>
                         panorama_fish_eye
                     </mat-icon>
                 </ng-template>
-    
+
                 <ng-template matStepperIcon="topic">
                     <mat-icon>
                         fact_check
                     </mat-icon>
                 </ng-template>
-    
+
                 <mat-step editable="false" label="Escolher video" state="videoChoice" linear="true"
                     [stepControl]="videoCtl">
                     <div class="d-flex flex-column justify-content-between dialog-content">
                         <div class="d-flex justify-content-center mb-5">
                             <div class="w-50 p-relative">
-                                <button mat-flat-button color="warn" class="w-100">
+                                <button mat-flat-button color="warn" class="w-100" [style]="{'height':'3rem'}">
                                     SELECIONAR VIDEO <mat-icon class="ml-1"> video_library </mat-icon>
                                 </button>
-    
+
                                 <!-- Fetch selected filed on change -->
                                 <input type="file" #fileInput id="uploadFile" (change)="uploadFileEvt($event)"
                                     name="uploadFile" [formControl]="videoCtl" accept="video/mp4" />
-    
+
                             </div>
                         </div>
                         <div
                             class="d-flex flex-column align-items-center justify-content-center irrelevant-text-sm text-disabled-1">
                             <p>
-                                Certifique-se que o video que deseja carregar não viola as <a href="#" class="ml-1"> regras
+                                Certifique-se que o video que deseja carregar não viola as <a href="#" class="ml-1">
+                                    regras
                                     da
                                     comunidade Alumny</a>
                             </p>
                         </div>
                     </div>
                 </mat-step>
-    
+
                 <mat-step label="Detalhes" state="details" [stepControl]="detailFg">
                     <div class="d-flex align-items-center justify-content-center">
                         <form [formGroup]="detailFg">
@@ -78,7 +79,7 @@
                                     Campo obrigatório
                                 </mat-error>
                             </mat-form-field>
-    
+
                             <div class="irrelevant-text text-disabled-1 mb-1">
                                 De forma resumida descreva os aspectos mais importantes da sua video-aula, bem como
                                 os seus objectivos, palavras chaves, ou alguma outra mensagem que ache oportuna.
@@ -95,94 +96,108 @@
                                     Campo obrigatório
                                 </mat-error>
                             </mat-form-field>
-    
+
                             <div class="irrelevant-text text-disabled-1 mb-1">
                                 Escolha a turma onde se destina esta video-aula. Siga pela selecção
                                 da escola e do curso da respectiva turma.
                             </div>
-                            <mat-accordion class="mt-1">
-                                <ng-container *ngIf="teacherPlacesGrouped">
-                                    <ng-container *ngFor="let groupedTeacherPlace of teacherPlacesGrouped">
-                                        <mat-expansion-panel>
-                                            <mat-expansion-panel-header>
-                                                <mat-panel-title>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="img-profile-xm mr-2">
-                                                            <img [src]="groupedTeacherPlace.school.profilePhotoPath">
-                                                        </div>
-                                                        <span>
-                                                            {{groupedTeacherPlace.school.shortName}}
-                                                        </span>
-                                                    </div>
-                                                </mat-panel-title>
-                                                <mat-panel-description>
-                                                    {{groupedTeacherPlace.school.name}}
-                                                </mat-panel-description>
-                                            </mat-expansion-panel-header>
-                                            <ng-template matExpansionPanelContent>
-                                                <mat-accordin>
-                                                    <ng-container
-                                                        *ngFor="let courseTeacherPlaces of groupedTeacherPlace.courseTeacherPlaces">
-                                                        <mat-expansion-panel class="mat-elevation-z0">
-                                                            <mat-expansion-panel-header>
-                                                                <mat-panel-title>
-                                                                    {{courseTeacherPlaces.course.name}}
-                                                                </mat-panel-title>
-                                                            </mat-expansion-panel-header>
-                                                            <ng-container
-                                                                *ngFor="let teacherPlace of courseTeacherPlaces.teacherPlaces">
-                                                                <ng-template matExpansionPanelContent>
-                                                                    <mat-selection-list [multiple]="false"
-                                                                        [formControl]="teacherPlaceCtl">
-                                                                        <mat-list-option [value]="teacherPlace.id">
-                                                                            <div class="d-flex align-items-center">
-                                                                                <div class="img-profile-xm mr-2"
-                                                                                    *ngIf="teacherPlace.profilePhotoPath; else noImage">
-                                                                                    <img
-                                                                                        [src]="teacherPlace.profilePhotoPath">
-                                                                                </div>
-                                                                                <span class="irrelevant-text-sm">
-                                                                                    {{teacherPlace.name}}
-                                                                                </span>
-                                                                            </div>
-                                                                        </mat-list-option>
-                                                                    </mat-selection-list>
-                                                                </ng-template>
-                                                            </ng-container>
-                                                        </mat-expansion-panel>
-                                                    </ng-container>
-                                                </mat-accordin>
-                                            </ng-template>
-                                        </mat-expansion-panel>
-                                    </ng-container>
-                                </ng-container>
+
+                            <!-- Teacher place on which will get the lesson -->
+                            <mat-accordion *ngIf="teacherPlacesGrouped" class="mt-1">
+                                <mat-expansion-panel *ngFor="let groupedTeacherPlace of teacherPlacesGrouped">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                            <div class="d-flex align-items-center">
+                                                <div class="img-profile-xm mr-2">
+                                                    <img [src]="groupedTeacherPlace.school.profilePhotoPath">
+                                                </div>
+                                                <span>
+                                                    {{groupedTeacherPlace.school.shortName}}
+                                                </span>
+                                            </div>
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            {{groupedTeacherPlace.school.name}}
+                                        </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                    <ng-template matExpansionPanelContent>
+                                        <mat-accordion>
+                                            <mat-expansion-panel
+                                                *ngFor="let courseTeacherPlaces of groupedTeacherPlace.courseTeacherPlaces"
+                                                class="mat-elevation-z0">
+                                                <mat-expansion-panel-header>
+                                                    <mat-panel-title>
+                                                        {{courseTeacherPlaces.course.name}}
+                                                    </mat-panel-title>
+                                                </mat-expansion-panel-header>
+                                                <ng-template matExpansionPanelContent>
+                                                    <mat-selection-list [multiple]="false"
+                                                        [formControl]="teacherPlaceCtl">
+                                                        <mat-list-option [value]="teacherPlace"
+                                                            *ngFor="let teacherPlace of courseTeacherPlaces.teacherPlaces">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="img-profile-xm mr-2"
+                                                                    *ngIf="teacherPlace.profilePhotoPath; else noImage">
+                                                                    <img [src]="teacherPlace.profilePhotoPath">
+                                                                </div>
+                                                                <span class="irrelevant-text-sm">
+                                                                    {{teacherPlace.name}}
+                                                                </span>
+                                                            </div>
+                                                        </mat-list-option>
+                                                    </mat-selection-list>
+                                                </ng-template>
+                                            </mat-expansion-panel>
+                                        </mat-accordion>
+                                    </ng-template>
+                                </mat-expansion-panel>
                             </mat-accordion>
+
+                            <ng-container *ngIf="teacherPlaceCtl.value[0] && teacherPlaceCtl.value[0].opened">
+                                <div class="irrelevant-text text-disabled-1 mb-1">
+                                    {{
+                                    isPublic ?
+                                    'Aulas publicas podem ser assistidas por todos, inclusive quem não estiver
+                                    matriculado na turma
+                                    onde a aula será publicada.'
+                                    :
+                                    'Aulas privadas podem ser assistidas apenas pelos estudantes matriculados na turma
+                                    onde a aula fôr
+                                    publicada. Todas as aulas de uma turma fechada são privadas.'
+                                    }}
+                                </div>
+                                <mat-slide-toggle [(ngModel)]="isPublic">
+                                    Aula pública
+                                </mat-slide-toggle>
+                            </ng-container>
                         </form>
-    
+
                     </div>
-                    <div class="mt-4">
-                        <button matStepperNext mat-flat-button color="warn" (click)="onVideoDetailComplete()">
+                    <div class="mt-4 d-flex justify-content-center">
+                        <button matStepperNext mat-flat-button class="w-25" color="warn" (click)="onVideoDetailComplete()">
                             Seguinte
                         </button>
                     </div>
                 </mat-step>
-    
+
                 <mat-step label="Tópico" state="topic" [stepControl]="disciplineTopicCtl">
                     <div class="d-flex align-items-center justify-content-center">
                         <form [formGroup]="disciplineTopicCtl">
 
                             <ng-container *ngIf="disciplineTopics$ | async as disciplineTopics; else loadingItems">
-                                <mat-error *ngIf="disciplineTopicCtl.touched && disciplineTopicCtl.hasError('required')">
+                                <mat-error
+                                    *ngIf="disciplineTopicCtl.touched && disciplineTopicCtl.hasError('required')">
                                     Deve escolher um tópico para a nova aula
                                 </mat-error>
 
                                 <ng-container *ngIf="disciplineTopics?.length > 0">
                                     <div class="irrelevant-text text-disabled-1 mb-1">
-                                        Seleccione o tópico do qual a video aula fará parte. 
+                                        Seleccione o tópico do qual a video aula fará parte.
                                         Caso não exista o tópico, pode criar abaixo.
                                     </div>
-        
-                                    <mat-selection-list [multiple]="false" [formControl]="disciplineTopicCtl" class="mt-1"> 
+
+                                    <mat-selection-list [multiple]="false" [formControl]="disciplineTopicCtl"
+                                        class="mt-1">
                                         <mat-list-option *ngFor="let disciplineTopic of disciplineTopics"
                                             [value]="disciplineTopic">
                                             {{disciplineTopic.name}}
@@ -200,28 +215,30 @@
                                         Criar um novo tópico
                                     </mat-label>
                                     <input [formControl]="disciplineTopicCtl" placeholder="Números Reais"
-                                        [matAutocomplete]="auto" matInput >                                    
+                                        [matAutocomplete]="auto" matInput>
                                 </mat-form-field>
                                 <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                                    <mat-option
-                                        *ngFor="let disciplineTopic of disciplineTopicsFiltered$ | async "
+                                    <mat-option *ngFor="let disciplineTopic of disciplineTopicsFiltered$ | async "
                                         [value]="disciplineTopic">
                                         {{disciplineTopic.name}}
                                     </mat-option>
-                                </mat-autocomplete>                               
+                                </mat-autocomplete>
                             </ng-container>
                         </form>
-    
+
                     </div>
-    
+
                     <ng-container *ngIf="manifest">
-                        <div class="mt-4">
-                            <button mat-flat-button color="warn" (click)="onLessonCreate()">
+                        <div class="mt-4 w-50 d-flex justify-content-center">
+                            <button mat-flat-button color="warn" (click)="onLessonCreate()" class="w-25 mb-4">
                                 Criar
+                            </button>
+                            <button mat-stroked-button matStepperPrevious>
+                                Retroceder
                             </button>
                         </div>
                     </ng-container>
-    
+
                 </mat-step>
             </mat-vertical-stepper>
         </div>

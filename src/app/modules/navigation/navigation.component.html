@@ -1,230 +1,167 @@
-<div>
-    <!-- Tool Bar Section -->
-    <mat-toolbar class="material-toolbar p-4 justify-content-between fixed-top shadow-sm">
-        <div class="d-flex justfy-content-between align-items-center">
-            <button mat-icon-button class="d-flex mr-2 actions" (click)="sidenav.toggle()">
-                <span class="navbar-toggler-icon">
-                    <mat-icon>menu</mat-icon>
-                </span>
-            </button>
-            <h1 class="brand d-flex align-items-center">
-                <mat-icon class="mr-2">school</mat-icon> alumny
-            </h1>
-        </div>
-        <div class="input-group align-self-center" style="width: 30%">
-            <input class="form-control" type="text" placeholder="Pesquisar">
-            <div class="input-group-prepend">
-                <div class="input-group-text">
-                    <mat-icon>search</mat-icon>
-                </div>
-            </div>
-        </div>
-        <div class="d-flex justfy-content-between align-items-center actions" *ngIf="role.toUpperCase()=='TEACHER'">
-            <button mat-icon-button matTooltip="Adicionar aula" matTooltipPosition="above"
-                [matMenuTriggerFor]="typeLessons">
-                <mat-icon class="text-color-primary" [style.fontSize.rem]="1.5">
-                    post_add
-                </mat-icon>
-            </button>
-            <mat-menu #typeLessons="matMenu">
-                <button mat-menu-item (click)="openCreateVideoLessonDialog()">
-                    <mat-icon class="text-color-primary">video_library</mat-icon>
-                    Video aula
-                </button>
-                <button mat-menu-item>
-                    <mat-icon class="text-color-primary">library_books</mat-icon>
-                    Artigo
-                </button>
-            </mat-menu>
-            <button class="mr-4" mat-icon-button>
-                <mat-icon matBadge="9+" matBadgePosition="after" matBadgeColor="primary">notifications
-                </mat-icon>
-            </button>
-            <div class="img-profile-xm" *ngIf="user.pictureProfilePath">
-                <img [src]="user.pictureProfilePath">
-            </div>
-            <div class="img-profile-xm-none" *ngIf="!user.pictureProfilePath">
-                <div></div>
-            </div>
-        </div>
-    </mat-toolbar>
-    <!-- End toolbar -->
-    <app-loading-determinate></app-loading-determinate>
-    <!-- Nav Bar Sections -->
-    <mat-sidenav-container class="nav-container h-100 p-0">
+<div *ngIf="role.toUpperCase()=='MANAGER'"
+    class="mt-1 w-100 p-3 d-flex flex-column justify-content-center align-items-center" [style.height.px]="208">
+    <div *ngIf="manager.school.profilePhotoPath;else noSchoolPhoto" class="img-profile-md">
+        <img [src]="manager.school.profilePhotoPath">
+    </div>
+    <ng-template class="img-profile-md-none" #noSchoolPhoto>
+        <div></div>
+    </ng-template>
+    <div class="relevant-text-principal">
+        <h5>
+            Escola
+        </h5>
+    </div>
+    <div class="irrelevant-text bold-500">
+        {{manager.school.name}}
+    </div>
+</div>
 
-        <mat-sidenav class="nav-sidenav" #sidenav fixedInViewport="true" fixedTopGap="50" mode="side" opened>
+<div *ngIf="role.toUpperCase()=='TEACHER'"
+    class="mt-1 w-100 p-3 d-flex flex-column justify-content-center align-items-center" [style.height.px]="208">
+    <div *ngIf="user.pictureProfilePath" class="img-profile-md">
+        <img [src]="user.pictureProfilePath">
+    </div>
+    <div class="img-profile-md-none" *ngIf="!user.pictureProfilePath">
+        <div></div>
+    </div>
+    <div class="relevant-text-principal">
+        <h5>
+            Professor
+        </h5>
+    </div>
+    <div class="irrelevant-text">
+        {{user.firstName}} {{user.lastName}}
+    </div>
+</div>
 
-            <div *ngIf="role.toUpperCase()=='MANAGER'"
-                class="mt-1 w-100 p-3 d-flex flex-column justify-content-center align-items-center"
-                [style.height.px]="208">
-                <div *ngIf="manager.school.profilePhotoPath;else noSchoolPhoto"
-                    class="img-profile-md">
-                    <img [src]="manager.school.profilePhotoPath">
-                </div>
-                <ng-template class="img-profile-md-none" #noSchoolPhoto>
-                    <div></div>
-                </ng-template>
-                <div class="relevant-text-principal">
-                    <h5>
-                        Escola
-                    </h5>
-                </div>
-                <div class="irrelevant-text bold-500">
-                    {{manager.school.name}}
-                </div>
-            </div>
+<div *ngIf="role.toUpperCase()=='STUDANT'"
+    class="mt-1 w-100 p-3 d-flex flex-column justify-content-center align-items-center" [style.height.px]="208">
+    <div class="img-profile-md">
+        <img src="../../assets/images/pexels-thirdman-5060987.jpg">
+    </div>
+    <div class="relevant-text-principal">
+        <h5>
+            Estudante
+        </h5>
+    </div>
+    <div class="irrelevant-text">
+        Mateus Galiano
+    </div>
+</div>
 
-            <div *ngIf="role.toUpperCase()=='TEACHER'"
-                class="mt-1 w-100 p-3 d-flex flex-column justify-content-center align-items-center"
-                [style.height.px]="208">
-                <div *ngIf="user.pictureProfilePath" class="img-profile-md">
-                    <img [src]="user.pictureProfilePath">
-                </div>
-                <div class="img-profile-md-none" *ngIf="!user.pictureProfilePath">
-                    <div></div>
-                </div>
-                <div class="relevant-text-principal">
-                    <h5>
-                        Professor
-                    </h5>
-                </div>
-                <div class="irrelevant-text">
-                    {{user.firstName}} {{user.lastName}}
-                </div>
-            </div>
+<!-- Manager nav items -->
+<ul *ngIf="role.toUpperCase() == 'MANAGER'" class="flex-column p-0 w-100 justfy-content-start mt-1">
+    <li class="nav-item">
+        <a class="d-flex pl-4" routerLink="/manager-school/home" routerLinkActive="nav-active"
+            [routerLinkActiveOptions]="{exact:true}">
+            <mat-icon [style.fontSize.rem]="1.6"> view_compact</mat-icon>
+            <span class="ml-4">
+                Painel de controlo
+            </span>
+        </a>
+    </li>
+</ul>
+<!-- End -->
 
-            <div *ngIf="role.toUpperCase()=='STUDANT'"
-                class="mt-1 w-100 p-3 d-flex flex-column justify-content-center align-items-center"
-                [style.height.px]="208">
-                <div class="img-profile-md">
-                    <img src="../../assets/images/pexels-thirdman-5060987.jpg">
-                </div>
-                <div class="relevant-text-principal">
-                    <h5>
-                        Estudante
-                    </h5>
-                </div>
-                <div class="irrelevant-text">
-                    Mateus Galiano
-                </div>
-            </div>
+<!-- Studant or teacher nav items -->
+<ul class="flex-column p-0 w-100 justfy-content-start mt-1"
+    *ngIf="role.toUpperCase() == 'STUDANT' || role.toUpperCase() == 'TEACHER'">
+    <!-- Home nav item -->
+    <li class="nav-item" *ngIf="role.toUpperCase() == 'STUDANT'">
+        <a class="d-flex pl-4" routerLink="/home" routerLinkActive="nav-active"
+            [routerLinkActiveOptions]="{exact:true}">
+            <mat-icon [style.fontSize.rem]="1.6"> home</mat-icon> <span class="ml-4">Inicío</span>
+        </a>
+    </li>
+    <!-- End -->
 
-            <!-- Manager nav items -->
-            <ul *ngIf="role.toUpperCase() == 'MANAGER'" class="flex-column p-0 w-100 justfy-content-start mt-1">
-                <li class="nav-item">
-                    <a class="d-flex pl-4" routerLink="/manager-school/home" routerLinkActive="nav-active"
-                        [routerLinkActiveOptions]="{exact:true}">
-                        <mat-icon [style.fontSize.rem]="1.6"> view_compact</mat-icon>
-                        <span class="ml-4">
-                            Painel de controlo
-                        </span>
-                    </a>
-                </li>
-            </ul>
-            <!-- End -->
+    <!-- Schools nav item -->
+    <li class="nav-item" *ngIf="role.toUpperCase() == 'TEACHER'">
+        <a class="d-flex pl-4" [routerLink]='["/school/choice", teacher.id]' routerLinkActive="nav-active">
+            <mat-icon [style.fontSize.rem]="1.6"> school</mat-icon> <span class="ml-4">Escolas</span>
+        </a>
+    </li>
+    <!-- End -->
 
-            <!-- Studant or teacher nav items -->
-            <ul class="flex-column p-0 w-100 justfy-content-start mt-1"
-                *ngIf="role.toUpperCase() == 'STUDANT' || role.toUpperCase() == 'TEACHER'">
-                <!-- Home nav item -->
-                <li class="nav-item" *ngIf="role.toUpperCase() == 'STUDANT'">
-                    <a class="d-flex pl-4" routerLink="/home" routerLinkActive="nav-active"
-                        [routerLinkActiveOptions]="{exact:true}">
-                        <mat-icon [style.fontSize.rem]="1.6"> home</mat-icon> <span class="ml-4">Inicío</span>
-                    </a>
-                </li>
-                <!-- End -->
+    <!-- Control painel nav item -->
+    <li class="nav-item" *ngIf="role.toUpperCase() == 'TEACHER'">
+        <a class="d-flex pl-4" routerLink="/teacher/control-painel" routerLinkActive="nav-active"
+            [routerLinkActiveOptions]="{exact:true}">
+            <mat-icon [style.fontSize.rem]="1.6"> dashboard</mat-icon> <span class="ml-4">Painel de
+                controlo</span>
+        </a>
+    </li>
+    <!-- End -->
 
-                <!-- Schools nav item -->
-                <li class="nav-item" *ngIf="role.toUpperCase() == 'TEACHER'">
-                    <a class="d-flex pl-4" [routerLink]='["/school/choice", teacher.id]' routerLinkActive="nav-active">
-                        <mat-icon [style.fontSize.rem]="1.6"> school</mat-icon> <span class="ml-4">Escolas</span>
-                    </a>
-                </li>
-                <!-- End -->
+    <!-- Teacher place nav item -->
+    <li class="nav-item">
+        <a class="pl-4 d-flex" [routerLink]="['/teacher', teacher.id, 'teacher-places']" routerLinkActive="nav-active"
+            [routerLinkActiveOptions]="{exact:true}">
+            <mat-icon [style.fontSize.rem]="1.4">school</mat-icon><span class="ml-4">Turmas</span>
+        </a>
+    </li>
+    <!-- End -->
 
-                <!-- Control painel nav item -->
-                <li class="nav-item" *ngIf="role.toUpperCase() == 'TEACHER'">
-                    <a class="d-flex pl-4" routerLink="/teacher/control-painel" routerLinkActive="nav-active"
-                        [routerLinkActiveOptions]="{exact:true}">
-                        <mat-icon [style.fontSize.rem]="1.6"> dashboard</mat-icon> <span class="ml-4">Painel de
-                            controlo</span>
-                    </a>
-                </li>
-                <!-- End -->
+    <!-- Lessons nav item -->
+    <li class="nav-item" *ngIf="role.toUpperCase() == 'TEACHER'">
+        <a class="pl-4 d-flex" routerLink="/lesson/managment" routerLinkActive="nav-active"
+            [routerLinkActiveOptions]="{exact:true}">
+            <mat-icon [style.fontSize.rem]="1.4">featured_play_list</mat-icon><span class="ml-4">Aulas</span>
+        </a>
+    </li>
+    <!-- End -->
 
-                <!-- Teacher place nav item -->
-                <li class="nav-item">
-                    <a class="pl-4 d-flex" [routerLink]="['/teacher', teacher.id, 'teacher-places']" routerLinkActive="nav-active"
-                        [routerLinkActiveOptions]="{exact:true}">
-                        <mat-icon [style.fontSize.rem]="1.4">school</mat-icon><span class="ml-4">Turmas</span>
-                    </a>
-                </li>
-                <!-- End -->
+    <!-- Question nav item -->
+    <li class="nav-item" *ngIf="role.toUpperCase() == 'STUDANT'">
+        <a class="pl-4 d-flex" routerLink="/teacherPlaces" routerLinkActive="nav-active"
+            [routerLinkActiveOptions]="{exact:true}">
+            <mat-icon [style.fontSize.rem]="1.5">live_help</mat-icon><span class="ml-4">Questões</span>
+        </a>
+    </li>
+    <!-- End -->
 
-                <!-- Lessons nav item -->
-                <li class="nav-item" *ngIf="role.toUpperCase() == 'TEACHER'">
-                    <a class="pl-4 d-flex" routerLink="/lesson/managment" routerLinkActive="nav-active"
-                        [routerLinkActiveOptions]="{exact:true}">
-                        <mat-icon [style.fontSize.rem]="1.4">featured_play_list</mat-icon><span
-                            class="ml-4">Aulas</span>
-                    </a>
-                </li>
-                <!-- End -->
+    <!-- Material nav item -->
+    <li class="nav-item">
+        <a routerLink="/materials" class="pl-4 d-flex" routerLinkActive="nav-active"
+            [routerLinkActiveOptions]="{exact:true}">
+            <mat-icon [style.fontSize.rem]="1.4">library_books</mat-icon><span class="ml-4">Materiais</span>
+        </a>
+    </li>
+    <!-- End -->
 
-                <!-- Question nav item -->
-                <li class="nav-item" *ngIf="role.toUpperCase() == 'STUDANT'">
-                    <a class="pl-4 d-flex" routerLink="/teacherPlaces" routerLinkActive="nav-active"
-                        [routerLinkActiveOptions]="{exact:true}">
-                        <mat-icon [style.fontSize.rem]="1.5">live_help</mat-icon><span class="ml-4">Questões</span>
-                    </a>
-                </li>
-                <!-- End -->
+    <!-- Messages nav item -->
+    <li class="nav-item">
+        <a routerLink="/messages" routerLinkActive="nav-active" class="pl-4 d-flex"
+            [routerLinkActiveOptions]="{exact:true}">
+            <mat-icon [style.fontSize.rem]="1.4">email</mat-icon><span class="ml-4">Mensagens</span>
+        </a>
+    </li>
+    <!-- End -->
 
-                <!-- Material nav item -->
-                <li class="nav-item">
-                    <a routerLink="/materials" class="pl-4 d-flex" routerLinkActive="nav-active"
-                        [routerLinkActiveOptions]="{exact:true}">
-                        <mat-icon [style.fontSize.rem]="1.4">library_books</mat-icon><span class="ml-4">Materiais</span>
-                    </a>
-                </li>
-                <!-- End -->
+    <!-- Statistic nav item -->
+    <li *ngIf="role.toUpperCase() == 'TEACHER'" class="nav-item">
+        <a routerLink="/statistic" routerLinkActive="nav-active" class="pl-4 d-flex"
+            [routerLinkActiveOptions]="{exact:true}">
+            <mat-icon [style.fontSize.rem]="1.5">analytics</mat-icon><span class="ml-4">Estatística</span>
+        </a>
+    </li>
+    <!-- End -->
 
-                <!-- Messages nav item -->
-                <li class="nav-item">
-                    <a routerLink="/messages" routerLinkActive="nav-active" class="pl-4 d-flex"
-                        [routerLinkActiveOptions]="{exact:true}">
-                        <mat-icon [style.fontSize.rem]="1.4">email</mat-icon><span class="ml-4">Mensagens</span>
-                    </a>
-                </li>
-                <!-- End -->
+    <!-- Finances nav item -->
+    <li class="nav-item" *ngIf="role.toUpperCase()=='TEACHER'">
+        <a routerLink="/finances" routerLinkActive="nav-active" class="pl-4 d-flex"
+            [routerLinkActiveOptions]="{exact:true}">
+            <mat-icon [style.fontSize.rem]="1.5">monetization_on</mat-icon><span class="ml-4">Finanças</span>
+        </a>
+    </li>
+    <!-- End -->
+</ul>
+<!-- End-->
 
-                <!-- Statistic nav item -->
-                <li *ngIf="role.toUpperCase() == 'TEACHER'" class="nav-item">
-                    <a routerLink="/statistic" routerLinkActive="nav-active" class="pl-4 d-flex"
-                        [routerLinkActiveOptions]="{exact:true}">
-                        <mat-icon [style.fontSize.rem]="1.5">analytics</mat-icon><span class="ml-4">Estatística</span>
-                    </a>
-                </li>
-                <!-- End -->
+<mat-divider></mat-divider>
 
-                <!-- Finances nav item -->
-                <li class="nav-item" *ngIf="role.toUpperCase()=='TEACHER'">
-                    <a routerLink="/finances" routerLinkActive="nav-active" class="pl-4 d-flex"
-                        [routerLinkActiveOptions]="{exact:true}">
-                        <mat-icon [style.fontSize.rem]="1.5">monetization_on</mat-icon><span
-                            class="ml-4">Finanças</span>
-                    </a>
-                </li>
-                <!-- End -->
-            </ul>
-            <!-- End-->
-
-            <mat-divider></mat-divider>
-
-            <!-- Schools of the user -->
-            <!--<div *ngIf="role.toUpperCase() == 'TEACHER' && schools">
+<!-- Schools of the user -->
+<!--<div *ngIf="role.toUpperCase() == 'TEACHER' && schools">
                 <div class="pl-4 mt-2">
                     <span class="bold-500  text-disabled-1">ESCOLAS</span>
                 </div>
@@ -246,32 +183,22 @@
                 </button>
 
             </div>-->
-            <!-- End -->
-            <mat-divider></mat-divider>
+<!-- End -->
+<mat-divider></mat-divider>
 
-            <!--Settings -->
-            <ul class="flex-column p-0 w-100 justfy-content-start mt-1">
-                <li class="nav-item">
-                    <a class="d-flex pl-4" routerLink="/definitions" routerLinkActive="nav-active"
-                        [routerLinkActiveOptions]="{exact:true}">
-                        <mat-icon [style.fontSize.rem]="1.6"> settings</mat-icon> <span class="ml-4">Definições</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="d-flex pl-4" routerLink="/definitions" routerLinkActive="nav-active"
-                        [routerLinkActiveOptions]="{exact:true}">
-                        <mat-icon [style.fontSize.rem]="1.6"> feedback</mat-icon> <span class="ml-4">Contacte-nos</span>
-                    </a>
-                </li>
-            </ul>
-            <!-- End -->
-
-        </mat-sidenav>
-
-        <!-- End Nav Bar -->
-
-        <mat-sidenav-content class="bg-lighter">
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
-</div>
+<!--Settings -->
+<ul class="flex-column p-0 w-100 justfy-content-start mt-1">
+    <li class="nav-item">
+        <a class="d-flex pl-4" routerLink="/definitions" routerLinkActive="nav-active"
+            [routerLinkActiveOptions]="{exact:true}">
+            <mat-icon [style.fontSize.rem]="1.6"> settings</mat-icon> <span class="ml-4">Definições</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="d-flex pl-4" routerLink="/definitions" routerLinkActive="nav-active"
+            [routerLinkActiveOptions]="{exact:true}">
+            <mat-icon [style.fontSize.rem]="1.6"> feedback</mat-icon> <span class="ml-4">Contacte-nos</span>
+        </a>
+    </li>
+</ul>
+<!-- End -->

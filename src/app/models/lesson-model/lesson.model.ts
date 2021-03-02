@@ -40,4 +40,6 @@ export class LessonModel {
     articleId?:string;
 
     date?:Date;
+
+    public:boolean;
 }

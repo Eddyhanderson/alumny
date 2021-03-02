@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthenticationModule } from './modules/authentication/authentication.module';
 
 const routes: Routes = [
-
   { path: "auth", loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule) },
   { path: "home", loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule) },
   { path: "lesson", loadChildren: () => import('./modules/lesson/lesson.module').then(m => m.LessonModule) },

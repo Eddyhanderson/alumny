@@ -1,0 +1,59 @@
+<ng-container>
+    <div class="main">
+        <div class="section">
+            <!-- Questions section -->
+            <div class="container-row">
+                <!-- Question -->
+                <div class="item bg-white">
+                    <div class="img-profile-xm pt-3">
+                        <img src="../../../assets/images/pexels-luis-gomes-546819.jpg">
+                    </div>
+                    <span class="px-3 mt-2"> Alberto Manuel </span>
+                    <span class="px-3 my-2 text-disabled-1">
+                        <h5>
+                            Questão exposta há 1s
+                        </h5>
+                    </span>
+                    <div class="statistics-info">
+                        <span class="d-flex align-items-center justify-content-center mb-1"
+                            matTooltip="Respostas dos alunos">
+                            <span class="mr-2">
+                                2
+                            </span>
+                            <mat-icon>face</mat-icon>
+                        </span>
+                        <span class="d-flex align-items-center justify-content-center mb-1"
+                            matTooltip="Respostas do professor">
+                            <span class="mr-2">
+                                5
+                            </span>
+                            <mat-icon>support_agent</mat-icon>
+                        </span>
+                        <span class="d-flex align-items-center justify-content-center" matTooltip="Comentários">
+                            <span class="mr-2">
+                                15
+                            </span>
+                            <mat-icon>chat_bubble</mat-icon>
+                        </span>
+                    </div>
+                    <mat-divider class="w-100"></mat-divider>
+
+                    <div class="doubt-content">
+                        <span class="bold-500 px-3 pb-3">
+                            Como funciona o endereçamento das variáveis na memória?
+                        </span>
+                    </div>
+                    
+                    <div class="state-info">
+                        <span class="badge badge-success bold-500">Resolvido</span>
+                    </div>
+                </div>
+                <!-- End -->
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #loadingItems>
+    <app-loading-item></app-loading-item>
+</ng-template>

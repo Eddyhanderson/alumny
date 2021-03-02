@@ -29,7 +29,7 @@ export class NavigationComponent implements OnInit {
   // Models if manager
   manager: ManagerModel;
 
-  constructor(private matDialog: MatDialog, private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.getUser();
@@ -37,12 +37,7 @@ export class NavigationComponent implements OnInit {
     this.getRoleData();
   }
 
-  public openCreateVideoLessonDialog() {
-    this.matDialog.open(VideoLessonCreationComponent, {
-      width: '80%',
-      height: '70%'
-    })
-  }
+  
 
   private getUser() {
     this.user = JSON.parse(localStorage.user);

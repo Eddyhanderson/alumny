@@ -2,6 +2,11 @@ export class Routes {
 
     private static BASE_URL = "api/v1/";
 
+    // Academy routes
+    static ARTICLE_CREATE_ROUTE = Routes.BASE_URL + "article/create";
+    static ARTICLE_UPDATE_ROUTE = Routes.BASE_URL + "article/update/{articleId}";
+    static ARTICLE_GET_ALL_ROUTE = Routes.BASE_URL + "article/getAll";
+    static ARTICLE_GET_ROUTE = Routes.BASE_URL + "article/get/{articleId}";
 
     // User routes
     static USER_REGISTER_ROUTE = Routes.BASE_URL + "user/registration";
@@ -50,7 +55,10 @@ export class Routes {
     static TEACHER_PLACE_GET_ROUTE = Routes.BASE_URL + "teacherPlace/get/{teacherPlaceId}";
 
     // Video routes
-    static VIDEO_UPLOAD = Routes.BASE_URL + "video/upload";
+    static VIDEO_UPLOAD_ROUTE = Routes.BASE_URL + "video/upload";
+
+    // Video routes
+    static IMAGE_UPLOAD_LESSON_PROFILE = Routes.BASE_URL + "image/upload/lesson/profile";
 
     // Lesson routes
     static LESSON_CREATE_ROUTE = Routes.BASE_URL + "lesson/create";

@@ -1,11 +1,11 @@
-export class VideoModel{
-        id:string;
-        
-        duration:number;
-        
-        manifestPath:string;
+export class VideoModel {
+        id: string;
 
-        thumbnailPath:string;
+        duration: number;
 
-        shortVideoPath:string;        
+        manifestPath: string;
+
+        thumbnailPath: string;
+
+        shortVideoPath: string;
 }

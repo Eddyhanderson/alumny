@@ -17,10 +17,10 @@ export class LoginComponent implements OnInit {
   password: FormControl;
   authGroup: FormGroup;
   inProgress: boolean = false;
-  teacher:TeacherModel;
+  teacher: TeacherModel;
   authenticated: boolean;
 
-  constructor(private router: Router, private route: ActivatedRoute, private accountService: AccountService) {
+  constructor(private router: Router, private route: ActivatedRoute, private accountService: AccountService) {    
   }
 
   ngOnInit(): void {
@@ -44,26 +44,10 @@ export class LoginComponent implements OnInit {
     this.inProgress = true;
     let formValues = this.authGroup.value;
     let result = await this.accountService.login(formValues.email, formValues.password);
-
-    if (result.authenticated) {
-      
-      let role = localStorage.getItem('userRole');
-      let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
-      let navigateTo;
-      if (role.toUpperCase() === Constants.STUDANT) {
-        navigateTo = returnUrl ?? 'home';
-      } else if (role.toUpperCase() === Constants.TEACHER) {
-        this.teacher = JSON.parse(localStorage.teacher);
-        navigateTo = returnUrl ?? 'teacher/' + this.teacher.id + '/control-painel';
-      } else if (role.toUpperCase() === Constants.SCHOOL_MANAGER) {
-        navigateTo = returnUrl ?? 'manager-school/home';
-      }
-
-      this.router.navigate([navigateTo]);
-    };
+    //TODO: Send some message in case that user inserted invalid credentials
   }
 
-  private checkLoginStatus(){
+  private checkLoginStatus() {
     this.accountService.logStatus.subscribe(state => this.authenticated = state);
   }
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AccountService } from './services/account-service/account.service';
+
 
 @Component({
   selector: 'app-root',
@@ -8,15 +9,20 @@ import { AccountService } from './services/account-service/account.service';
 })
 export class AppComponent {
   title = 'alumni';
-  
-  isLogedIn: boolean = false;
+  logged = false;
 
-  constructor() { }
+  constructor(private acs: AccountService, private router: Router) {
+    this.acs.logStatus.subscribe(loginState => {
+      if (!loginState) {
+        this.router.navigate(['/auth/login']);
+      } else {
+        this.logged = loginState;
+      }
+    });
+
+  }
 
   ngOnInit(): void {
   }
 
-  public checkAuthState(state: boolean) {
-    this.isLogedIn = state;
-  }
 }

@@ -60,6 +60,7 @@ export class VideoLessonCreationComponent implements OnInit {
   public disciplineTopic: DisciplineTopicModel;
   public teacherPlaces: TeacherPlaceModel[];
   public disciplineTopics$: Observable<DisciplineTopicModel[]>;
+  public isPublic: boolean;
   public video: VideoModel;
 
   // Queries
@@ -154,14 +155,15 @@ export class VideoLessonCreationComponent implements OnInit {
 
         this.disciplineTopic = stt.data;
       } else {
-        this.disciplineTopic = this.disciplineTopicCtl.value[0];
+        this.disciplineTopic = this.disciplineTopicCtl.value;
       }
 
       let lesson: LessonModel = {
+        public: this.isPublic,
         backgroundPhotoPath: this.thumbnail,
         description: this.descriptionCtl.value,
         discpilineTopicId: this.disciplineTopic.id,
-        teacherPlaceId: this.teacherPlaceCtl.value[0],
+        teacherPlaceId: this.teacherPlaceCtl.value[0].id,
         title: this.titleCtl.value,
         videoId: this.video.id,
         lessonType: PostTypes.Video
@@ -174,7 +176,7 @@ export class VideoLessonCreationComponent implements OnInit {
 
         snackBarRef.afterDismissed().subscribe(() => this.router.navigate(["lesson/managment"], {
           queryParams: {
-            'teacherPlaceId': this.teacherPlaceCtl.value[0],
+            'teacherPlaceId': this.teacherPlaceCtl.value[0].id,
             'disciplineTopicId': this.disciplineTopic.id
           }
         }));
@@ -219,7 +221,7 @@ export class VideoLessonCreationComponent implements OnInit {
 
   private createDisciplineTopicQueryParam() {
     if (this.teacherPlaceCtl.valid) {
-      let teacherPlaceId = this.teacherPlaceCtl.value;
+      let teacherPlaceId = this.teacherPlaceCtl.value[0].id;
       this.disciplineTopicQueryParams = new DisciplineTopicQuery(teacherPlaceId)
     }
   }
@@ -241,53 +243,40 @@ export class VideoLessonCreationComponent implements OnInit {
   }
 
   private groupTeacherPlace() {
-    this.teacherPlaces.forEach((teacherPlace, i) => {
-      if (i == 0) {
-        this.teacherPlacesGrouped = [this.createTeacherPlaceGrouped(teacherPlace)]
-      } else {
-        let schoolExist = false;
+    var schools = new Set(this.teacherPlaces.map(tp => tp.schoolId));
+    var courses = new Set(this.teacherPlaces.map(tp => tp.courseId));
 
-        this.teacherPlacesGrouped.forEach((group, i) => {
-          if (group.school.id == teacherPlace.schoolId) {
-            schoolExist = true;
-            var courseIndex = group.courseTeacherPlaces.findIndex((courseTeacherPlace) => { courseTeacherPlace.course.id == teacherPlace.courseId });
+    for (let skey of schools) {
+      let tpSchool = this.teacherPlaces.filter(tp => tp.schoolId == skey);
 
-            if (courseIndex > -1) {
-              this.teacherPlacesGrouped[i].courseTeacherPlaces[courseIndex].teacherPlaces.push(teacherPlace);
-            } else {
-              this.teacherPlacesGrouped[i].courseTeacherPlaces.push({
-                course: {
-                  name: teacherPlace.courseName,
-                  id: teacherPlace.courseId
-                },
-                teacherPlaces: [teacherPlace]
-              })
-            }
-          }
-        })
+      if (tpSchool && tpSchool.length == 0) break;
 
-        if (!schoolExist) {
-          this.teacherPlacesGrouped.push(this.createTeacherPlaceGrouped(teacherPlace));
+      let school: SchoolModel = {
+        id: tpSchool[0].id,
+        name: tpSchool[0].schoolName,
+        profilePhotoPath: tpSchool[0].schoolPictureProfilePath,
+        shortName: tpSchool[0].schoolShortName
+      };
+
+      for (let ckey of courses) {
+        let tpCourses = tpSchool.filter(tp => tp.courseId == ckey);
+
+        if (tpCourses && tpCourses.length == 0) break;
+
+        let course: CourseModel = { id: tpCourses[0].courseId, name: tpCourses[0].courseName };
+
+        let i = this.teacherPlacesGrouped.findIndex(tpg => tpg.school.id == school.id);
+
+        if (i >= 0) {
+          this.teacherPlacesGrouped[i].courseTeacherPlaces.push({ course: course, teacherPlaces: tpCourses });
+          break;
         }
-      }
-    })
-  }
 
-  private createTeacherPlaceGrouped(teacherPlace: TeacherPlaceModel): { school: SchoolModel; courseTeacherPlaces: [{ course: CourseModel; teacherPlaces: TeacherPlaceModel[]; }]; } {
-    return {
-      school: {
-        name: teacherPlace.schoolName,
-        shortName: teacherPlace.schoolShortName,
-        profilePhotoPath: teacherPlace.schoolPictureProfilePath,
-        id: teacherPlace.schoolId
-      },
-      courseTeacherPlaces: [{
-        course: {
-          name: teacherPlace.courseName,
-          id: teacherPlace.courseId
-        },
-        teacherPlaces: [teacherPlace]
-      }],
+        this.teacherPlacesGrouped.push({
+          school: school,
+          courseTeacherPlaces: [{ course: course, teacherPlaces: tpCourses }]
+        })
+      }
     }
   }
 

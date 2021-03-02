@@ -44,4 +44,6 @@ export class TeacherPlaceModel {
     name: string;
 
     profilePhotoPath?: string;
+
+    opened?:boolean;
 }

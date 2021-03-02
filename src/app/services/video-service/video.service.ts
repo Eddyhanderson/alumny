@@ -16,7 +16,7 @@ export class VideoService {
     var formData = new FormData();
     formData.append('file', file);
 
-    return this.http.post<Response<VideoModel>>(Routes.VIDEO_UPLOAD, formData, {
+    return this.http.post<Response<VideoModel>>(Routes.VIDEO_UPLOAD_ROUTE, formData, {
       reportProgress: true,
       observe: 'events'
     });

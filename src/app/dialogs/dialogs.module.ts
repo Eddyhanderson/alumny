@@ -12,6 +12,7 @@ import { TeacherPlaceCreateDialog } from './teacher-place/teacher-place-create-d
 import { VideoLessonCreationComponent } from './lesson/video/create/video-lesson-creation.component';
 import { SharedModule } from '../shared/shared.module';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { ArticleLessonCreationComponent } from './lesson/article/create/article-lesson-creation/article-lesson-creation.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
     SchoolRequestComponentDialog,
     CourseCreateDialogComponent,
     TeacherPlaceCreateDialog,
-    VideoLessonCreationComponent
+    VideoLessonCreationComponent,
+    ArticleLessonCreationComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +36,8 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
     CreateAnswerDialogComponent,
     TopicChoiceDialogComponent,
     SchoolRequestComponentDialog,
-    TeacherPlaceCreateDialog
+    TeacherPlaceCreateDialog,
+    ArticleLessonCreationComponent
   ],
 
   providers: [
