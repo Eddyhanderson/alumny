@@ -49,19 +49,19 @@ export class PaginationAdapter<T, Q> implements Subscribable<T> {
         return this.dataSource$;
     }
 
-    private pageSize = new BehaviorSubject(50);
+    private pageSize = new BehaviorSubject(10);
 
     set setPageSize(v: number) {
-        this.pageNumber.next(v);
+        this.pageSize.next(v);
     }
 
     get getPageSize() {
         return this.pageSize.asObservable();
     }
 
-    private hasMore = new BehaviorSubject(true);
+    public hasMore = new BehaviorSubject(true);
 
-    public loading = new BehaviorSubject(false);
+    public loading:boolean = false;
 
     public totalElements: number;
 
@@ -70,7 +70,7 @@ export class PaginationAdapter<T, Q> implements Subscribable<T> {
 
         this.dataSource$ = combineLatest([this.pageNumber, this.pageSize, this.searchValue]).pipe(
             switchMap(([pageNumber, pageSize, searchValue]) => this.param.pipe(
-                tap(() => this.loading.next(true)),
+                tap(() => this.loading = true ),
                 switchMap((param) => dataSource({ pageNumber, pageSize, searchValue }, param))
             )),
             map((pageResponse) => { this.totalElements = pageResponse.totalElements; return pageResponse.data }),
@@ -80,7 +80,7 @@ export class PaginationAdapter<T, Q> implements Subscribable<T> {
 
                 return [...acc, ...data]
             }, []),
-            tap(() => this.loading.next(false))
+            tap(() => this.loading = false)
         );
     }
 

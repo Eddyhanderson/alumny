@@ -154,7 +154,7 @@
                             </mat-accordion>
 
                             <ng-container *ngIf="teacherPlaceCtl.value[0] && teacherPlaceCtl.value[0].opened">
-                                <div class="irrelevant-text text-disabled-1 mb-1">
+                                <div class="irrelevant-text text-disabled-1 mt-5">
                                     {{
                                     isPublic ?
                                     'Aulas publicas podem ser assistidas por todos, inclusive quem não estiver
@@ -166,8 +166,8 @@
                                     publicada. Todas as aulas de uma turma fechada são privadas.'
                                     }}
                                 </div>
-                                <mat-slide-toggle [(ngModel)]="isPublic">
-                                    Aula pública
+                                <mat-slide-toggle [(ngModel)]="isPublic" [ngModelOptions]="{standalone: true}">
+                                    {{isPublic ? 'Aula pública' : 'Aula privada'}}
                                 </mat-slide-toggle>
                             </ng-container>
                         </form>
@@ -228,13 +228,14 @@
 
                     </div>
 
-                    <ng-container *ngIf="manifest">
-                        <div class="mt-4 w-50 d-flex justify-content-center">
-                            <button mat-flat-button color="warn" (click)="onLessonCreate()" class="w-25 mb-4">
+                    <ng-container>
+                        <div class="mt-4 d-flex justify-content-center align-items-center flex-column">
+                            <button mat-flat-button mat-flat-button color="accent" class="w-25 mb-4"
+                                (click)="onLessonCreate()" [disabled]="submited">
                                 Criar
                             </button>
-                            <button mat-stroked-button matStepperPrevious>
-                                Retroceder
+                            <button matStepperPrevious mat-stroked-button class="w-25">
+                                Voltar
                             </button>
                         </div>
                     </ng-container>

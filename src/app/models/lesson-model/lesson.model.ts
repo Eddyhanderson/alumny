@@ -6,7 +6,7 @@ export class LessonModel {
     teacherPlaceId: string;
     
     teacherPlaceName?:string;
-
+ 
     teacherPlacePhotoPath?:string;
 
     schoolId?:string;
@@ -42,4 +42,6 @@ export class LessonModel {
     date?:Date;
 
     public:boolean;
+
+    duration?:string;
 }

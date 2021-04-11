@@ -1,18 +1,24 @@
 import { UserModel } from "../user-model/user-model";
 
-export class PostModel{
-    
-    id:string;
+export class PostModel {
 
-    userId:string;
+    id: string;
 
-    postType:string;
+    userId: string;
 
-    commentableId:string;
+    userPictureProfilePath: string;
 
-    createAt:Date;
+    userFirstName: string;
 
-    situation:string;
-    
-    user:UserModel;            
+    userLastName: string;
+
+    postType: string;
+
+    commentableId: string;
+
+    createAt: Date;
+
+    situation: string;
+
+    user: UserModel;
 }

@@ -49,10 +49,10 @@ export class LessonService {
           'pageNumber': query.pageNumber.toString(),
           'pageSize': query.pageSize.toString(),
           'searchValue': query.searchValue ?? '',
-          'teacherId': param.teacherId ?? '',
-          'teacherPlaceId': param.teacherPlaceId ?? '',
-          'disciplineTopicId': param.disciplineTopicId ?? '',
-          'schoolId': param.schoolId ?? ''
+          'teacherId': param?.teacherId ?? '',
+          'teacherPlaceId': param?.teacherPlaceId ?? '',
+          'disciplineTopicId': param?.disciplineTopicId ?? '',
+          'schoolId': param?.schoolId ?? ''
         }
       })
     } catch (error) {

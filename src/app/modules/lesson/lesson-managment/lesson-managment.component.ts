@@ -10,7 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ArticleLessonCreationComponent } from 'src/app/dialogs/lesson/article/create/article-lesson-creation/article-lesson-creation.component';
+import { ArticleLessonCreationComponent } from 'src/app/dialogs/lesson/article/create/article-lesson-creation.component';
 import { ArticleQuery } from 'src/app/interfaces/article-query/article.query';
 import { DisciplineTopicQuery } from 'src/app/interfaces/discipline-topic-query/discipline-topic.query';
 import { LessonQuery } from 'src/app/interfaces/lesson-query/lesson.query';

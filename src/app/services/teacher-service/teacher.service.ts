@@ -6,6 +6,9 @@ import { Response } from '../../models/response/response';
 import { CreationResult } from '../../models/creation-result/creation-result';
 import { Routes } from '../../shared/utils/routing-constants';
 import { BehaviorSubject, Observable, Subject, } from 'rxjs';
+import { TeacherQuery } from 'src/app/interfaces/teacher-query/teacher.query';
+import { PaginationQuery } from 'src/app/interfaces/pagination-query/pagination-query';
+import { PageResponse } from 'src/app/models/page-response/page-response';
 
 
 @Injectable(
@@ -15,25 +18,24 @@ export class TeacherService {
 
     constructor(private http: HttpClient) { }
 
-    private teacherLoged = new BehaviorSubject<TeacherModel>(null);
-
     /**
      * Registration of teacher
      * @param teacherModel the teacher who will be persisted
      */
-    public create(teacherModel: TeacherModel): Promise<TeacherModel> {        
-        let creationResult = this.http.post<CreationResult<TeacherModel>>(Routes.TEACHER_CREATE_ROUTE, teacherModel)
-            .toPromise()
-            .then(creationResult => {
-                if (creationResult.succeded) {
-                    this.teacherLoged.next(creationResult.data);
-                }
-            })
-            .catch(r => { console.log(r.message); return r });;
+    public async create(teacherModel: TeacherModel): Promise<CreationResult<TeacherModel>> {
 
-        if (creationResult instanceof (CreationResult)) {
-            if (creationResult.succeded)
-                return creationResult.data;
+        try {
+            let creationResult = await this.http.post<CreationResult<TeacherModel>>(Routes.TEACHER_CREATE_ROUTE, teacherModel)
+                .toPromise();
+
+            if (creationResult.succeded) {
+                this.persistTeacherData(creationResult.data);
+
+                return creationResult;
+            }
+
+        } catch (error) {
+            console.log(error.message);
         }
 
         return null;
@@ -44,18 +46,40 @@ export class TeacherService {
      * @param teacherId the id of the teacher
      * @returns the teacher data
      */
-    public async get(teacherId: string): Promise<TeacherModel> {
+    public async get(query: TeacherQuery): Promise<TeacherModel> {
 
-        let response = await this.http
-            .get<Response<TeacherModel>>(Routes.TEACHER_GET_ROUTE.replace('{teacherId}', teacherId))
-            .toPromise()
-            .catch(r => { return console.log(r.message) });
-
-        if (response instanceof (Response)) {
+        try {
+            let response = await this.http
+                .get<Response<TeacherModel>>(Routes.TEACHER_GET_ROUTE, { params: { 'id': query.id, 'userId': query.userId } })
+                .toPromise();
             return response.data;
-        }
 
-        return null;
+        } catch (error) {
+            console.log(error.message)
+            return null;
+        }
+    }
+
+    /**
+     * Get all studant data
+     * @param query the query string to get data from server
+     * @param param the custom data criteria
+     * @returns the teacher data
+     */
+    public getAll(query: PaginationQuery, param: TeacherQuery): Observable<PageResponse<TeacherModel>> {
+
+        try {
+            return this.http.get<PageResponse<TeacherModel>>(Routes.TEACHER_GET_ALL_ROUTE, {
+                params: {
+                    'pageNumber': query.pageNumber.toString(),
+                    'pageSize': query.pageSize.toString(),
+                    'searchValue': query.searchValue ?? '',
+                    ...param
+                }
+            })
+        } catch (error) {
+            console.log(error.message)
+        }
     }
 
     /**
@@ -67,18 +91,16 @@ export class TeacherService {
         if (localStorage['teacher'] !== undefined) return true;
 
         try {
-            let response = await this.http
-                .get<Response<TeacherModel>>(Routes.TEACHER_GET_BY_USER_ROUTE.replace('{userId}', userId))
-                .toPromise();
+            let teacher = await this.get(new TeacherQuery(null, userId));
 
-            if (response) {
-                this.persistTeacherData(response.data);
+            if (teacher) {
+                this.persistTeacherData(teacher);
                 return true;
             }
 
             return false;
         } catch (error) {
-            console.log("ERROR LOG: " + error.message)
+            console.log(error.message)
         }
     }
 

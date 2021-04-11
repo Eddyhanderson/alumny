@@ -26,6 +26,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DisciplineTopicQuery } from 'src/app/interfaces/discipline-topic-query/discipline-topic.query';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TeacherPlaceGroup } from 'src/app/interfaces/teacher-place-group/teacher-place.group';
 
 
 @Component({
@@ -38,15 +39,7 @@ export class VideoLessonCreationComponent implements OnInit {
   @ViewChild('stepper') stepper: MatStepper;
 
   // To present data
-  public teacherPlacesGrouped: [
-    {
-      school: SchoolModel,
-      courseTeacherPlaces: [{
-        course: CourseModel,
-        teacherPlaces: TeacherPlaceModel[]
-      }],
-    }
-  ]
+  public teacherPlacesGrouped: TeacherPlaceGroup[] = new Array<TeacherPlaceGroup>();
 
   public lessonsGrouped: [
     {
@@ -60,7 +53,7 @@ export class VideoLessonCreationComponent implements OnInit {
   public disciplineTopic: DisciplineTopicModel;
   public teacherPlaces: TeacherPlaceModel[];
   public disciplineTopics$: Observable<DisciplineTopicModel[]>;
-  public isPublic: boolean;
+  public isPublic: boolean = true;
   public video: VideoModel;
 
   // Queries
@@ -90,6 +83,9 @@ export class VideoLessonCreationComponent implements OnInit {
 
   // To mark loading mode
   public loadingMode: boolean = false;
+
+  // Flags 
+  submited: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<VideoLessonCreationComponent>,
@@ -142,7 +138,7 @@ export class VideoLessonCreationComponent implements OnInit {
 
   public async onLessonCreate() {
     if (this.detailFg.valid) {
-
+      this.submited = true;
       if (typeof this.disciplineTopicCtl.value === 'string') {
         let disciplineTopic: DisciplineTopicModel = {
           name: this.disciplineTopicCtl.value
@@ -155,7 +151,7 @@ export class VideoLessonCreationComponent implements OnInit {
 
         this.disciplineTopic = stt.data;
       } else {
-        this.disciplineTopic = this.disciplineTopicCtl.value;
+        this.disciplineTopic = this.disciplineTopicCtl.value[0];
       }
 
       let lesson: LessonModel = {
@@ -168,6 +164,8 @@ export class VideoLessonCreationComponent implements OnInit {
         videoId: this.video.id,
         lessonType: PostTypes.Video
       }
+
+      console.dir(lesson);
 
       let stt = await this.createLesson(lesson);
 
@@ -303,6 +301,7 @@ export class VideoLessonCreationComponent implements OnInit {
 
     // to get video manifest location
     this.vus.manifest.subscribe((data) => {
+      this.progress = 100;
       this.manifest = data;
     })
   }

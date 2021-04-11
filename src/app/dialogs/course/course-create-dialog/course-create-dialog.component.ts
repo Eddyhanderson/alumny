@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { PaginationQuery } from 'src/app/interfaces/pagination-query/pagination-query';
 import { CourseModel } from 'src/app/models/course-model/course.model';
 import { CourseService } from 'src/app/services/course-service/course.service';
@@ -22,7 +23,7 @@ export class CourseCreateDialogComponent implements OnInit {
   filteredCourses$: Observable<CourseModel[]>;
 
   constructor(
-    
+
     public dialogRef: MatDialogRef<CourseCreateDialogComponent>,
     private courseService: CourseService,
     private fb: FormBuilder) { }
@@ -51,7 +52,7 @@ export class CourseCreateDialogComponent implements OnInit {
       searchValue: courseName
     };
 
-    return this.courseService.getAll(query);
+    return this.courseService.getAll(query).pipe(map((response) => response.data));
   }
 
   public displayFn(course: CourseModel): string {

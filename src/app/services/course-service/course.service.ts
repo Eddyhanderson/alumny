@@ -7,6 +7,8 @@ import { PageResponse } from 'src/app/models/page-response/page-response';
 import { map } from 'rxjs/operators';
 import { CreationResult } from 'src/app/models/creation-result/creation-result';
 import { PaginationQuery } from 'src/app/interfaces/pagination-query/pagination-query';
+import { CourseQuery } from "src/app/interfaces/course-query/course.query";
+import { Response } from 'src/app/models/response/response';
 
 @Injectable({ providedIn: "root" })
 export class CourseService {
@@ -17,8 +19,23 @@ export class CourseService {
      * @param name the name of course that are searching
      * @returns the response containing the course object if exists and null if no
      */
-    getByName(name: string): Promise<any> {
-        return this.http.get(Routes.COURSE_GET_BY_NAME_ROUTE.replace("{name}", name)).toPromise();
+    public async get(query: CourseQuery): Promise<CourseModel> {
+        try {
+
+            if (query == null) return null;
+
+            var response = await this.http.get<Response<CourseModel>>(Routes.COURSE_GET_BY_NAME_ROUTE, {
+                params: {
+                    'name': query.name,
+                    'id': query.id
+                }
+            }).toPromise();
+
+            return response?.data;
+        } catch (error) {
+            console.log(error?.message);
+            return null;
+        }
     }
 
     /**
@@ -27,14 +44,18 @@ export class CourseService {
      * @returns the response containing the course object
      */
     create(newCourse: CourseModel): Promise<CreationResult<CourseModel>> {
-        return this.http.post<CreationResult<CourseModel>>(Routes.COURSE_CREATE_ROUTE, newCourse).toPromise();
+        try {
+            return this.http.post<CreationResult<CourseModel>>(Routes.COURSE_CREATE_ROUTE, newCourse).toPromise();
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
     /**
      * Get all courses of school
      * @param query the data with specification of page number and size
      */
-    public getAll(query: PaginationQuery): Observable<CourseModel[]> {
+    public getAll(query: PaginationQuery): Observable<PageResponse<CourseModel>> {
         try {
             let params = new HttpParams()
                 .set('pageNumber', query.pageNumber.toString())
@@ -43,9 +64,9 @@ export class CourseService {
 
             return this.http.get<PageResponse<CourseModel>>(Routes.COURSE_GET_ALL_ROUTE, {
                 params
-            }).pipe(map(pr => pr.data));
+            });
         } catch (error) {
-
+            console.log(error?.message);
         }
     }
 }

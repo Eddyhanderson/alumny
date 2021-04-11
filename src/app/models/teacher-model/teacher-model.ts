@@ -5,29 +5,29 @@ import { AcademicLevelModel } from '../academic-level-model/academic-level.model
 
 export declare class TeacherModel {
 
-        id?:string;
+        id?: string;
+ 
+        firstName?: string;
 
-        firstName?:string;
+        lastName?: string;
 
-        lastName?:string;
+        userId?: string;
 
-        userId?:string;
+        pictureProfilePath?: string;
 
-        pictureProfilePath?:string;
+        academicLevelId?: string;
 
-        academicLevelId?:string;
+        academicLevelName?: string;
 
-        academicLevelName?:string;
+        academyId?: string;
 
-        academyId?:string;
+        academyName?: string;
 
-        academyName?:string;
+        courseId?: string;
 
-        courseId?:string;
+        courseName?: string;
 
-        courseName?:string;
+        teacherPlaceQnt?: string;
 
-        teacherPlaceQnt?:string;
-
-        teacherCode?:string;
+        teacherCode?: string;
 }

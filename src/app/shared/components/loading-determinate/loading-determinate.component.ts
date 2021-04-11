@@ -30,7 +30,7 @@ export class LoadingDeterminateComponent implements OnInit, OnDestroy {
 
   private catchEvents(event: any) {
 
-    if (event instanceof NavigationStart) {
+    if (event instanceof NavigationStart) {      
       this.initializeProgressValue();
       this.progressTimer = setInterval(() => {
         this.incrementProgressValue();

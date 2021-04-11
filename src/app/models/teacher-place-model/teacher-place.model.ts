@@ -23,7 +23,7 @@ export class TeacherPlaceModel {
 
     disciplineId?: string;
 
-    displineName?: string;
+    disciplineName?: string;
 
     courseId?: string;
 

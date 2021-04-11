@@ -44,8 +44,8 @@
                                             {{tsPending.teacher.firstName}} {{tsPending.teacher.lastName}}
                                         </a>
                                     </div>
-                                    <div class="irrelevant-text" [appDataFormater]="tsPending.creationAt">
-
+                                    <div class="irrelevant-text">
+                                        {{tsPending.creationAt | elapsed}}
                                     </div>
                                     <div class="bold-500">
                                         <h5>

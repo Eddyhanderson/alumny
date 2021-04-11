@@ -1,0 +1,32 @@
+<div class="main">    
+    <div class="section">
+        <div class="container-column" *ngIf="lesson && article && post">
+            <div class="p-relative close-view">
+                <button matTooltip="Terminar leitura" mat-icon-button mat-dialog-close>
+                    <mat-icon>
+                        close
+                    </mat-icon>
+                </button>
+            </div>
+            <div class="container-column">
+                <div class="img-profile-sm mb-1">
+                    <img [src]="post.userPictureProfilePath">
+                </div>
+                <span>
+                    {{post.userFirstName}} {{post.userLastName}}
+                </span>
+            </div>
+            <div>
+                <h2>
+                    {{lesson.title}}
+                </h2>
+            </div>
+            <div class="background-image">
+                <img [src]="lesson.backgroundPhotoPath">
+            </div>
+        </div> 
+        <div #view id="editor-container">
+
+        </div>   
+    </div>
+</div>

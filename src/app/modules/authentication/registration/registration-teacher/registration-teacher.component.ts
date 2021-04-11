@@ -18,6 +18,7 @@ import { TeacherService } from 'src/app/services/teacher-service/teacher.service
 import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-registration-studant',
@@ -56,7 +57,8 @@ export class RegistrationTeacherComponent implements OnInit {
     private academyService: AcademyService,
     private courseService: CourseService,
     private teacherService: TeacherService,
-    private router: Router) 
+    private router: Router,
+    private snackBar:MatSnackBar) 
     {
       accountService.logStatus.subscribe(status =>{
         this.isLogin = status;
@@ -83,7 +85,7 @@ export class RegistrationTeacherComponent implements OnInit {
     this.firstName = new FormControl('', [Validators.required, Validators.max(15), Validators.pattern(Constants.NOMENCLATURE_REGEX)]);
     this.lastName = new FormControl('', [Validators.required, Validators.max(15), Validators.pattern(Constants.NOMENCLATURE_REGEX)]);
     this.phoneNumber = new FormControl('', [Validators.required]);
-    this.email = new FormControl('', [Validators.required, Validators.pattern(''), Validators.pattern(Constants.EMAIL_REGEX)]);
+    this.email = new FormControl('', [Validators.required, Validators.pattern(Constants.EMAIL_REGEX)]);
     this.birth = new FormControl('', [Validators.required]);
     this.genre = new FormControl('', [Validators.required]);
 
@@ -154,8 +156,10 @@ export class RegistrationTeacherComponent implements OnInit {
 
       this.inProgress = false;
 
-      if(stt != null) 
+      if(stt != null){
+        this.snackBar.open('Utilizador criado. Seja bem vindo.');
         this.router.navigateByUrl('/teacher/control-painel');
+      }
 
     } else {
       this.setErrorsMessages(authResult.errors);

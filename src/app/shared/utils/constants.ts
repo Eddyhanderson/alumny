@@ -1,8 +1,8 @@
 export class Constants {
     // Users roles 
-    static STUDANT = "STUDANT";
-    static TEACHER = "TEACHER";
-    static SCHOOL_MANAGER = "MANAGER";
+    static STUDANT = "Studant";
+    static TEACHER = "Teacher";
+    static SCHOOL_MANAGER = "Manager";
 
     // Api url
     static ROOT = "api";
@@ -26,7 +26,7 @@ export class Constants {
 
     static STANDARD_INFORMATION_REGEX = "^[a-zA-ZáÁàÀêÊéèÉÈíìÌÍÔôõÕóòÓÒÚúùÙ]*{1,15}$";
 
-    static EMAIL_REGEX = "^[a-zA-Z0-9_]+@[a-zA-Z]+[.][a-zA-Z]+$";
+    static EMAIL_REGEX = "^[a-zA-Z0-9_.]+@[a-zA-Z]+[.][a-zA-Z]+$";
 
     // Status code
     static FORBIDDEN_STATUS_CODE = 403;

@@ -35,19 +35,21 @@ export class AccountService {
    * To register the new user
    * @param newUser the user that we are trying register
    */
-  public async registration(newUser: UserModel): Promise<UserModel> {
+  public async registration(newUser: UserModel): Promise<AuthResult> {
     if (newUser == null) return null;
 
     try {
       let authResult = await this.http.post<AuthResult>(Routes.USER_REGISTER_ROUTE, newUser).toPromise();
 
-      if (authResult.authenticated) {
+      if (authResult?.authenticated) {
         this.persistAuthData(authResult);
         this.persistUserData(authResult.user);
         this.loginStatus.next(true);
       }
 
-      return authResult.user;
+      
+
+      return authResult;
     } catch (error) {
       console.log(error.message);
     }

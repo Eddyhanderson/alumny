@@ -67,10 +67,11 @@ export class TeacherPlaceService {
 
   private createQueryParams(query: PaginationQuery, params: TeacherPlaceQuery): HttpParams {
     return new HttpParams()
-      .set('pageNumber', query?.pageNumber.toString())
-      .set('pageSize', query?.pageSize.toString())
+      .set('pageNumber', query?.pageNumber.toString() ?? '')
+      .set('pageSize', query?.pageSize.toString() ?? '')
       .set('searchValue', query?.searchValue ?? '')
-      .set('schoolId', params?.schoolId)
-      .set('teacherId', params?.teacherId)
+      .set('schoolId', params?.schoolId ?? '')
+      .set('teacherId', params?.teacherId ?? '')
+      .set('opened', params?.opened  ? 'true' : 'false')
   }
 }

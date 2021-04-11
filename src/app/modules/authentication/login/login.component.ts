@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
     this.inProgress = true;
     let formValues = this.authGroup.value;
     let result = await this.accountService.login(formValues.email, formValues.password);
+    this.inProgress = false;
     //TODO: Send some message in case that user inserted invalid credentials
   }
 

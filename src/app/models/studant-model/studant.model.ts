@@ -3,15 +3,27 @@ import { UserModel } from "../user-model/user-model";
 
 export class StudantModel {
 
-    id: string;
+    id?: string;
 
-    userId: string;
+    firstName?: string;
 
-    studantCode: string;
+    lastName?: string;
 
-    courseId: string;
+    userId?: string;
 
-    user: UserModel;
+    pictureProfilePath?: string;
 
-    course: CourseModel;
+    academicLevelId?: string;
+
+    academicLevelName?: string;
+
+    academyId?: string;
+
+    academyName?: string;
+
+    courseId?: string;
+
+    courseName?: string;
+
+    studantCode?: string;
 }

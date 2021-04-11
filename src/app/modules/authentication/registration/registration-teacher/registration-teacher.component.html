@@ -6,7 +6,7 @@
         <!-- Brand image-->
         <div class="w-100 d-flex justify-content-center mb-4">
             <h1 class="brand d-flex align-items-center">
-                <mat-icon class="mr-2">school</mat-icon> alumni
+                <mat-icon class="mr-2">school</mat-icon> alumny
             </h1>
         </div>
         <!-- End -->
@@ -113,7 +113,7 @@
 
                         <div class="d-flex">
                             <mat-form-field class="w-100">
-                                <input type="date" matInput formControlName="birth">
+                                <input type="date" matInput formControlName="birth" color="primary">
                                 <mat-error *ngIf="birth.touched && birth.errors && birth.hasError('required')">
                                     Precisa inserir uma data de nascimento
                                 </mat-error>
@@ -136,7 +136,7 @@
                                     Feminino
                                 </mat-radio-button>
                                 <mat-error *ngIf="genre.touched && genre.errors && genre.hasError('required')">
-                                    Precisa inserir um nome
+                                    Precisa inserir o seu gênero
                                 </mat-error>
                             </mat-radio-group>
                         </div>
@@ -188,9 +188,9 @@
                         </mat-form-field>
                     </div>
 
-                    <div class="d-flex flex-column mb-2">
+                    <div class="d-flex flex-column mb-2" *ngIf="academicLevel.value != 1">
                         <div class="irrelevant-text">
-                            Em que instituição ?
+                            Qual é a instituição ?
                         </div>
                         <mat-form-field class="w-100 mr-2">
                             <mat-label>
@@ -208,7 +208,7 @@
 
                     <div class="d-flex flex-column mb-2">
                         <div class="irrelevant-text">
-                            Em que curso ?
+                            Qual é o curso ?
                         </div>
                         <mat-form-field class="w-100 mr-2">
                             <mat-label>
@@ -225,7 +225,7 @@
                     </div>
 
                     <div class="w-100 d-flex flex-column justify-content-center align-items-center">
-                        <button mat-button matStepperNext class="button-bg-accent1 w-50 mb-2">
+                        <button mat-button matStepperNext class="button-bg-accent-1 w-50 mb-2">
                             Avançar
                         </button>
                         <button mat-button matStepperPrevious color="warn">
